@@ -79,7 +79,7 @@ public class TabHostFragment extends Fragment {
                 convertView.setTag(holder);
             }
 
-            holder.img.setOnClickListener(new OnClickListener() {
+            holder.add.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -98,6 +98,8 @@ public class TabHostFragment extends Fragment {
 
         @InjectView(R.id.item_tabhost_fragment_name)
         TextView name;
+        @InjectView(R.id.item_tabhost_fragment_add)
+        ImageView add;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);

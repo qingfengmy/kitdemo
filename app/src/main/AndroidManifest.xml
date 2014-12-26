@@ -24,6 +24,15 @@
         <activity
             android:name=".ui.FlowLayoutActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.RecyclerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.AnimatorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.GuaGuakaActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

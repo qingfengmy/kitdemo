@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ import com.qingfengmy.ui.view.BadgeView;
 
 import java.io.Serializable;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class TabHostActivity extends BaseActivity {
 
     private FragmentTabHost tabHost;
@@ -44,11 +48,24 @@ public class TabHostActivity extends BaseActivity {
     private ImageView shopcart;
     private BadgeView badgeView;
     private int num;
+    @InjectView(R.id.toolbar)
+    Toolbar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host);
+        ButterKnife.inject(this);
+
+        titleBar.setTitle(names[0]);
+        setSupportActionBar(titleBar);
+        titleBar.setNavigationIcon(R.drawable.ic_menu_back);
+        titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         inflater = (LayoutInflater) this
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -120,7 +137,7 @@ public class TabHostActivity extends BaseActivity {
             LinearLayout layout = (LinearLayout) view.findViewById(R.id.item_tabhostlayout);
             badgeView = new BadgeView(this, layout);
             badgeView.setTextColor(Color.WHITE);
-            badgeView.setBackgroundColor(Color.RED);
+            badgeView.setBackgroundColor(Color.parseColor("#59b984"));
             badgeView.setTextSize(12);
         }
 
@@ -162,6 +179,7 @@ public class TabHostActivity extends BaseActivity {
                             num++;
                             badgeView.setText(num + "");
                             badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+                            badgeView.setBadgeBackgroundColor(0x59b984);
                             badgeView.show();
                         }
                     });
@@ -179,6 +197,7 @@ public class TabHostActivity extends BaseActivity {
 
     ViewGroup decorView;
     LinearLayout animLayout;
+
     // 创建动画层
     private ViewGroup createAnimLayout() {
         // 获取根view

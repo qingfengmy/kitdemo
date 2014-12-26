@@ -3,15 +3,48 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <!-- actionbar的背景色-->
-        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimary">@color/select_green</item>
         <!-- 状态栏的背景色-->
-        <item name="colorPrimaryDark">@color/red</item>
+        <item name="colorPrimaryDark">@color/select_green</item>
         <!-- actionbar的字体颜色-->
         <item name="android:textColorPrimary">@color/white</item>
         <!--显示在actionbar上的menu字体颜色 5.0用-->
         <item name="android:actionMenuTextColor">@color/white</item>
         <!--显示在actionbar上的menu字体颜色 5.0以下用-->
         <item name="actionMenuTextColor">@color/white</item>
+        <!-- 没标题栏-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+
+        <item name="toolbarStyle">@style/myToolbar</item>
+        <item name="toolbarNavigationButtonStyle">@style/myNavigation</item>
+    </style>
+
+    <style name="myToolbar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/select_green</item>
+        <item name="titleTextAppearance">@style/myTitle</item>
+        <item name="subtitleTextAppearance">
+            @style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle
+        </item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="titleMargins">0dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="maxButtonHeight">56dp</item>
+        <item name="contentInsetStart">16dp</item>
+    </style>
+
+    <style name="myTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/title_bar_size</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="myNavigation" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:background">?attr/actionBarItemBackground</item>
+        <item name="android:minWidth">?attr/actionBarSize</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:scaleType">centerInside</item>
     </style>
 
 </resources>

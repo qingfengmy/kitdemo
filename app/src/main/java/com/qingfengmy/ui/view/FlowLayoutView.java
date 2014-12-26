@@ -20,6 +20,7 @@ public class FlowLayoutView extends ViewGroup {
 
     /**
      * 根据子view的宽高，在wrapcontent的情况下，算出当前flowlayout的宽高
+     *
      * @param widthMeasureSpec
      * @param heightMeasureSpec
      */
@@ -45,10 +46,16 @@ public class FlowLayoutView extends ViewGroup {
             View child = getChildAt(i);
             // 测量子View的宽和高
             measureChild(child, widthMeasureSpec, heightMeasureSpec);
-            // 子View占据的宽度(view的宽度 = 内容的宽度+ padingLeft + padingRight)
-            int childWidth = child.getMeasuredWidth() + child.getPaddingLeft() + child.getPaddingRight();
+            // 获取child的margin值
+            MarginLayoutParams lp = (MarginLayoutParams) child
+                    .getLayoutParams();
+
+            // 子View占据的宽度
+            int childWidth = child.getMeasuredWidth() + lp.leftMargin
+                    + lp.rightMargin;
             // 子View占据的高度
-            int childHeight = child.getMeasuredHeight() + child.getPaddingTop() + child.getPaddingBottom();
+            int childHeight = child.getMeasuredHeight() + lp.topMargin
+                    + lp.bottomMargin;
 
             // 当某一行的宽度大于测量宽度时，换行
             if (lineWidth + childWidth > sizeWidth - getPaddingLeft() - getPaddingRight()) {
@@ -73,7 +80,6 @@ public class FlowLayoutView extends ViewGroup {
             }
         }
 
-
         //如果是fill_parent或者指定大小，mode是exactly，不需要重新计算其值
         setMeasuredDimension(
                 modeWidth == MeasureSpec.EXACTLY ? sizeWidth : width + getPaddingLeft() + getPaddingRight(),
@@ -94,6 +100,7 @@ public class FlowLayoutView extends ViewGroup {
     /**
      * 先计算出子view在哪一行以及该行行高
      * 再循环设置view的layout
+     *
      * @param changed
      * @param l
      * @param t

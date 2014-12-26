@@ -2,6 +2,7 @@ package com.qingfengmy.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,10 +20,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @InjectView(R.id.listview)
     ListView listview;
+    @InjectView(R.id.toolbar)
+    Toolbar titleBar;
     private ArrayAdapter<String> adapter;
 
-    private String[] names;
-    private String[] classes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        names = getResources().getStringArray(R.array.names);
-        classes = getResources().getStringArray(R.array.classes);
+        setSupportActionBar(titleBar);
+        titleBar.setTitle(R.string.app_name);
+        titleBar.setNavigationIcon(R.drawable.ic_launcher);
 
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, names);

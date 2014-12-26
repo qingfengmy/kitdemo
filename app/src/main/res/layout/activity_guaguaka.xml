@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/make_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/prize_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/prize_to1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="活动规则"
+            android:textColor="#ffd249"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/prize_to2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prize_to1"
+            android:text="1.活动时间\n   2013年11月21日起~2014年1月1日止\n2.活动内容\n   活动期间,登陆游戏即有机会抽取4999红包大奖"
+            android:textColor="#fff" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/prize_title"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/mm_gold"
+        android:padding="10dp" />
+
+    <com.qingfengmy.ui.view.GuaGuaKa
+        android:id="@+id/rubbler"
+        android:layout_width="235dip"
+        android:layout_height="60dip"
+        android:layout_below="@+id/prize_title"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="怎么可能\n会中奖!"
+        android:textColor="#FFF" />
+
+</RelativeLayout>

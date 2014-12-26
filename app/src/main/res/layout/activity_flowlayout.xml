@@ -4,9 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
     <com.qingfengmy.ui.view.FlowLayoutView
-        android:id="@+id/flowlayout"
+        android:id="@+id/flowlayout1"
         android:layout_width="match_parent"
-        android:background="#E5E5F5"
+        android:background="#59b984"
+        android:layout_height="wrap_content"></com.qingfengmy.ui.view.FlowLayoutView>
+
+    <com.qingfengmy.ui.view.FlowLayoutView
+        android:id="@+id/flowlayout2"
+        android:layout_width="match_parent"
+        android:background="#59b984"
+        android:layout_height="wrap_content"></com.qingfengmy.ui.view.FlowLayoutView>
+
+    <com.qingfengmy.ui.view.FlowLayoutView
+        android:id="@+id/flowlayout3"
+        android:layout_width="match_parent"
+        android:background="#59b984"
         android:layout_height="wrap_content"></com.qingfengmy.ui.view.FlowLayoutView>
 </LinearLayout>
