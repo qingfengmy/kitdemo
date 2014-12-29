@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnticipateInterpolator;
@@ -52,13 +53,16 @@ public class AnimatorActivity extends BaseActivity {
     @InjectView(R.id.charline)
     Button startchar;
     String[] lines = {"*", "地", "震", "高", "岗", "一", "派", "青", "山", "千", "古", "秀", "门", "朝", "大", "海", "三", "河", "河", "水", "万", "年", "流", "!"};
-
+    @InjectView(R.id.toolbar)
+    Toolbar titleBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
         ButterKnife.inject(this);
-
+        setSupportActionBar(titleBar);
+        titleBar.setTitle(names[3]);
+        titleBar.setNavigationIcon(R.drawable.ic_launcher);
         for (int i = 0; i < 7; i++) {
             imgs[i] = (ImageView) findViewById(ids[i]);
         }

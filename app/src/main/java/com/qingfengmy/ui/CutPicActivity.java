@@ -38,7 +38,7 @@ public class CutPicActivity extends BaseActivity {
         setContentView(R.layout.activity_cutpic);
         ButterKnife.inject(this);
         // 先设置title，再设置action，否则无效
-        titleBar.setTitle(names[1]);
+        titleBar.setTitle(names[5]);
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {
