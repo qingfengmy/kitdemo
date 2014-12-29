@@ -4,5 +4,6 @@
     <string name="app_name">KitDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="aboutme">https://github.com/qingfengmy/kitdemo</string>
 
 </resources>

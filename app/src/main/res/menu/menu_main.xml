@@ -5,5 +5,6 @@
     <item
         android:id="@+id/menu_about"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/git_icon"
         android:title="关于"/>
 </menu>
