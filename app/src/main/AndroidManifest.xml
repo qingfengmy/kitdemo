@@ -33,6 +33,18 @@
         <activity
             android:name=".ui.GuaGuakaActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.CutPicActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SingleSelecterActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.MultipeSelectActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.ViewPagerMultiActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

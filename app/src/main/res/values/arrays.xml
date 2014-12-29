@@ -6,10 +6,11 @@
         <item>RecyclerView</item>
         <item>属性动画</item>
         <item>刮刮卡</item>
-        <item>简单贪吃蛇（SuifaceView）</item>
+        <item>截取头像</item>
+        <item>listview单选</item>
+        <item>listview多选</item>
         <item>viewpager实现画廊效果</item>
         <item>生成条形码+生成二维码+扫码</item>
-        <item>ListView的一些item操作</item>
         <item>选取和截取相册图片</item>
         <item>刮刮乐效果</item>
     </string-array>
@@ -19,10 +20,11 @@
         <item>com.qingfengmy.ui.RecyclerActivity</item>
         <item>com.qingfengmy.ui.AnimatorActivity</item>
         <item>com.qingfengmy.ui.GuaGuakaActivity</item>
-        <item>qingfengmy.demo.ui.SnackGameActivity</item>
-        <item>qingfengmy.demo.ui.ViewPagerMultiFragment</item>
+        <item>com.qingfengmy.ui.CutPicActivity</item>
+        <item>com.qingfengmy.ui.SingleSelecterActivity</item>
+        <item>com.qingfengmy.ui.MultipeSelectActivity</item>
+        <item>com.qingfengmy.ui.ViewPagerMultiActivity</item>
         <item>"qingfengmy.demo.ui.CreateCodeActivity"</item>
-        <item>"qingfengmy.demo.ui.ListViewActivity"</item>
         <item>"qingfengmy.demo.ui.PictureActivity"</item>
         <item>"qingfengmy.demo.ui.RubblerActivity"</item>
     </string-array>

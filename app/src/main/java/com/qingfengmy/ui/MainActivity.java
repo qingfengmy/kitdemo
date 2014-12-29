@@ -55,4 +55,19 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             showToast("不存在该类");
         }
     }
+
+    long exitTime;
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            showToast("再按一次退出应用程序");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+
+
+    }
 }
