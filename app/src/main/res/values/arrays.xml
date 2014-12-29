@@ -12,7 +12,6 @@
         <item>viewpager实现画廊效果</item>
         <item>生成条形码+生成二维码+扫码</item>
         <item>选取和截取相册图片</item>
-        <item>刮刮乐效果</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -26,6 +25,5 @@
         <item>com.qingfengmy.ui.ViewPagerMultiActivity</item>
         <item>"qingfengmy.demo.ui.CreateCodeActivity"</item>
         <item>"qingfengmy.demo.ui.PictureActivity"</item>
-        <item>"qingfengmy.demo.ui.RubblerActivity"</item>
     </string-array>
 </resources>

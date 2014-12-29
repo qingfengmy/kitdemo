@@ -60,8 +60,8 @@ public class AnimatorActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
         ButterKnife.inject(this);
-        setSupportActionBar(titleBar);
         titleBar.setTitle(names[3]);
+        setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_launcher);
         for (int i = 0; i < 7; i++) {
             imgs[i] = (ImageView) findViewById(ids[i]);
