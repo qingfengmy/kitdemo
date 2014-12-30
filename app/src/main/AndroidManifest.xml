@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qingfengmy">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -44,6 +49,18 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.ViewPagerMultiActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SlidingMenuActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.CreateCodeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.MipcaActivityCapture"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.PictureActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 

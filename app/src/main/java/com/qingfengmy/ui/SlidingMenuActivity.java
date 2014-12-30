@@ -1,34 +1,37 @@
 package com.qingfengmy.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 
 import com.qingfengmy.R;
-import com.qingfengmy.ui.view.GuaGuaKa;
+import com.qingfengmy.ui.fragment.MainFragment;
+import com.qingfengmy.ui.fragment.MenuFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
  * User: zhangtao
- * Date: 2014-12-25
- * Time: 17:50
+ * Date: 2014-12-30
+ * Time: 09:48
  */
-public class GuaGuakaActivity extends BaseActivity {
+public class SlidingMenuActivity extends BaseActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
-    @InjectView(R.id.rubbler)
-    GuaGuaKa guaGuaKa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guaguaka);
+        setContentView(R.layout.activity_slidingmenu);
         ButterKnife.inject(this);
-        // 先设置title，再设置action，否则无效
-        titleBar.setTitle(names[4]);
+        titleBar.setTitle(names[9]);
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -37,13 +40,11 @@ public class GuaGuakaActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content_frame, new MainFragment());
+        ft.replace(R.id.menu_frame, new MenuFragment());
+        ft.commit();
 
-        guaGuaKa.setOnGuaGuaKaCompleteListener(new GuaGuaKa.OnGuaGuaKaCompleteListener() {
-            @Override
-            public void complete() {
-                showToast("恭喜中大奖，好运滚滚来！");
-            }
-        });
     }
-
 }

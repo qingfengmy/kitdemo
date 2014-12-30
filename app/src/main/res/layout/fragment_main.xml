@@ -3,13 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_light" >
+    android:background="@color/green_light">
 
     <TextView
+        android:id="@+id/text_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:text="fragment"
-        android:gravity="center"/>
+        android:gravity="center" />
 </LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <EditText
+        android:id="@+id/code_edittext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/select_green"
+        android:text="" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/code_btn"
+            android:layout_width="100dip"
+            android:layout_height="40dip"
+            android:background="@color/select_green"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:text="二维码" />
+
+        <Button
+            android:id="@+id/btn_code"
+            android:layout_width="100dip"
+            android:layout_height="40dip"
+            android:layout_marginLeft="10dp"
+            android:background="@color/select_green"
+            android:textColor="@color/white"
+            android:text="一维码"></Button>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/scan_btn"
+        android:layout_width="100dip"
+        android:layout_height="40dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="7dip"
+        android:background="@color/select_green"
+        android:textColor="@color/white"
+        android:text="扫描" />
+
+    <ImageView
+        android:id="@+id/code_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip" />
+
+</LinearLayout>

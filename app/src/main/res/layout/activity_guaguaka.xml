@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:GuaGuaKa="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/make_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
 
     <RelativeLayout
         android:id="@+id/prize_title"
@@ -11,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="10dp" >
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/prize_to1"
@@ -35,19 +40,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/prize_title"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:background="@drawable/mm_gold"
         android:padding="10dp" />
 
     <com.qingfengmy.ui.view.GuaGuaKa
         android:id="@+id/rubbler"
-        android:layout_width="235dip"
-        android:layout_height="60dip"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/prize_title"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="怎么可能\n会中奖!"
-        android:textColor="#FFF" />
+        GuaGuaKa:text="￥500,0000"
+        GuaGuaKa:textColor="@color/white"
+        GuaGuaKa:textSize="30sp" />
 
 </RelativeLayout>

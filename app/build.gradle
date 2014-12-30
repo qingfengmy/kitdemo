@@ -25,4 +25,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.android.support:appcompat-v7:21.0.0'
     compile files('libs/android-support-v7-recyclerview.jar')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile files('libs/zxing.jar')
 }
