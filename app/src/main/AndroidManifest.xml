@@ -62,6 +62,12 @@
         <activity
             android:name=".ui.PictureActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.RefreshListViewActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.DetailActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

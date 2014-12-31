@@ -3,4 +3,14 @@
     <dimen name="title_bar_size">20sp</dimen>
     <dimen name="text16">16sp</dimen>
     <dimen name="pager_margin">40dp</dimen>
+
+    <!-- Fab button -->
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="activity_vertical_margin">88dp</dimen>
+    <dimen name="margin15">15dp</dimen>
+    <dimen name="margin20">20dp</dimen>
 </resources>

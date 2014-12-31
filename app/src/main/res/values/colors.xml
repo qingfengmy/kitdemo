@@ -3,6 +3,7 @@
     <color name="select_orange">#e4a744</color>
     <color name="select_purple">#953c95</color>
     <color name="select_green">#59b984</color>
+    <color name="selected_green">#ff438c64</color>
     <color name="select_blue">#1599a8</color>
     <color name="select_black">#686667</color>
     <color name="select_grey">#989898</color>
