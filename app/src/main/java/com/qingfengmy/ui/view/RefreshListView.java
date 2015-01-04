@@ -11,6 +11,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
@@ -103,11 +104,24 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         this.scrollState = scrollState;
+        if(scrollState == OnScrollListener.SCROLL_STATE_IDLE){
+            // 停止滚动
+            intercept = false;
+        }else{
+            intercept = true;
+        }
+        requestDisallowInterceptTouchEvent(intercept);
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         this.firstVisibleItem = firstVisibleItem;
+    }
+
+    boolean intercept;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return intercept;
     }
 
     @Override

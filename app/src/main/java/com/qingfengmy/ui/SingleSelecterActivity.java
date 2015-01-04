@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
+import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.view.SprinnerView;
 
@@ -41,10 +42,17 @@ public class SingleSelecterActivity extends BaseActivity {
 
         titleBar.setTitle("");
         setSupportActionBar(titleBar);
+        titleBar.setNavigationIcon(R.drawable.ic_menu_back);
+        titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new MainFragment());
+        ft.replace(R.id.content_frame, new AboutFragment());
         ft.commit();
 
 

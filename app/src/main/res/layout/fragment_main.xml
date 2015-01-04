@@ -3,14 +3,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_light">
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/text_main"
+    <ListView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:text="fragment"
-        android:gravity="center" />
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>

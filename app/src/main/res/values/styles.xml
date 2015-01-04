@@ -3,9 +3,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <!-- actionbar的背景色-->
-        <item name="colorPrimary">@color/select_green</item>
+        <item name="colorPrimary">@color/primary</item>
         <!-- 状态栏的背景色-->
-        <item name="colorPrimaryDark">@color/select_green</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
         <!-- actionbar的字体颜色-->
         <item name="android:textColorPrimary">@color/white</item>
         <!--显示在actionbar上的menu字体颜色 5.0用-->
@@ -19,10 +19,13 @@
 
         <item name="toolbarStyle">@style/myToolbar</item>
         <item name="toolbarNavigationButtonStyle">@style/myNavigation</item>
+        <!--背景透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/translation</item>
     </style>
 
     <style name="myToolbar" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/select_green</item>
+        <item name="android:background">@color/primary</item>
         <item name="titleTextAppearance">@style/myTitle</item>
         <item name="subtitleTextAppearance">
             @style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle

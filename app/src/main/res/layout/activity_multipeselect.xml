@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <include
@@ -13,13 +14,13 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/second_gray">
+        android:background="@color/primary">
 
         <View
             android:id="@+id/gray_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/first_gray"></View>
+            android:background="@color/primary_dark"></View>
 
         <LinearLayout
             android:id="@+id/layout"

@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/select_green"
+        android:textColor="@color/primary_text"
         android:text="" />
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:id="@+id/code_btn"
             android:layout_width="100dip"
             android:layout_height="40dip"
-            android:background="@color/select_green"
+            android:background="@color/primary"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
             android:text="二维码" />
@@ -38,7 +38,7 @@
             android:layout_width="100dip"
             android:layout_height="40dip"
             android:layout_marginLeft="10dp"
-            android:background="@color/select_green"
+            android:background="@color/primary"
             android:textColor="@color/white"
             android:text="一维码"></Button>
     </LinearLayout>
@@ -49,7 +49,7 @@
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="7dip"
-        android:background="@color/select_green"
+        android:background="@color/primary"
         android:textColor="@color/white"
         android:text="扫描" />
 

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.qingfengmy.R;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -22,10 +24,11 @@ import butterknife.InjectView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private LayoutInflater mInflater;
-    private String title;
+    private List<String> titles;
 
-    public RecyclerAdapter(Context context, String title) {
-        this.title = title;
+
+    public RecyclerAdapter(Context context, List<String> titles) {
+        this.titles = titles;
         mInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -38,12 +41,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        viewHolder.name.setText(title);
+        viewHolder.name.setText(titles.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return titles.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,6 +58,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(itemView);
             ButterKnife.inject(this, itemView);
         }
+    }
+
+    public void add(String item, int position) {
+        titles.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public void remove(String item) {
+        int position = titles.indexOf(item);
+        titles.remove(position);
+        notifyItemRemoved(position);
     }
 
 }

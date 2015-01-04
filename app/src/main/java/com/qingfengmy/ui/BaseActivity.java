@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.entity.AppInfo;
+
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
 
 /**
  * 所有activity的父类
@@ -18,10 +21,11 @@ import com.qingfengmy.ui.entity.AppInfo;
  *         <p/>
  *         2014-3-15
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends SwipeBackActivity {
 
-    protected String[] names;
-    protected String[] classes;
+    public String[] names;
+    public String[] classes;
+    private SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,10 @@ public class BaseActivity extends ActionBarActivity {
 
         names = getResources().getStringArray(R.array.names);
         classes = getResources().getStringArray(R.array.classes);
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        setSwipeBackEnable(true);
     }
-
 
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

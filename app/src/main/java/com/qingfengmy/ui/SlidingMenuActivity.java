@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 
 import com.qingfengmy.R;
+import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
 
@@ -21,7 +22,7 @@ import butterknife.InjectView;
  * Date: 2014-12-30
  * Time: 09:48
  */
-public class SlidingMenuActivity extends BaseActivity {
+public class SlidingMenuActivity extends BaseActivity implements MenuFragment.NavigationDrawerCallbacks{
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
@@ -31,6 +32,8 @@ public class SlidingMenuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slidingmenu);
         ButterKnife.inject(this);
+
+        setSwipeBackEnable(false);
         titleBar.setTitle(names[9]);
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
@@ -42,9 +45,14 @@ public class SlidingMenuActivity extends BaseActivity {
         });
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new MainFragment());
+        ft.replace(R.id.content_frame, new AboutFragment());
         ft.replace(R.id.menu_frame, new MenuFragment());
         ft.commit();
 
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        showToast(position+"被点击了");
     }
 }

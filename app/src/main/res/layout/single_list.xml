@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:cacheColorHint="@android:color/transparent"
-    android:divider="@color/first_gray"
+    android:divider="@color/primary_dark"
     android:dividerHeight="1dp"
     android:choiceMode="singleChoice"
     android:scrollbars="none" >
