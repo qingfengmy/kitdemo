@@ -68,6 +68,9 @@
         <activity
             android:name=".ui.DetailActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.PageTransformerActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

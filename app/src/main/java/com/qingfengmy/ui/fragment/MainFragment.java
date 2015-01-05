@@ -34,6 +34,9 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     private ArrayAdapter<String> adapter;
     BaseActivity mActivity;
 
+    public String[] names;
+    public String[] classes;
+
     /**
      * fragment的生命周期中，构造方法-onAttach-onCreateView-onActivityCreate
      * 其中在onAttach之后，才会获取activity
@@ -44,8 +47,12 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity = (BaseActivity) getActivity();
+
+        names = getResources().getStringArray(R.array.names);
+        classes = getResources().getStringArray(R.array.classes);
+
         adapter = new ArrayAdapter<String>(mActivity,
-                android.R.layout.simple_list_item_1, mActivity.names);
+                android.R.layout.simple_list_item_1, names);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(this);
@@ -63,7 +70,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         Class<?> clazz;
         Intent intent = new Intent();
         try {
-            clazz = Class.forName(mActivity.classes[position]);
+            clazz = Class.forName(classes[position]);
             intent.setClass(mActivity, clazz);
             startActivity(intent);
         } catch (ClassNotFoundException e) {

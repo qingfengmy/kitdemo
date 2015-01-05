@@ -66,7 +66,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         // 先设置title，再设置action，否则无效
-        titleBar.setTitle(names[10]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {

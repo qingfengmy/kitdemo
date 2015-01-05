@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.qingfengmy.R;
+import com.qingfengmy.ui.view.RiseNumberTextView;
+import com.qingfengmy.ui.view.SecretTextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,30 +47,55 @@ public class AnimatorActivity extends BaseActivity {
 
     ImageView[] imgs_left = new ImageView[5];
 
-    boolean flag_left = true;
-
     @InjectView(R.id.startfloat)
     Button startfloat;
 
     @InjectView(R.id.charline)
     Button startchar;
     String[] lines = {"*", "地", "震", "高", "岗", "一", "派", "青", "山", "千", "古", "秀", "门", "朝", "大", "海", "三", "河", "河", "水", "万", "年", "流", "!"};
+
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
+    @InjectView(R.id.secrettext)
+    SecretTextView secretTextView;
+    @InjectView(R.id.risenum)
+    RiseNumberTextView riseNum;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
         ButterKnife.inject(this);
-        titleBar.setTitle(names[3]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
-        titleBar.setNavigationIcon(R.drawable.ic_launcher);
+        titleBar.setNavigationIcon(R.drawable.ic_menu_back);
+        titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         for (int i = 0; i < 7; i++) {
             imgs[i] = (ImageView) findViewById(ids[i]);
         }
         for (int i = 0; i < 5; i++) {
             imgs_left[i] = (ImageView) findViewById(ids_left[i]);
         }
+
+        secretTextView.toggle();
+
+        riseNum.withNumber(999999.99f).start();
+    }
+
+    @OnClick(R.id.secretbutton)
+    public void amazingButton() {
+        secretTextView.toggle();
+    }
+
+    @OnClick(R.id.risebutton)
+    public void riseButton() {
+        riseNum.withNumber(999999.99f).start();
     }
 
     String line = "";
@@ -80,7 +107,7 @@ public class AnimatorActivity extends BaseActivity {
             @Override
             public String evaluate(float fraction, String startValue, String endValue) {
                 // fraction是从0-1变化
-                int i = (int) ((lines.length-1) * fraction);
+                int i = (int) ((lines.length - 1) * fraction);
                 return lines[i];
             }
         }, "*", "!");

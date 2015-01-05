@@ -34,7 +34,7 @@ public class SlidingMenuActivity extends BaseActivity implements MenuFragment.Na
         ButterKnife.inject(this);
 
         setSwipeBackEnable(false);
-        titleBar.setTitle(names[9]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {

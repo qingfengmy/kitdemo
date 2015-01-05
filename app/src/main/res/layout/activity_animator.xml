@@ -17,6 +17,35 @@
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
+        <com.qingfengmy.ui.view.RiseNumberTextView
+            android:id="@+id/risenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="50sp"
+            android:textColor="@color/primary_text" />
+
+        <Button
+            android:id="@+id/risebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="risenumber" />
+
+        <com.qingfengmy.ui.view.SecretTextView
+            android:id="@+id/secrettext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="This is really an amazing TextView"
+            android:textSize="30sp"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/secretbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="amazing" />
+
         <Button
             android:id="@+id/startfloat"
             android:layout_width="wrap_content"

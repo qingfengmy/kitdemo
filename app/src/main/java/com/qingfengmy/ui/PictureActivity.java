@@ -45,7 +45,7 @@ public class PictureActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picture);
         ButterKnife.inject(this);
-        titleBar.setTitle(names[11]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_launcher);
 		iv_image = (ImageView) this.findViewById(R.id.img);

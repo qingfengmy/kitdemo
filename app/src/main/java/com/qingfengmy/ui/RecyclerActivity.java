@@ -53,7 +53,7 @@ public class RecyclerActivity extends BaseActivity {
         setContentView(R.layout.activity_recycler);
         ButterKnife.inject(this);
 
-        titleBar.setTitle(names[2]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {

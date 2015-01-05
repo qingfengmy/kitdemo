@@ -38,7 +38,7 @@ public class CutPicActivity extends BaseActivity {
         setContentView(R.layout.activity_cutpic);
         ButterKnife.inject(this);
         // 先设置title，再设置action，否则无效
-        titleBar.setTitle(names[5]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
         titleBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -63,15 +63,19 @@ public class CutPicActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_done, menu);
+        MenuItem item = menu.findItem(R.id.action_done);
+        item.setActionView(R.layout.button_save);
+        View v = item.getActionView();
+        Button btn = (Button) v.findViewById(R.id.btn_menu);
+        btn.setText("确定");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bitmap = mCutPicView.toRoundBitmap();
+                titleBar.setNavigationIcon(new BitmapDrawable(bitmap));
+            }
+        });
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_done){
-            bitmap = mCutPicView.toRoundBitmap();
-            titleBar.setNavigationIcon(new BitmapDrawable(bitmap));
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

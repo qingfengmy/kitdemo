@@ -40,7 +40,7 @@ public class ViewPagerMultiActivity extends BaseActivity {
         setContentView(R.layout.activity_viewpagermulti);
         ButterKnife.inject(this);
 
-        titleBar.setTitle(names[8]);
+        titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_launcher);
 
