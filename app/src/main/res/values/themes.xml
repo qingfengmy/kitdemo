@@ -1,6 +1,7 @@
 <resources>
+    <style name="AppTheme" parent="BaseAppTheme"></style>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!-- actionbar的背景色-->
         <item name="colorPrimary">@color/primary</item>
@@ -12,11 +13,6 @@
         <item name="android:actionMenuTextColor">@color/primary_text</item>
         <!--显示在actionbar上的menu字体颜色 5.0以下用-->
         <item name="actionMenuTextColor">@color/primary_text</item>
-        <!-- 没标题栏-->
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowActionBar">false</item>
-
         <item name="toolbarStyle">@style/myToolbar</item>
         <item name="toolbarNavigationButtonStyle">@style/myNavigation</item>
         <!--背景透明 -->
@@ -24,14 +20,13 @@
         <item name="android:windowBackground">@color/translation</item>
     </style>
 
-    <style name="myToolbar" parent="Base.Widget.AppCompat.Toolbar">
+    <style name="myToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:background">@color/primary</item>
         <item name="titleTextAppearance">@style/myTitle</item>
         <item name="subtitleTextAppearance">
             @style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle
         </item>
         <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="titleMargins">0dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="maxButtonHeight">56dp</item>
         <item name="contentInsetStart">16dp</item>

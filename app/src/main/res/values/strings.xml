@@ -5,7 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="aboutme">https://github.com/qingfengmy/kitdemo</string>
+    <string name="daimajia">https://github.com/daimajia/AndroidImageSlider</string>
+    <string name="PagerSlidingTabStrip">https://github.com/jpardogo/PagerSlidingTabStrip</string>
     <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="volley">Android开发团队也是意识到了有必要将HTTP的通信操作再进行简单化，于是在2013年Google I/O大会上推出了一个新的网络通信框架——Volley。Volley可是说是把AsyncHttpClient和Universal-Image-Loader的优点集于了一身，既可以像AsyncHttpClient一样非常简单地进行HTTP通信，也可以像Universal-Image-Loader一样轻松加载网络上的图片。除了简单易用之外，Volley在性能方面也进行了大幅度的调整，它的设计目标就是非常适合去进行数据量不大，但通信频繁的网络操作，而对于大数据量的网络操作，比如说下载文件等，Volley的表现就会非常糟糕。</string>
     <string name="open">open</string>
     <string name="close">close</string>
 

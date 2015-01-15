@@ -71,6 +71,15 @@
         <activity
             android:name=".ui.PageTransformerActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.ViewPagerIndicatorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.BackgroundPagerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.VolleyActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

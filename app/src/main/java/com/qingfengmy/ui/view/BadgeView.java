@@ -186,7 +186,7 @@ public class BadgeView extends TextView {
 	/**
      * Make the badge visible in the UI.
      *
-     * @param animate flag to apply the default fade-in animation.
+     * @param animate flag to apply the default_image fade-in animation.
      */
 	public void show(boolean animate) {
 		show(animate, fadeIn);
@@ -212,7 +212,7 @@ public class BadgeView extends TextView {
 	/**
      * Make the badge non-visible in the UI.
      *
-     * @param animate flag to apply the default fade-out animation.
+     * @param animate flag to apply the default_image fade-out animation.
      */
 	public void hide(boolean animate) {
 		hide(animate, fadeOut);
@@ -238,7 +238,7 @@ public class BadgeView extends TextView {
 	/**
      * Toggle the badge visibility in the UI.
      * 
-     * @param animate flag to apply the default fade-in/out animation.
+     * @param animate flag to apply the default_image fade-in/out animation.
      */
 	public void toggle(boolean animate) {
 		toggle(animate, fadeIn, fadeOut);

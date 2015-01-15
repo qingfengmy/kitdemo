@@ -40,7 +40,7 @@ public class MyPageTransformer implements PageTransformer {
             ViewHelper.setScaleX(page, 1);
             ViewHelper.setScaleY(page, 1);
         } else if (position <= 0) { // [-1,0]
-            // Use the default slide transition when moving to the left page
+            // Use the default_image slide transition when moving to the left page
             // 设置中心点在左边
             ViewHelper.setPivotX(page, 0);
             ViewHelper.setPivotY(page, h / 2);

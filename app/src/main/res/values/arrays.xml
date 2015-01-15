@@ -15,6 +15,9 @@
         <item>选取和截取相册图片</item>
         <item>上拉加载更多和下拉刷新</item>
         <item>Viewpager切换动画</item>
+        <item>ViewPagerIndicator</item>
+        <item>BackgroundPagerActivity</item>
+        <item>Volley学习</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -31,5 +34,8 @@
         <item>"com.qingfengmy.ui.PictureActivity"</item>
         <item>"com.qingfengmy.ui.RefreshListViewActivity"</item>
         <item>"com.qingfengmy.ui.PageTransformerActivity"</item>
+        <item>"com.qingfengmy.ui.ViewPagerIndicatorActivity"</item>
+        <item>"com.qingfengmy.ui.BackgroundPagerActivity"</item>
+        <item>"com.qingfengmy.ui.VolleyActivity"</item>
     </string-array>
 </resources>

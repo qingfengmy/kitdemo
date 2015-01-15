@@ -11,6 +11,8 @@
     <color name="white">#ffffff</color>
     <color name="translation">#00000000</color>
 
+    <color name="background_tab_pressed">#1AFFFFFF</color>
+
     <!--扫码-->
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>

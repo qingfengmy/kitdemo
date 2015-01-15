@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".CutPicActivity">
+    tools:context=".CutPicActivity"
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/toolbar"

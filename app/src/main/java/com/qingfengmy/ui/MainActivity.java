@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.logging.LogRecord;
 
@@ -28,18 +30,20 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MainActivity extends BaseActivity implements MenuFragment.NavigationDrawerCallbacks{
+public class MainActivity extends BaseActivity implements MenuFragment.NavigationDrawerCallbacks {
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.inject(this);
 
         setSwipeBackEnable(false);
@@ -47,6 +51,9 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         setSupportActionBar(titleBar);
         titleBar.setTitle(R.string.app_name);
         titleBar.setNavigationIcon(R.drawable.ic_launcher);
+
+        fragmentManager = getSupportFragmentManager();
+
         // v7包中分装了其他东西，这里需要处理开关的监听
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, titleBar, R.string.open, R.string.close);
 
@@ -55,19 +62,19 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         selectItem(0);
 
-        Log.e("aa","onCreate");
+        Log.e("aa", "onCreate");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("aa","onResume");
+        Log.e("aa", "onResume");
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Log.e("aa","onWindowFocusChanged");
+        Log.e("aa", "onWindowFocusChanged");
     }
 
     @Override
@@ -76,7 +83,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         // 将drawerToggle和drawerlayout同步
         // 将actionbarDrawerToogle中的图标设置为ActionBar中的home-button
         mDrawerToggle.syncState();
-        Log.e("aa","onPostCreate");
+        Log.e("aa", "onPostCreate");
     }
 
     @Override
@@ -97,7 +104,6 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 //        fragment.setArguments(args);
 
                 // 通过替换已存在的fragment来插入新的fragment
-                FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .commit();
@@ -118,6 +124,18 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
             mDrawerLayout.closeDrawers();
         }
     }
+
+    public void switchContent(Fragment from, Fragment to) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction().setCustomAnimations(R.animator.push_left_in, R.animator.push_left_out);
+        if (!to.isAdded()) {
+            // 先判断是否被add过
+            transaction.hide(from).add(R.id.content_frame, to).commit();
+            // 隐藏当前的fragment，add下一个到Activity中
+        } else {
+            transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个           }
+        }
+    }
+
 
     public void setTitle(CharSequence title) {
         titleBar.setTitle(title);
@@ -145,12 +163,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_about) {
-            String url = getString(R.string.aboutme);
-            Intent intent = new Intent();
-            intent.setAction("android.intent.action.VIEW");
-            Uri content_url = Uri.parse(url);
-            intent.setData(content_url);
-            startActivity(intent);
+            openWebPage(getString(R.string.aboutme));
         }
         return super.onOptionsItemSelected(item);
     }
