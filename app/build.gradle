@@ -33,5 +33,6 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.mcxiaoke.volley:library:1.0.10'
     compile 'com.google.code.gson:gson:2.3.1'
-    compile project(':extras:library')
+    compile project(':extras:SwipeBackLibrary')
+    compile project(':extras:PullToRefreshLibrary')
 }

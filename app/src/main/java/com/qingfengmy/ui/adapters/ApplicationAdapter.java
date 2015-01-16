@@ -22,6 +22,10 @@ import butterknife.InjectView;
  * User: zhangtao
  * Date: 2014-12-31
  * Time: 11:09
+ *
+ *  final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+    mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+ * List<ResolveInfo> ril = getPackageManager().queryIntentActivities(mainIntent, 0);
  */
 public class ApplicationAdapter extends BaseAdapter {
     private List<AppInfo> applications;

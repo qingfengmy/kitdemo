@@ -1,5 +1,6 @@
 package com.qingfengmy.ui.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -111,5 +112,53 @@ public class VolleyFirstFragment extends Fragment {
         if (mQueue == null)
             mQueue = ((VolleyActivity) getActivity()).getRequestQueue();
         return mQueue;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.e("aaa","1-onAttach");
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.e("aaa","1-onViewCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("aaa","1-onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("aaa","1-onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("aaa","1-onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e("aaa","1-onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("aaa","1-onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("aaa","1-onDestroy");
     }
 }

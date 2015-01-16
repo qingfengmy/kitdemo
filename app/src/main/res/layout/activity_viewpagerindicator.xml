@@ -18,6 +18,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:pstsUnderlineColor="@color/white"
+        app:pststabTextColor="@color/tab_color_list"
         app:pstsIndicatorColor ="@color/tab_color_list"
         app:pstsPaddingMiddle="false" />
 

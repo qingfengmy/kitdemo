@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
-import com.qingfengmy.ui.BaseActivity;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,16 +24,16 @@ public class MyAdapter extends BaseAdapter {
 
 
     private LayoutInflater mInflater;
-    private String title;
+    List<String> titles;
 
-    public MyAdapter(Context context, String title) {
-        this.title = title;
+    public MyAdapter(Context context, List<String> titles) {
+        this.titles = titles;
         mInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return 20;
+        return titles.size();
     }
 
     @Override
@@ -58,7 +59,7 @@ public class MyAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
 
-        holder.name.setText(title);
+        holder.name.setText(titles.get(position));
         return convertView;
     }
 

@@ -1,10 +1,12 @@
 package com.qingfengmy.ui.fragment;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,5 +156,54 @@ public class VolleySecondFragment extends Fragment {
             mCache.put(url, bitmap);
         }
 
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.e("aaa", "2-onAttach");
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.e("aaa","2-onViewCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("aaa","2-onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("aaa","2-onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("aaa","2-onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e("aaa","2-onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("aaa","2-onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("aaa","2-onDestroy");
     }
 }

@@ -22,6 +22,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
@@ -186,8 +187,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         // get custom attrs
         a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
+        tabTextColor = a.getColorStateList(R.styleable.PagerSlidingTabStrip_pststabTextColor);
         indicatorColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsIndicatorColor, indicatorColor);
-        underlineColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnderlineColor, underlineColor);
+        underlineColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnderlineColor, Color.WHITE);
         dividerColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDividerColor, dividerColor);
         dividerWidth = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsDividerWidth, dividerWidth);
         indicatorHeight = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsIndicatorHeight, indicatorHeight);

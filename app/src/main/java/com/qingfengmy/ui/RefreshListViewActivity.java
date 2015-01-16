@@ -6,18 +6,24 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.ApplicationAdapter;
+import com.qingfengmy.ui.adapters.MyAdapter;
+import com.qingfengmy.ui.adapters.RecyclerAdapter;
 import com.qingfengmy.ui.entity.AppInfo;
-import com.qingfengmy.ui.view.RefreshListView;
+import com.qingfengmy.ui.view.EmptyView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -29,16 +35,17 @@ import butterknife.InjectView;
  * Date: 2014-12-31
  * Time: 10:35
  */
-public class RefreshListViewActivity extends BaseActivity implements RefreshListView.IReflashListener {
+public class RefreshListViewActivity extends BaseActivity {
 
     private List<AppInfo> applicationList;
-    private ApplicationAdapter mAdapter;
+    private MyAdapter mAdapter;
 
-    @InjectView(R.id.refreshListView)
-    RefreshListView listView;
+    @InjectView(R.id.pull_refresh_list)
+    PullToRefreshListView mPullRefreshListView;
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
+    List<String> titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,31 +63,36 @@ public class RefreshListViewActivity extends BaseActivity implements RefreshList
             }
         });
 
-        new InitializeApplicationsTask().execute();
-    }
-
-    @Override
-    public void onReflash() {
-        new Handler().postDelayed(new Runnable() {
-
+        mPullRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                //获取最新数据
-                setReflashData();
-                //通知界面显示
-                mAdapter.notifyDataSetChanged();
-                //通知listview 刷新数据完毕；
-                listView.reflashComplete();
-            }
-        }, 2000);
-    }
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
-    private void setReflashData() {
-        for (int i = 0; i < 2; i++) {
-            AppInfo entity = applicationList.get(i);
-            applicationList.add(entity);
-        }
+                // Update the LastUpdatedLabel
+                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+                // Do work to refresh the list here.
+                new InitializeApplicationsTask().execute();
+            }
+        });
+
+
+        ListView actualListView = mPullRefreshListView.getRefreshableView();
+
+        actualListView.setEmptyView(new EmptyView(this));
+
+        // Need to use the Actual ListView when registering for Context Menu
+        registerForContextMenu(actualListView);
+
+        // init date
+        titles = new ArrayList<>();
+
+        mAdapter = new MyAdapter(RefreshListViewActivity.this, titles);
+
+        actualListView.setAdapter(mAdapter);
+
+        mPullRefreshListView.setRefreshing();
     }
 
     private class InitializeApplicationsTask extends AsyncTask<Void, Void, Void> {
@@ -92,33 +104,23 @@ public class RefreshListViewActivity extends BaseActivity implements RefreshList
 
         @Override
         protected Void doInBackground(Void... params) {
-            //Query the applications
-            final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-            applicationList = new ArrayList<>();
-
-            List<ResolveInfo> ril = getPackageManager().queryIntentActivities(mainIntent, 0);
-            for (ResolveInfo ri : ril) {
-                applicationList.add(new AppInfo(RefreshListViewActivity.this, ri));
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
             }
-            Collections.sort(applicationList);
 
+            for (int i = 0; i < 20; i++)
+                titles.add("recyclerview's adapter");
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
+            titles.add("Added after refresh...");
+            mAdapter.notifyDataSetChanged();
 
-            mAdapter = new ApplicationAdapter(RefreshListViewActivity.this, applicationList);
-            listView.setAdapter(mAdapter);
-            listView.setInterface(RefreshListViewActivity.this);
-
-            Animation fadeIn = AnimationUtils.loadAnimation(RefreshListViewActivity.this, android.R.anim.slide_in_left);
-            fadeIn.setDuration(250);
-            LayoutAnimationController layoutAnimationController = new LayoutAnimationController(fadeIn);
-            listView.setLayoutAnimation(layoutAnimationController);
-            listView.startLayoutAnimation();
+            // Call onRefreshComplete when the list has been refreshed.
+            mPullRefreshListView.onRefreshComplete();
 
             super.onPostExecute(result);
         }

@@ -47,13 +47,13 @@ public class BaseActivity extends SwipeBackActivity {
         // 激活状态栏设置
         tintManager.setStatusBarTintEnabled(true);
         // 激活导航栏设置
-        tintManager.setNavigationBarTintEnabled(true);
+//        tintManager.setNavigationBarTintEnabled(true);
 
         // 设置一个颜色给系统栏(系统栏包括导航栏-魅族的底栏和状态栏)
 //        tintManager.setTintColor(getResources().getColor(R.color.primary));
-        // 设置一个样式背景给导航栏
-        tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary_dark));
-        // 设置一个状态栏资源
+        // 设置一个样式背景给导航栏（魅族底栏）
+//        tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary_dark));
+        // 设置一个状态栏资源（魅族状态栏）
         tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary));
     }
 

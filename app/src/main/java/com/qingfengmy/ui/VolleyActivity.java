@@ -81,6 +81,7 @@ public class VolleyActivity extends BaseActivity {
                 } else {
                     ft.hide(secondFragment).hide(thirdFragment).add(R.id.volley_content, firstFragment).commit();
                 }
+//                ft.replace(R.id.volley_content, firstFragment).commit();
                 break;
             case R.id.action_second:
                 if (secondFragment.isAdded()) {
@@ -88,6 +89,7 @@ public class VolleyActivity extends BaseActivity {
                 } else {
                     ft.hide(firstFragment).hide(thirdFragment).add(R.id.volley_content, secondFragment).show(secondFragment).commit();
                 }
+//                ft.replace(R.id.volley_content, secondFragment).commit();
                 break;
             case R.id.action_third:
                 if (thirdFragment.isAdded()) {
@@ -95,6 +97,7 @@ public class VolleyActivity extends BaseActivity {
                 } else {
                     ft.hide(secondFragment).hide(firstFragment).add(R.id.volley_content, thirdFragment).show(thirdFragment).commit();
                 }
+//                ft.replace(R.id.volley_content, thirdFragment).commit();
                 break;
         }
         return true;
