@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
+import com.qingfengmy.ui.fragment.JokeFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -39,6 +40,10 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     private ActionBarDrawerToggle mDrawerToggle;
     FragmentManager fragmentManager;
 
+    MainFragment mainFragment;
+    AboutFragment aboutFragment;
+    JokeFragment jokeFragment;
+    JokeFragment jokeImgFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,17 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         // 设置drawer触发器为DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        mainFragment = new MainFragment();
+        aboutFragment = new AboutFragment();
+        jokeFragment = new JokeFragment();
+        Bundle jokeargs = new Bundle();
+        jokeargs.putBoolean(JokeFragment.TYPE, true);
+        jokeFragment.setArguments(jokeargs);
+        jokeImgFragment = new JokeFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(JokeFragment.TYPE, false);
+        jokeImgFragment.setArguments(args);
 
         selectItem(0);
 
@@ -94,29 +110,39 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     }
 
     private void selectItem(int position) {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
         switch (position) {
             case 0:
                 // 首页主程序
-                // 创建一个新的fragment并且根据行星的位置来显示
-                Fragment fragment = new MainFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-//        fragment.setArguments(args);
-
-                // 通过替换已存在的fragment来插入新的fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .commit();
+                if(mainFragment.isAdded()){
+                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
+                }else{
+                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).commit();
+                }
                 break;
             case 1:
                 // 关于
-                // 创建一个新的fragment并且根据行星的位置来显示
-                fragment = new AboutFragment();
-                // 通过替换已存在的fragment来插入新的fragment
-                fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .commit();
+                if(aboutFragment.isAdded()){
+                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
+                }else{
+                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).commit();
+                }
+                break;
+            case 2:
+                //笑话
+                if(jokeFragment.isAdded()){
+                    ft.show(jokeFragment).hide(mainFragment).hide(aboutFragment).hide(jokeImgFragment).commit();
+                }else{
+                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).commit();
+                }
+                break;
+            case 3:
+                // 趣图
+                if(jokeImgFragment.isAdded()){
+                    ft.show(jokeImgFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).commit();
+                }else{
+                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).commit();
+                }
                 break;
         }
 
@@ -124,18 +150,6 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
             mDrawerLayout.closeDrawers();
         }
     }
-
-    public void switchContent(Fragment from, Fragment to) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction().setCustomAnimations(R.animator.push_left_in, R.animator.push_left_out);
-        if (!to.isAdded()) {
-            // 先判断是否被add过
-            transaction.hide(from).add(R.id.content_frame, to).commit();
-            // 隐藏当前的fragment，add下一个到Activity中
-        } else {
-            transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个           }
-        }
-    }
-
 
     public void setTitle(CharSequence title) {
         titleBar.setTitle(title);

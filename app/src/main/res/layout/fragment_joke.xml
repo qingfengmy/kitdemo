@@ -2,14 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/title_bar"></include>
-
+    android:layout_height="match_parent">
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/list_view_with_empty_view_fragment_ptr_frame"
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
@@ -27,20 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.qingfengmy.ui.view.LoadMoreListView
-                android:id="@+id/list_view_with_empty_view_fragment_list_view"
+            <ListView
+                android:id="@+id/listView"
+                android:scrollbars="none"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@null"
-                android:fadingEdge="none"
-                android:listSelector="@android:color/transparent"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:scrollbarStyle="outsideOverlay"
-                android:choiceMode="singleChoice" />
+                android:layout_height="match_parent" />
 
             <com.qingfengmy.ui.view.EmptyView
-                android:id="@+id/list_view_with_empty_view_fragment_empty_view"
+                android:id="@+id/empty_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>

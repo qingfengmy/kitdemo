@@ -91,7 +91,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="18dp"
                     android:layout_toRightOf="@id/id_img3"
-                    android:text="设置"
+                    android:text="笑话"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp" />
             </RelativeLayout>
@@ -116,7 +116,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="18dp"
                     android:layout_toRightOf="@id/id_img4"
-                    android:text="检查更新"
+                    android:text="趣图"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp" />
             </RelativeLayout>

@@ -10,6 +10,6 @@
     android:shadowRadius="5"
     android:text="KitDemo"
     android:shadowColor="#f1f1f1"
-    android:background="#cccccc">
+    android:background="#fcfccf">
 
 </TextView>

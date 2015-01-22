@@ -10,6 +10,8 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -19,15 +21,21 @@ import com.qingfengmy.ui.adapters.MyAdapter;
 import com.qingfengmy.ui.adapters.RecyclerAdapter;
 import com.qingfengmy.ui.entity.AppInfo;
 import com.qingfengmy.ui.view.EmptyView;
+import com.qingfengmy.ui.view.LoadMoreListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 
 /**
@@ -37,15 +45,20 @@ import butterknife.InjectView;
  */
 public class RefreshListViewActivity extends BaseActivity {
 
-    private List<AppInfo> applicationList;
     private MyAdapter mAdapter;
 
-    @InjectView(R.id.pull_refresh_list)
-    PullToRefreshListView mPullRefreshListView;
+    @InjectView(R.id.list_view_with_empty_view_fragment_ptr_frame)
+    PtrClassicFrameLayout mPtrFrame;
+
+    @InjectView(R.id.list_view_with_empty_view_fragment_list_view)
+    LoadMoreListView actualListView;
+
+    @InjectView(R.id.list_view_with_empty_view_fragment_empty_view)
+    EmptyView emptyView;
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
-    List<String> titles;
+    LinkedList<String> titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,36 +76,51 @@ public class RefreshListViewActivity extends BaseActivity {
             }
         });
 
-        mPullRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+        mPtrFrame.setLastUpdateTimeRelateObject(this);
+        mPtrFrame.setPtrHandler(new PtrHandler() {
             @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                // Update the LastUpdatedLabel
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
-                // Do work to refresh the list here.
+            public void onRefreshBegin(PtrFrameLayout frame) {
                 new InitializeApplicationsTask().execute();
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                // 第二个参数必须是listview，否则滑动会出错
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, actualListView, header);
+//                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
         });
 
+        // the following are default settings
+        mPtrFrame.setResistance(1.7f);
+        mPtrFrame.setRatioOfHeaderHeightToRefresh(1.2f);
+        mPtrFrame.setDurationToClose(200);
+        mPtrFrame.setDurationToCloseHeader(1000);
+        // default is false
+        mPtrFrame.setPullToRefresh(false);
+        // default is true
+        mPtrFrame.setKeepHeaderWhenRefresh(true);
 
-        ListView actualListView = mPullRefreshListView.getRefreshableView();
-
-        actualListView.setEmptyView(new EmptyView(this));
-
-        // Need to use the Actual ListView when registering for Context Menu
-        registerForContextMenu(actualListView);
-
+        actualListView.setLoadMoreListenner(new LoadMoreListView.LoadMoreListenner() {
+            @Override
+            public void loadMore() {
+                new LoadMoreTask().execute();
+            }
+        });
+        actualListView.setEmptyView(emptyView);
         // init date
-        titles = new ArrayList<>();
+        titles = new LinkedList<>();
 
         mAdapter = new MyAdapter(RefreshListViewActivity.this, titles);
 
         actualListView.setAdapter(mAdapter);
 
-        mPullRefreshListView.setRefreshing();
+        mPtrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPtrFrame.autoRefresh();
+            }
+        }, 100);
     }
 
     private class InitializeApplicationsTask extends AsyncTask<Void, Void, Void> {
@@ -105,23 +133,52 @@ public class RefreshListViewActivity extends BaseActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                Thread.sleep(4000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
             }
 
-            for (int i = 0; i < 20; i++)
-                titles.add("recyclerview's adapter");
+            titles.clear();
+            int count = 3;
+//            int count = new Random().nextInt(20);
+            for (int i = 0; i < count; i++)
+                titles.add("recyclerview's adapter-" + new Random().nextInt(100));
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            titles.add("Added after refresh...");
             mAdapter.notifyDataSetChanged();
+            mPtrFrame.refreshComplete();
+            super.onPostExecute(result);
+        }
+    }
 
-            // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshListView.onRefreshComplete();
+    private class LoadMoreTask extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            int i = new Random().nextInt(10)%2;
+            if(i == 0)
+                titles.addLast("recyclerview's footview--");
+            else
+                showToast("mei you geng duo shu ju");
+            mAdapter.notifyDataSetChanged();
+            actualListView.loadMoreComplete();
             super.onPostExecute(result);
         }
     }
