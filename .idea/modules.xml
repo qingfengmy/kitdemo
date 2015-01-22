@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/Qingfengmy.iml" filepath="$PROJECT_DIR$/Qingfengmy.iml" />
       <module fileurl="file://$PROJECT_DIR$/extras/SwipeBackLibrary/SwipeBackLibrary.iml" filepath="$PROJECT_DIR$/extras/SwipeBackLibrary/SwipeBackLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extras/endless/endless.iml" filepath="$PROJECT_DIR$/extras/endless/endless.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extras/ptr-lib/ptr-lib.iml" filepath="$PROJECT_DIR$/extras/ptr-lib/ptr-lib.iml" />
     </modules>
   </component>
 </project>
