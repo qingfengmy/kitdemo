@@ -1,6 +1,6 @@
 package com.qingfengmy.ui.network;
 
-import com.qingfengmy.ui.network.services.JokeApi;
+import com.qingfengmy.ui.network.services.JokesApi;
 import com.qingfengmy.ui.utils.Constants;
 
 import retrofit.RequestInterceptor;
@@ -54,7 +54,7 @@ public class ApiClient {
         return restAdapter;
     }
 
-    public JokeApi getJokeApi() {
-        return getRestAdapter().create(JokeApi.class);
+    public JokesApi getJokeApi() {
+        return getRestAdapter().create(JokesApi.class);
     }
 }

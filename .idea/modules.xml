@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/extras/PullToRefreshLibrary/PullToRefreshLibrary.iml" filepath="$PROJECT_DIR$/extras/PullToRefreshLibrary/PullToRefreshLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/Qingfengmy.iml" filepath="$PROJECT_DIR$/Qingfengmy.iml" />
       <module fileurl="file://$PROJECT_DIR$/extras/SwipeBackLibrary/SwipeBackLibrary.iml" filepath="$PROJECT_DIR$/extras/SwipeBackLibrary/SwipeBackLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

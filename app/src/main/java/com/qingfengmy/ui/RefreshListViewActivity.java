@@ -1,33 +1,16 @@
 package com.qingfengmy.ui;
 
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.qingfengmy.R;
-import com.qingfengmy.ui.adapters.ApplicationAdapter;
 import com.qingfengmy.ui.adapters.MyAdapter;
-import com.qingfengmy.ui.adapters.RecyclerAdapter;
-import com.qingfengmy.ui.entity.AppInfo;
 import com.qingfengmy.ui.view.EmptyView;
 import com.qingfengmy.ui.view.LoadMoreListView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 import butterknife.ButterKnife;

@@ -102,7 +102,6 @@
     <orderEntry type="module" module-name="SwipeBackLibrary" exported="" />
     <orderEntry type="module" module-name="endless" exported="" />
     <orderEntry type="module" module-name="ptr-lib" exported="" />
-    <orderEntry type="module" module-name="PullToRefreshLibrary" exported="" />
   </component>
 </module>
 
