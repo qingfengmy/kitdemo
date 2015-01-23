@@ -3,6 +3,7 @@ package com.qingfengmy.ui.network.entities;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Administrator on 2015/1/21.
@@ -16,7 +17,8 @@ public class Joke extends Model {
     @Column(name = "unixtime")
     private long unixtime;
     @Column(name = "updatetime")
-    private String updatetime;
+    @SerializedName("updatetime")
+    private String aaa;
     @Column(name = "url")
     private String url;
 
@@ -45,11 +47,11 @@ public class Joke extends Model {
     }
 
     public String getUpdatetime() {
-        return updatetime;
+        return aaa;
     }
 
     public void setUpdatetime(String updatetime) {
-        this.updatetime = updatetime;
+        this.aaa = updatetime;
     }
 
     public String getUrl() {

@@ -6,5 +6,5 @@ package com.qingfengmy.ui.utils;
 public class Constants {
     public static final String OpenID = "19d26ad4cd68bcc36c4d7415764c67fb";
 
-    public static boolean DEBUG;
+    public static boolean DEBUG = true;
 }
