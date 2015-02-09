@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.view.RiseNumberTextView;
 import com.qingfengmy.ui.view.SecretTextView;
+import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -67,6 +68,7 @@ public class AnimatorActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
         ButterKnife.inject(this);
+        Slidr.attach(this);
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);

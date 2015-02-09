@@ -1,4 +1,4 @@
 include ':app'
-include ':extras:SwipeBackLibrary'
 include ':extras:ptr-lib'
 include ':extras:endless'
+include ':extras:StikkyHeader'

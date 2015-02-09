@@ -9,6 +9,7 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.MyAdapter;
 import com.qingfengmy.ui.view.EmptyView;
 import com.qingfengmy.ui.view.LoadMoreListView;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -43,11 +44,14 @@ public class RefreshListViewActivity extends BaseActivity {
     Toolbar titleBar;
     LinkedList<String> titles;
 
+    int total;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refreshlistview);
         ButterKnife.inject(this);
+        Slidr.attach(this);
         // 先设置title，再设置action，否则无效
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -83,11 +87,11 @@ public class RefreshListViewActivity extends BaseActivity {
         mPtrFrame.setPullToRefresh(false);
         // default is true
         mPtrFrame.setKeepHeaderWhenRefresh(true);
-
-        actualListView.setLoadMoreListenner(new LoadMoreListView.LoadMoreListenner() {
+        actualListView.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
             @Override
-            public void loadMore() {
-                new LoadMoreTask().execute();
+            public void onLoadMore() {
+                if (total < 10)
+                    new LoadMoreTask().execute();
             }
         });
         actualListView.setEmptyView(emptyView);
@@ -121,8 +125,7 @@ public class RefreshListViewActivity extends BaseActivity {
             }
 
             titles.clear();
-            int count = 3;
-//            int count = new Random().nextInt(20);
+            int count = new Random().nextInt(20);
             for (int i = 0; i < count; i++)
                 titles.add("recyclerview's adapter-" + new Random().nextInt(100));
             return null;
@@ -132,7 +135,7 @@ public class RefreshListViewActivity extends BaseActivity {
         protected void onPostExecute(Void result) {
             mAdapter.notifyDataSetChanged();
             mPtrFrame.refreshComplete();
-            super.onPostExecute(result);
+            actualListView.setCanLoadMore(true);
         }
     }
 
@@ -154,15 +157,15 @@ public class RefreshListViewActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-
-            int i = new Random().nextInt(10)%2;
-            if(i == 0)
+            if (total < 10) {
                 titles.addLast("recyclerview's footview--");
-            else
+            } else {
                 showToast("mei you geng duo shu ju");
+            }
             mAdapter.notifyDataSetChanged();
-            actualListView.loadMoreComplete();
-            super.onPostExecute(result);
+            actualListView.onLoadMoreComplete();
+            actualListView.setCanLoadMore(total < 10);
+            total++;
         }
     }
 }

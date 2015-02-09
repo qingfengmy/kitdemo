@@ -21,6 +21,8 @@ import com.qingfengmy.ui.view.transformers.StackTransformer;
 import com.qingfengmy.ui.view.transformers.TabletTransformer;
 import com.qingfengmy.ui.view.transformers.ZoomInTransformer;
 import com.qingfengmy.ui.view.transformers.ZoomOutTransformer;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.SlidrInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +45,13 @@ public class PageTransformerActivity extends BaseActivity {
             R.drawable.b, R.drawable.c, R.drawable.d};
     private List<ImageView> mImageViews = new ArrayList<ImageView>();
 
+    SlidrInterface slidrInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagetransformer);
         ButterKnife.inject(this);
+        slidrInterface = Slidr.attach(this);
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
@@ -62,6 +66,26 @@ public class PageTransformerActivity extends BaseActivity {
         viewpager.setAdapter(new MyPagerAdapter());
 
         viewpager.setPageTransformer(true, new MyPageTransformer());
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    slidrInterface.unlock();
+                }else{
+                    slidrInterface.lock();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initData() {

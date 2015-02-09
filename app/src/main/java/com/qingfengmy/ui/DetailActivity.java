@@ -18,6 +18,7 @@ import com.nispok.snackbar.Snackbar;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.entity.AppInfo;
 import com.qingfengmy.ui.utils.Utils;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.Date;
 
@@ -39,6 +40,7 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
+        Slidr.attach(this);
 
         titleBar.setTitle("");
         setSupportActionBar(titleBar);
@@ -52,11 +54,6 @@ public class DetailActivity extends BaseActivity {
 
         // Row Container
         rowContainer = (LinearLayout) findViewById(R.id.row_container);
-
-        // Fab Button
-        View fabButton = findViewById(R.id.fab_button);
-        fabButton.setOnClickListener(fabClickListener);
-        Utils.configureFab(fabButton);
 
         for (int i = 1; i < rowContainer.getChildCount(); i++) {
             View rowView = rowContainer.getChildAt(i);

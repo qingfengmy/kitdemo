@@ -6,6 +6,8 @@
     <dimen name="text30">30sp</dimen>
     <dimen name="pager_margin">40dp</dimen>
 
+    <dimen name="min_height_header">50dp</dimen>
+    <dimen name="max_height_header">300dp</dimen>
     <!-- Fab button -->
     <dimen name="fab_size">56dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
@@ -15,4 +17,5 @@
     <dimen name="activity_vertical_margin">88dp</dimen>
     <dimen name="margin15">15dp</dimen>
     <dimen name="margin20">20dp</dimen>
+    <dimen name="do_len">5dp</dimen>
 </resources>

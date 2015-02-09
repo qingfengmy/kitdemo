@@ -3,20 +3,18 @@ package com.qingfengmy.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.entity.AppInfo;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 
 /**
  * 所有activity的父类
@@ -25,36 +23,23 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  *         <p/>
  *         2014-3-15
  */
-public class BaseActivity extends SwipeBackActivity {
-
-    private SwipeBackLayout mSwipeBackLayout;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-        setSwipeBackEnable(true);
-    }
+public class BaseActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // 创建状态栏的管理实例
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // 激活状态栏设置
-        tintManager.setStatusBarTintEnabled(true);
-        // 激活导航栏设置
-//        tintManager.setNavigationBarTintEnabled(true);
-
-        // 设置一个颜色给系统栏(系统栏包括导航栏-魅族的底栏和状态栏)
-//        tintManager.setTintColor(getResources().getColor(R.color.primary));
-        // 设置一个样式背景给导航栏（魅族底栏）
-//        tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary_dark));
-        // 设置一个状态栏资源（魅族状态栏）
-        tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary));
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // 5.0
+            Window window = getWindow();
+            window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
+            window.setNavigationBarColor(getResources().getColor(R.color.primary));
+        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            // 4.4
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+            tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
+        }
     }
 
     public String getName(Activity activity) {

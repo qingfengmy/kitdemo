@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.view.ParallaxViewPager;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.SlidrInterface;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,12 +30,14 @@ public class BackgroundPagerActivity extends BaseActivity {
     Toolbar titleBar;
     @InjectView(R.id.pager)
     ParallaxViewPager pager;
+    SlidrInterface slidrInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backgroundpager);
         ButterKnife.inject(this);
+        slidrInterface = Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -46,6 +50,26 @@ public class BackgroundPagerActivity extends BaseActivity {
         });
         pager.setBackgroundResource(R.drawable.wide_bg);
         pager.setAdapter(new MyPagerAdapter());
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    slidrInterface.unlock();
+                }else{
+                    slidrInterface.lock();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 

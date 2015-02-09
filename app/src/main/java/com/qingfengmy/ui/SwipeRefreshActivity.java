@@ -10,8 +10,10 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.MyAdapter;
 import com.qingfengmy.ui.view.EmptyView;
 import com.qingfengmy.ui.view.LoadMoreListView;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,21 +27,23 @@ public class SwipeRefreshActivity extends BaseActivity {
 
     @InjectView(R.id.swipe_container)
     SwipeRefreshLayout mSwipeLayout;
-    @InjectView(R.id.listview)
+    @InjectView(R.id.list_view_with_empty_view_fragment_list_view)
     LoadMoreListView actualListView;
     @InjectView(R.id.empty_view)
     EmptyView emptyView;
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
-    List<String> titles;
+    LinkedList<String> titles;
     private MyAdapter mAdapter;
+    int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swiperefresh);
         ButterKnife.inject(this);
+        Slidr.attach(this);
         // 先设置title，再设置action，否则无效
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -62,21 +66,20 @@ public class SwipeRefreshActivity extends BaseActivity {
         });
 
 
-        actualListView.setLoadMoreListenner(new LoadMoreListView.LoadMoreListenner() {
+        actualListView.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
             @Override
-            public void loadMore() {
-                new LoadMoreTask().execute();
+            public void onLoadMore() {
+                if (total < 10)
+                    new LoadMoreTask().execute();
             }
         });
         actualListView.setEmptyView(emptyView);
         // init date
-        titles = new ArrayList<>();
+        titles = new LinkedList<>();
 
         mAdapter = new MyAdapter(SwipeRefreshActivity.this, titles);
 
         actualListView.setAdapter(mAdapter);
-
-        mSwipeLayout.setRefreshing(true);
     }
 
     private class InitTask extends AsyncTask<Void, Void, Void> {
@@ -93,7 +96,10 @@ public class SwipeRefreshActivity extends BaseActivity {
             } catch (InterruptedException e) {
             }
 
-            titles.add("recyclerview's refresh-");
+            titles.clear();
+            int count = new Random().nextInt(20);
+            for (int i = 0; i < count; i++)
+                titles.add("recyclerview's adapter-" + new Random().nextInt(100));
             return null;
         }
 
@@ -124,14 +130,15 @@ public class SwipeRefreshActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            int i = new Random().nextInt(10)%2;
-            if(i == 0)
-                titles.add("recyclerview's footview--");
-            else
+            if (total < 10) {
+                titles.addLast("recyclerview's footview--");
+            } else {
                 showToast("mei you geng duo shu ju");
+            }
             mAdapter.notifyDataSetChanged();
-            actualListView.loadMoreComplete();
-            super.onPostExecute(result);
+            actualListView.onLoadMoreComplete();
+            actualListView.setCanLoadMore(total < 10);
+            total++;
         }
     }
 }

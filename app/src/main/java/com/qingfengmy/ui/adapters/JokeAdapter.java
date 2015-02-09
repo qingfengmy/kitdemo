@@ -1,7 +1,11 @@
 package com.qingfengmy.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,11 @@ import android.widget.TextView;
 
 import com.google.zxing.common.StringUtils;
 import com.qingfengmy.R;
+import com.qingfengmy.ui.GifActivity;
 import com.qingfengmy.ui.network.entities.Joke;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -27,6 +34,8 @@ public class JokeAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Joke> jokeList;
+
+    private Bitmap bmp;
 
     public JokeAdapter(Context context, List<Joke> jokeList) {
         this.mContext = context;
@@ -66,11 +75,48 @@ public class JokeAdapter extends BaseAdapter {
         holder.content.setText(joke.getContent());
         holder.time.setText(joke.getUpdatetime());
 
-        if(TextUtils.isEmpty(joke.getUrl())){
+        if (TextUtils.isEmpty(joke.getUrl())) {
             holder.img.setVisibility(View.GONE);
-        }else{
-            Picasso.with(mContext).load(joke.getUrl()).placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image).into(holder.img);
+        } else {
+            if (joke.getUrl().endsWith("gif")) {
+                holder.gif.setVisibility(View.VISIBLE);
+
+                holder.img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (bmp != null) {
+                            // 浏览gif的界面
+                            Intent intent = new Intent();
+                            intent.putExtra("bitmap", bmp);
+                            intent.setClass(mContext, GifActivity.class);
+                            mContext.startActivity(intent);
+                        }
+                    }
+                });
+                Picasso.with(mContext).load(joke.getUrl()).placeholder(R.drawable.default_image)
+                        .error(R.drawable.default_image).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        bmp = bitmap;
+                        holder.img.setImageBitmap(bmp);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+            } else {
+                holder.gif.setVisibility(View.GONE);
+                Picasso.with(mContext).load(joke.getUrl()).placeholder(R.drawable.default_image)
+                        .error(R.drawable.default_image).into(holder.img);
+            }
+
         }
         return convertView;
     }
@@ -84,6 +130,8 @@ public class JokeAdapter extends BaseAdapter {
         TextView time;
         @InjectView(R.id.img)
         ImageView img;
+        @InjectView(R.id.gif)
+        TextView gif;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);

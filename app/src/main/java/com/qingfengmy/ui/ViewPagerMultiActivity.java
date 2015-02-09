@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.SlidrInterface;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,7 +24,7 @@ import butterknife.InjectView;
  * Time: 16:59
  */
 public class ViewPagerMultiActivity extends BaseActivity {
-    private static int TOTAL_COUNT = 14;
+    private static int TOTAL_COUNT = 13;
 
     @InjectView(R.id.pager_layout)
     RelativeLayout viewPagerContainer;
@@ -39,6 +41,7 @@ public class ViewPagerMultiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpagermulti);
         ButterKnife.inject(this);
+        slidrInterface = Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -99,12 +102,18 @@ public class ViewPagerMultiActivity extends BaseActivity {
         }
     }
 
+    SlidrInterface slidrInterface;
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageSelected(int position) {
             indexText.setText(new StringBuilder().append(position + 1)
                     .append("/").append(TOTAL_COUNT));
+            if(position == 0){
+                slidrInterface.unlock();
+            }else{
+                slidrInterface.lock();
+            }
         }
 
         @Override

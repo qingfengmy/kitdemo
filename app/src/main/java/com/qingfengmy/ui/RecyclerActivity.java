@@ -1,12 +1,16 @@
 package com.qingfengmy.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -16,6 +20,8 @@ import android.widget.RelativeLayout;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.RecyclerAdapter;
 import com.qingfengmy.ui.view.AbsListViewScrollDetector;
+import com.qingfengmy.ui.view.SampleDivider;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +37,6 @@ import butterknife.OnClick;
  */
 public class RecyclerActivity extends BaseActivity {
 
-
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
     @InjectView(R.id.recyclerView)
@@ -46,12 +51,14 @@ public class RecyclerActivity extends BaseActivity {
     List<String> titles;
     RecyclerAdapter adapter;
     LinearLayoutManager layoutManager;
+    private boolean show = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
         ButterKnife.inject(this);
+        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -67,6 +74,12 @@ public class RecyclerActivity extends BaseActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        //  创建列表项分隔线对象final
+        RecyclerView.ItemDecoration itemDecoration = new SampleDivider(this);
+        //  为RecyclerView控件指定分隔线对象
+        recyclerView.addItemDecoration(itemDecoration);
+
+
         titles = new ArrayList<>();
         for (int i = 0; i < 20; i++)
             titles.add("recyclerview's adapter");
@@ -81,15 +94,18 @@ public class RecyclerActivity extends BaseActivity {
                 final int lastVisibleItem = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                 int totalItemCount = layoutManager.getItemCount();
                 //lastVisibleItem 是从0开始数的，totalItemCount是从1开始数的，故total-1
-                // dy>0 表示向下滑动
-                if (lastVisibleItem == totalItemCount-1  && dy > 0) {
+                // dy>0 表示向上滑动
+                if (lastVisibleItem == totalItemCount - 1 && dy > 0) {
                     adapter.add("last's adapter", lastVisibleItem);
                 }
-
-                if (dy > 10) {
-                    showFloatButton();
-                } else if (dy < -10) {
-                    hideFloatButton();
+                Log.e("aaa", "dy=" + dy);
+                Log.e("aaa", "show=" + show);
+                if (dy < -10) {
+                    if (!show)
+                        showFloatButton();
+                } else if (dy > 10) {
+                    if (show)
+                        hideFloatButton();
                 }
             }
 
@@ -114,7 +130,6 @@ public class RecyclerActivity extends BaseActivity {
             }
         });
 
-
     }
 
     @OnClick(R.id.button)
@@ -123,16 +138,34 @@ public class RecyclerActivity extends BaseActivity {
     }
 
     public void showFloatButton() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(buttons, "translationY", 0, 300);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(buttons, "translationY", 300, 0);
         animator.setDuration(300);
-        animator.setInterpolator(new AnticipateInterpolator());
+//        animator.setInterpolator(new AnticipateInterpolator());
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                buttons.setVisibility(View.VISIBLE);
+                show = true;
+            }
+        });
         animator.start();
     }
 
     public void hideFloatButton() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(buttons, "translationY", 300, 0);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(buttons, "translationY", 0, 300);
         animator.setDuration(300);
-        animator.setInterpolator(new AnticipateInterpolator());
+//        animator.setInterpolator(new AnticipateInterpolator());
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                show = false;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                buttons.setVisibility(View.INVISIBLE);
+            }
+        });
         animator.start();
     }
 }

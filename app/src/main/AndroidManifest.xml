@@ -31,9 +31,6 @@
             android:name=".ui.FlowLayoutActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.RecyclerActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
             android:name=".ui.AnimatorActivity"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -83,6 +80,27 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.VolleyActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.StickyHeaderActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.RecyclerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.CardViewActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.GifActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.PaletteActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.TransitionActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.TransitionExplodeActivity"
             android:screenOrientation="portrait"></activity>
 
         <meta-data android:name="AA_DB_NAME" android:value="joke.db" />

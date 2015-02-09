@@ -3,7 +3,6 @@
     <string-array name="names">
         <item>实现加入购物车效果</item>
         <item>流式布局（热门标签）</item>
-        <item>RecyclerView</item>
         <item>属性动画</item>
         <item>刮刮卡</item>
         <item>截取头像</item>
@@ -19,11 +18,11 @@
         <item>ViewPagerIndicator</item>
         <item>BackgroundPagerActivity</item>
         <item>Volley学习</item>
+        <item>stickyHeaderListView</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
         <item>com.qingfengmy.ui.FlowLayoutActivity</item>
-        <item>com.qingfengmy.ui.RecyclerActivity</item>
         <item>com.qingfengmy.ui.AnimatorActivity</item>
         <item>com.qingfengmy.ui.GuaGuakaActivity</item>
         <item>com.qingfengmy.ui.CutPicActivity</item>
@@ -39,5 +38,6 @@
         <item>"com.qingfengmy.ui.ViewPagerIndicatorActivity"</item>
         <item>"com.qingfengmy.ui.BackgroundPagerActivity"</item>
         <item>"com.qingfengmy.ui.VolleyActivity"</item>
+        <item>"com.qingfengmy.ui.StickyHeaderActivity"</item>
     </string-array>
 </resources>

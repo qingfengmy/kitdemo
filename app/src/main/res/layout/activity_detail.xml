@@ -52,20 +52,6 @@
                 android:id="@+id/row_moments"
                 layout="@layout/row_detailview" />
 
-            <ImageButton
-                android:id="@+id/fab_button"
-                android:layout_width="@dimen/fab_size"
-                android:transitionName="fab"
-                android:layout_height="@dimen/fab_size"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="@drawable/button_round"
-                android:stateListAnimator="@animator/fab_anim"
-                android:elevation="8dp"
-                android:padding="8dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

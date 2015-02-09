@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background_material_light"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <RelativeLayout
+        android:id="@+id/pager_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:clipChildren="false"
+        android:layerType="software">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clipChildren="false" />
+
+        <TextView
+            android:id="@+id/view_pager_index"
+            android:layout_margin="@dimen/margin15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_pager"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/pager_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/translate_shape"
+        android:showDividers="beginning|middle|end"
+        android:dividerPadding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Vibrant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vibrant(有活力的)"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/DarkVibrant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DarkVibrant(有活力的暗色)"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/LightVibrant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LightVibrant(有活力的亮色)"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/Muted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Muted(柔和的)"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/DarkMuted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DarkMuted(柔和的暗色)"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/LightMuted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LightMuted(柔和的亮色)"
+            android:textSize="@dimen/text18" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -2,10 +2,10 @@ package com.qingfengmy.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +23,9 @@ import butterknife.InjectView;
  * Date: 2014-12-31
  * Time: 11:09
  *
- *  final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-    mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
- * List<ResolveInfo> ril = getPackageManager().queryIntentActivities(mainIntent, 0);
+ *
  */
-public class ApplicationAdapter extends BaseAdapter {
+public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ViewHolder> {
     private List<AppInfo> applications;
     private Context context;
     private LayoutInflater mInflater;
@@ -38,38 +36,15 @@ public class ApplicationAdapter extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setApplications(List<AppInfo> applications) {
-        this.applications = applications;
-        this.notifyDataSetChanged();
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = View.inflate(parent.getContext(), R.layout.row_application, null);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
-    public int getCount() {
-        return applications.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-        if (convertView != null) {
-            holder = (ViewHolder) convertView.getTag();
-        } else {
-            convertView = mInflater.inflate(R.layout.row_application,
-                    null);
-            holder = new ViewHolder(convertView);
-
-            convertView.setTag(holder);
-        }
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final AppInfo appInfo = applications.get(position);
         holder.name.setText(appInfo.getName());
         holder.image.setImageDrawable(appInfo.getIcon());
@@ -77,15 +52,19 @@ public class ApplicationAdapter extends BaseAdapter {
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               BaseActivity activity = (BaseActivity) context;
+                BaseActivity activity = (BaseActivity) context;
                 activity.animateActivity(appInfo, holder.image);
             }
         });
-
-        return convertView;
     }
 
-    static class ViewHolder {
+    @Override
+    public int getItemCount() {
+        return applications.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
         @InjectView(R.id.cardview)
         CardView card;
 
@@ -95,8 +74,9 @@ public class ApplicationAdapter extends BaseAdapter {
         @InjectView(R.id.countryName)
         TextView name;
 
-        public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.inject(this, itemView);
         }
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.BaseActivity;
+import com.qingfengmy.ui.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,7 +33,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     @InjectView(R.id.listview)
     ListView listview;
     private ArrayAdapter<String> adapter;
-    BaseActivity mActivity;
+    MainActivity mActivity;
 
     public String[] names;
     public String[] classes;
@@ -46,7 +47,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity = (BaseActivity) getActivity();
+        mActivity = (MainActivity) getActivity();
 
         names = getResources().getStringArray(R.array.names);
         classes = getResources().getStringArray(R.array.classes);
@@ -75,7 +76,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
             startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            mActivity.showToast("不存在该类");
+//            mActivity.showToast("不存在该类");
         }
     }
 }

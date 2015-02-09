@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.view.FlowLayoutView;
+import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -37,6 +38,7 @@ public class FlowLayoutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flowlayout);
         ButterKnife.inject(this);
+        Slidr.attach(this);
 
         // 先设置title，再设置action，否则无效
         titleBar.setTitle(getName(this));

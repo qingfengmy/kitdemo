@@ -13,6 +13,10 @@
 
     <color name="background_tab_pressed">#1AFFFFFF</color>
 
+    <color name="color_translate_gray">#f0f0f0</color>
+    <color name="color_first_gray">#474747</color>
+    <color name="color_second_gray">#8b8b8b</color>
+    <color name="color_third_gray">#a8a8a8</color>
     <!--扫码-->
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>

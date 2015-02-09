@@ -16,16 +16,9 @@
         android:layout_height="match_parent">
 
         <com.qingfengmy.ui.view.LoadMoreListView
-            android:id="@+id/listview"
+            android:id="@+id/list_view_with_empty_view_fragment_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:fadingEdge="none"
-            android:listSelector="@android:color/transparent"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:choiceMode="singleChoice" />
+            android:layout_height="match_parent" />
 
         <com.qingfengmy.ui.view.EmptyView
             android:id="@+id/empty_view"

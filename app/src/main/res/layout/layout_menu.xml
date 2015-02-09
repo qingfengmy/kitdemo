@@ -141,7 +141,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="18dp"
                     android:layout_toRightOf="@id/id_img5"
-                    android:text="分享"
+                    android:text="android 5.0"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp" />
             </RelativeLayout>

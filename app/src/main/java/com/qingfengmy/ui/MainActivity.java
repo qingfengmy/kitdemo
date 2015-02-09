@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,11 +22,9 @@ import android.widget.ListView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.JokeFragment;
+import com.qingfengmy.ui.fragment.LollipopFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
-import java.util.logging.LogRecord;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,14 +43,14 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     AboutFragment aboutFragment;
     JokeFragment jokeFragment;
     JokeFragment jokeImgFragment;
+    LollipopFragment lollipopFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);
-
-        setSwipeBackEnable(false);
 
         setSupportActionBar(titleBar);
         titleBar.setTitle(R.string.app_name);
@@ -67,14 +66,18 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         mainFragment = new MainFragment();
         aboutFragment = new AboutFragment();
+
         jokeFragment = new JokeFragment();
         Bundle jokeargs = new Bundle();
         jokeargs.putBoolean(JokeFragment.TYPE, true);
         jokeFragment.setArguments(jokeargs);
+
         jokeImgFragment = new JokeFragment();
         Bundle args = new Bundle();
         args.putBoolean(JokeFragment.TYPE, false);
         jokeImgFragment.setArguments(args);
+
+        lollipopFragment = new LollipopFragment();
 
         selectItem(0);
 
@@ -114,34 +117,42 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         switch (position) {
             case 0:
                 // 首页主程序
-                if(mainFragment.isAdded()){
-                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
-                }else{
-                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).commit();
+                if (mainFragment.isAdded()) {
+                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 1:
                 // 关于
-                if(aboutFragment.isAdded()){
-                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
-                }else{
-                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).commit();
+                if (aboutFragment.isAdded()) {
+                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 2:
                 //笑话
-                if(jokeFragment.isAdded()){
-                    ft.show(jokeFragment).hide(mainFragment).hide(aboutFragment).hide(jokeImgFragment).commit();
-                }else{
-                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).commit();
+                if (jokeFragment.isAdded()) {
+                    ft.show(jokeFragment).hide(mainFragment).hide(aboutFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).hide(aboutFragment).hide(mainFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 3:
                 // 趣图
-                if(jokeImgFragment.isAdded()){
-                    ft.show(jokeImgFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).commit();
-                }else{
-                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).commit();
+                if (jokeImgFragment.isAdded()) {
+                    ft.show(jokeImgFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(lollipopFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).hide(aboutFragment).hide(jokeFragment).hide(mainFragment).hide(lollipopFragment).commit();
+                }
+                break;
+            case 4:
+                // android 5.0
+                if (lollipopFragment.isAdded()) {
+                    ft.show(lollipopFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, lollipopFragment).show(lollipopFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).commit();
                 }
                 break;
         }
@@ -177,7 +188,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_about) {
-            openWebPage(getString(R.string.aboutme));
+//            openWebPage(getString(R.string.aboutme));
         }
         return super.onOptionsItemSelected(item);
     }

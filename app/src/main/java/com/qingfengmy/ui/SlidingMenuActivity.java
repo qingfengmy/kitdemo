@@ -13,6 +13,7 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
+import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -33,7 +34,6 @@ public class SlidingMenuActivity extends BaseActivity implements MenuFragment.Na
         setContentView(R.layout.activity_slidingmenu);
         ButterKnife.inject(this);
 
-        setSwipeBackEnable(false);
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);
