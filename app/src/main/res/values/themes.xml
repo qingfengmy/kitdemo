@@ -48,7 +48,7 @@
     <style name="progressbar_style1">
         <item name="android:maxWidth">136.0dip</item>
         <item name="android:maxHeight">106.0dip</item>
-        <item name="android:indeterminateDrawable">@animator/loading</item>
+        <item name="android:indeterminateDrawable">@anim/loading</item>
         <item name="android:minWidth">68.0dip</item>
         <item name="android:minHeight">53.0dip</item>
     </style>

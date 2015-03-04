@@ -145,6 +145,30 @@
                     android:textColor="@color/primary_text"
                     android:textSize="18sp" />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:id="@+id/id_layout6"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/id_img6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/composer_thought" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/id_img6"
+                    android:text="小游戏"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp" />
+            </RelativeLayout>
 
         </LinearLayout>
 

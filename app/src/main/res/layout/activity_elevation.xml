@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_light"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:clickable="false"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:contentPadding="10dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="5dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/color_first_gray"
+            android:text="eleavation是静态的成员，translationZ是用来做动画。\n视图的背景边界决定了阴影的默认形状。轮廓（Outlines）代表了图形对象的外形状，并确定了对触摸反馈区的波纹。"
+            android:textSize="18sp" />
+    </android.support.v7.widget.CardView>
+
+    <com.qingfengmy.ui.view.DragFrameLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <View
+            android:id="@+id/circle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:background="@color/primary" />
+
+        <LinearLayout
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/raise_bt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Z+" />
+
+            <Button
+                android:id="@+id/lower_bt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Z-" />
+        </LinearLayout>
+    </com.qingfengmy.ui.view.DragFrameLayout>
+</LinearLayout>

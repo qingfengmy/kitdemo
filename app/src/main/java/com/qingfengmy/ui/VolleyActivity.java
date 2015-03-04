@@ -75,7 +75,7 @@ public class VolleyActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        FragmentTransaction ft = fm.beginTransaction().setCustomAnimations(R.animator.push_left_in, R.animator.push_left_out);
+        FragmentTransaction ft = fm.beginTransaction().setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
         switch (item.getItemId()) {
             case R.id.action_first:
                 if (firstFragment.isAdded()) {

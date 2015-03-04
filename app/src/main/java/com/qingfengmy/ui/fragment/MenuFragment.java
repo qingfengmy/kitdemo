@@ -53,7 +53,7 @@ public class MenuFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.id_layout1, R.id.id_layout2, R.id.id_layout3, R.id.id_layout4, R.id.id_layout5})
+    @OnClick({R.id.id_layout1, R.id.id_layout2, R.id.id_layout3, R.id.id_layout4, R.id.id_layout5, R.id.id_layout6})
     public void click(View v) {
         int position = 0;
         switch (v.getId()) {
@@ -71,6 +71,9 @@ public class MenuFragment extends Fragment {
                 break;
             case R.id.id_layout5:
                 position = 4;
+                break;
+            case R.id.id_layout6:
+                position = 5;
                 break;
         }
         if (mCallback != null) {

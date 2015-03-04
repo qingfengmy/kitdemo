@@ -173,7 +173,7 @@ public class TabHostActivity extends BaseActivity {
             set.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    Animator anim = AnimatorInflater.loadAnimator(TabHostActivity.this, R.animator.shake);
+                    Animator anim = AnimatorInflater.loadAnimator(TabHostActivity.this, R.anim.shake);
                     anim.setTarget(shopcart);
                     anim.addListener(new AnimatorListenerAdapter() {
                         @Override

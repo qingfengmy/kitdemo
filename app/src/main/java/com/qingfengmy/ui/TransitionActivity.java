@@ -1,5 +1,6 @@
 package com.qingfengmy.ui;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +10,12 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.ChangeTransform;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.transition.Transition;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -38,9 +42,11 @@ public class TransitionActivity extends BaseActivity {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
 
-    String[] list = new String[]{"explode：从场景的中心移入或移出 ", "slide：从场景的边缘移入或移出 ", "fade：调整透明度产生渐变效果", "share：分享元素"};
+    String[] list = new String[]{"explode：从场景的中心移入或移出 ", "slide：从场景的边缘移入或移出 ", "fade：调整透明度产生渐变效果", "share：分享元素", "完整demo"};
 
     Window window;
+
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +80,7 @@ public class TransitionActivity extends BaseActivity {
     public void finishAfterTransition() {
         // 4. 返回之后，这里执行reenter transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            super.finishAfterTransition();
-            window.setReenterTransition(new Fade());
+            // Material主题默认会将exit的共享元素transition设置成null而enter的共享元素transition设置成@android:transition/move.如果reenter 或者 return transition没有明确设置，则将用exit 和enter的共享元素transition替代
         }
     }
 
@@ -89,16 +94,20 @@ public class TransitionActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, final int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.name.setText(list[position]);
-            holder.image.setVisibility(View.GONE);
+            if (position != 4) {
+                holder.image.setVisibility(View.GONE);
+            }
+
+            TransitionActivity.this.position = position;
 
             holder.card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         // 2. 设置具体transition
-                        switch (position){
+                        switch (position) {
                             case 0:
                                 window.setExitTransition(new Explode());
                                 break;
@@ -108,12 +117,32 @@ public class TransitionActivity extends BaseActivity {
                             case 2:
                                 window.setExitTransition(new Fade());
                                 break;
-
+                            case 3:
+                                window.setExitTransition(new Slide().setDuration(2000));
+                                break;
+                            case 4:
+                                Transition ts = new ChangeTransform();
+                                ts.setDuration(1000);
+                                window.setExitTransition(ts);
+                                break;
                         }
                         // 3. 开始一个activity
-                        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(TransitionActivity.this).toBundle();
-                        Intent intent = new Intent(TransitionActivity.this, TransitionExplodeActivity.class);
-                        intent.putExtra("position", position);
+                        Bundle bundle;
+                        Intent intent = new Intent();
+                        if (position == 3) {
+                            Pair<View, String> pair1 = Pair.create((View) holder.name, "text");
+                            bundle = ActivityOptions.makeSceneTransitionAnimation(TransitionActivity.this, pair1).toBundle();
+                            intent.setClass(TransitionActivity.this, TransitionExplodeActivity.class);
+                            intent.putExtra("position", position);
+                        } else if (position == 4) {
+                            Pair<View, String> pair1 = Pair.create((View) holder.image, "img");
+                            bundle = ActivityOptions.makeSceneTransitionAnimation(TransitionActivity.this, pair1).toBundle();
+                            intent.setClass(TransitionActivity.this, TransitionDemoActivity.class);
+                        } else {
+                            bundle = ActivityOptions.makeSceneTransitionAnimation(TransitionActivity.this).toBundle();
+                            intent.setClass(TransitionActivity.this, TransitionExplodeActivity.class);
+                            intent.putExtra("position", position);
+                        }
                         startActivity(intent, bundle);
                     }
                 }
@@ -142,4 +171,5 @@ public class TransitionActivity extends BaseActivity {
             }
         }
     }
+
 }

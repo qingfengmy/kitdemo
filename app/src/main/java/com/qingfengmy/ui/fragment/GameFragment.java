@@ -21,6 +21,7 @@ import com.qingfengmy.ui.StateListAnimatorActivity;
 import com.qingfengmy.ui.SvgActivity;
 import com.qingfengmy.ui.TintingActivity;
 import com.qingfengmy.ui.TransitionActivity;
+import com.qingfengmy.ui.game.NewPuzzleActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,22 +29,14 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2015/2/3.
  */
-public class LollipopFragment extends Fragment {
+public class GameFragment extends Fragment {
 
     @InjectView(R.id.listView)
     ListView listView;
 
     private String[] titles = {
-            "recycle view",
-            "card view",
-            "取色：palette",
-            "Activity Transition",
-            "定义阴影:Z = elevation + translationZ",
-            "裁剪：ViewOutlineProvider",
-            "Drawable Tinting（着色）",
-            "Ripple(波纹)",
-            "矢量图动画",
-            "View state changes （视图状态改变）"};
+            "新拼图",
+            "2048"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,12 +55,11 @@ public class LollipopFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        // recycler view
-                        startActivity(new Intent(getActivity(), RecyclerActivity.class));
+                        // 新拼图
+                        startActivity(new Intent(getActivity(), NewPuzzleActivity.class));
                         break;
                     case 1:
-                        // card view
-                        startActivity(new Intent(getActivity(), CardViewActivity.class));
+
                         break;
                     case 2:
                         // palette

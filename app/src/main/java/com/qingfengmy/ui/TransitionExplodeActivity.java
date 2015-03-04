@@ -70,6 +70,12 @@ public class TransitionExplodeActivity extends BaseActivity {
                     // 3. 设置返回的transition
                     window.setReturnTransition(new Fade());
                     break;
+                case 3:
+                    // 共享元素
+                    // 在两个activity的样式文件中给共享元素分配一个相同的名字使用android:transitionName属性
+                    text.setTransitionName("text");
+                    window.setSharedElementEnterTransition(new Slide().setDuration(1000));
+                    break;
             }
 
         }

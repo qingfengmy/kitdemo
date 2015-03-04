@@ -102,9 +102,37 @@
         <activity
             android:name=".ui.TransitionExplodeActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.TransitionDemoActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.ElevationDragActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.ClippingActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.TintingActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SvgActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.StateListAnimatorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.game.NewPuzzleActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.TreeActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <meta-data android:name="AA_DB_NAME" android:value="joke.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="joke.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
         <meta-data
             android:name="joke"
             android:value="com.qingfengmy.ui.network.entities.Joke" />

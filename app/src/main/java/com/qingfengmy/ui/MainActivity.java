@@ -21,6 +21,7 @@ import android.widget.ListView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
+import com.qingfengmy.ui.fragment.GameFragment;
 import com.qingfengmy.ui.fragment.JokeFragment;
 import com.qingfengmy.ui.fragment.LollipopFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
@@ -44,6 +45,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     JokeFragment jokeFragment;
     JokeFragment jokeImgFragment;
     LollipopFragment lollipopFragment;
+    GameFragment gameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         jokeImgFragment.setArguments(args);
 
         lollipopFragment = new LollipopFragment();
+
+        gameFragment = new GameFragment();
 
         selectItem(0);
 
@@ -118,41 +122,49 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
             case 0:
                 // 首页主程序
                 if (mainFragment.isAdded()) {
-                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(gameFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 } else {
-                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 1:
                 // 关于
                 if (aboutFragment.isAdded()) {
-                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(gameFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 } else {
-                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).hide(gameFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 2:
                 //笑话
                 if (jokeFragment.isAdded()) {
-                    ft.show(jokeFragment).hide(mainFragment).hide(aboutFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.show(jokeFragment).hide(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 } else {
-                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).hide(aboutFragment).hide(mainFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).hide(gameFragment).hide(aboutFragment).hide(mainFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 3:
                 // 趣图
                 if (jokeImgFragment.isAdded()) {
-                    ft.show(jokeImgFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(lollipopFragment).commit();
+                    ft.show(jokeImgFragment).hide(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(lollipopFragment).commit();
                 } else {
-                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).hide(aboutFragment).hide(jokeFragment).hide(mainFragment).hide(lollipopFragment).commit();
+                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(mainFragment).hide(lollipopFragment).commit();
                 }
                 break;
             case 4:
                 // android 5.0
                 if (lollipopFragment.isAdded()) {
-                    ft.show(lollipopFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
+                    ft.show(lollipopFragment).hide(gameFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
                 } else {
-                    ft.add(R.id.content_frame, lollipopFragment).show(lollipopFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).commit();
+                    ft.add(R.id.content_frame, lollipopFragment).show(lollipopFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).commit();
+                }
+                break;
+            case 5:
+                // 小游戏
+                if (gameFragment.isAdded()) {
+                    ft.show(gameFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
+                } else {
+                    ft.add(R.id.content_frame, gameFragment).show(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).hide(lollipopFragment).commit();
                 }
                 break;
         }
