@@ -116,7 +116,7 @@
             android:name=".ui.ClippingActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.TintingActivity"
+            android:name=".ui.TintingsActivity"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.SvgActivity"

@@ -19,7 +19,8 @@ import com.qingfengmy.ui.PaletteActivity;
 import com.qingfengmy.ui.RecyclerActivity;
 import com.qingfengmy.ui.StateListAnimatorActivity;
 import com.qingfengmy.ui.SvgActivity;
-import com.qingfengmy.ui.TintingActivity;
+import com.qingfengmy.ui.TintingsActivity;
+import com.qingfengmy.ui.TintingsActivity;
 import com.qingfengmy.ui.TransitionActivity;
 import com.qingfengmy.ui.game.NewPuzzleActivity;
 
@@ -79,7 +80,7 @@ public class GameFragment extends Fragment {
                         break;
                     case 6:
                         // 着色
-                        startActivity(new Intent(getActivity(), TintingActivity.class));
+                        startActivity(new Intent(getActivity(), TintingsActivity.class));
                         break;
                     case 7:
                         // 波纹
