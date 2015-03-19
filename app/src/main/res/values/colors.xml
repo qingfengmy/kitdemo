@@ -29,4 +29,5 @@
     <color name="yellow">#ff0</color>
     <color name="gray">#ccc</color>
     <color name="pink">#e91e63</color>
+    <color name="color_shadow">#44000000</color>
 </resources>

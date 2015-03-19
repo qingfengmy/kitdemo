@@ -53,4 +53,7 @@
         <item name="android:minHeight">53.0dip</item>
     </style>
 
+    <style name="splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/logo</item>
+    </style>
 </resources>

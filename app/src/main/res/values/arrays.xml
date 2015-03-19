@@ -20,6 +20,8 @@
         <item>Volley学习</item>
         <item>stickyHeaderListView</item>
         <item>树形结构</item>
+        <item>canvas绘制折线图</item>
+        <item>HideOnScrollExample</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -41,6 +43,8 @@
         <item>"com.qingfengmy.ui.VolleyActivity"</item>
         <item>"com.qingfengmy.ui.StickyHeaderActivity"</item>
         <item>"com.qingfengmy.ui.TreeActivity"</item>
+        <item>"com.qingfengmy.ui.BrokenLineActivity"</item>
+        <item>"com.qingfengmy.ui.HideOnScrollActivity"</item>
     </string-array>
     <string-array name="blend_modes">
         <item>Add</item>

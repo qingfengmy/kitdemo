@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/extras/StikkyHeader/StikkyHeader.iml" filepath="$PROJECT_DIR$/extras/StikkyHeader/StikkyHeader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/extras/endless/endless.iml" filepath="$PROJECT_DIR$/extras/endless/endless.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extras/extras.iml" filepath="$PROJECT_DIR$/extras/extras.iml" />
       <module fileurl="file://$PROJECT_DIR$/extras/ptr-lib/ptr-lib.iml" filepath="$PROJECT_DIR$/extras/ptr-lib/ptr-lib.iml" />
     </modules>
   </component>

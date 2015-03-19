@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     Toolbar titleBar;
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+
     private ActionBarDrawerToggle mDrawerToggle;
     FragmentManager fragmentManager;
 
@@ -201,6 +203,8 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_about) {
 //            openWebPage(getString(R.string.aboutme));
+        } else if (item.getItemId() == R.id.menu_right) {
+            openRightLayout();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -208,5 +212,21 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         selectItem(position);
+    }
+
+    // 右边菜单开关事件
+
+    public void openRightLayout() {
+
+        if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+
+            mDrawerLayout.closeDrawer(Gravity.RIGHT);
+
+        } else {
+
+            mDrawerLayout.openDrawer(Gravity.RIGHT);
+
+        }
+
     }
 }

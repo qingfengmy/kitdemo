@@ -26,6 +26,12 @@
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_gravity="start" />
+        <fragment
+            android:id="@+id/info"
+            android:name="com.qingfengmy.ui.fragment.MenuFragment"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end" />
     </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>
