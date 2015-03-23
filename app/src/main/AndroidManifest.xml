@@ -137,6 +137,10 @@
             android:name=".ui.HideOnScrollActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".ui.WeiXinActivity"
+            android:screenOrientation="portrait"></activity>
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="joke.db" />

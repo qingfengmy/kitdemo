@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/gray"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.qingfengmy.ui.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            zhy:weixin_icon="@drawable/ic_launcher"
+            zhy:weixin_text="首页"
+            zhy:weixin_text_size="12sp" />
+
+        <com.qingfengmy.ui.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_two"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            zhy:weixin_icon="@drawable/ic_launcher"
+            zhy:weixin_text="我的"
+            zhy:weixin_text_size="12sp" />
+
+        <com.qingfengmy.ui.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_three"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            zhy:weixin_icon="@drawable/ic_launcher"
+            zhy:weixin_text="系统"
+            zhy:weixin_text_size="12sp" />
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</RelativeLayout>
