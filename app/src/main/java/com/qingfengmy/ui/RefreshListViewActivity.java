@@ -78,14 +78,14 @@ public class RefreshListViewActivity extends BaseActivity {
             }
         });
 
-        // the following are default settings
+        // the following are default_image settings
         mPtrFrame.setResistance(1.7f);
         mPtrFrame.setRatioOfHeaderHeightToRefresh(1.2f);
         mPtrFrame.setDurationToClose(200);
         mPtrFrame.setDurationToCloseHeader(1000);
-        // default is false
+        // default_image is false
         mPtrFrame.setPullToRefresh(false);
-        // default is true
+        // default_image is true
         mPtrFrame.setKeepHeaderWhenRefresh(true);
         actualListView.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
             @Override

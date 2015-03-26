@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/big_pager_layout"
+    android:layout_below="@+id/toolbar"
+    android:background="#000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:layerType="software">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <TextView
+        android:id="@+id/big_view_pager_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true" />
+
+    <com.qingfengmy.ui.view.ViewPagerFixed
+        android:id="@+id/big_view_pager"
+        android:layout_width="wrap_content"
+        android:layout_above="@+id/big_view_pager_index"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:clipChildren="false" />
+</RelativeLayout>

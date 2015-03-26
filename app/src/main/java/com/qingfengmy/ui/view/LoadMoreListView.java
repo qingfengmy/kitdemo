@@ -51,7 +51,7 @@ public class LoadMoreListView extends ListView implements OnScrollListener {
 
     // Listener to process load more items when user reaches the end of the list
     private OnLoadMoreListener mOnLoadMoreListener;
-    // To know if the list is loading more items
+    // To know if the list is loading_anim more items
     private boolean mIsLoadingMore = false;
 
     private boolean mCanLoadMore = true;
@@ -181,7 +181,7 @@ public class LoadMoreListView extends ListView implements OnScrollListener {
     }
 
     /**
-     * Notify the loading more operation has finished
+     * Notify the loading_anim more operation has finished
      */
     public void onLoadMoreComplete() {
         mIsLoadingMore = false;

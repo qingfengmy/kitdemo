@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+
+    <com.qingfengmy.ui.view.DampView
+        android:id="@+id/dampview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <!-- 此处必须设置imageview的scaleType为centerCrop,当然在代码中设置也可以 -->
+
+            <ImageView
+                android:id="@+id/img_mine_bg"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/c" />
+
+            <TextView
+                android:id="@+id/iv_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="75dp"
+                android:text="登录/注册" />
+
+            <com.qingfengmy.ui.view.NoScrollGridView
+                android:id="@+id/gv_mine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:horizontalSpacing="8dp"
+                android:numColumns="3"
+                android:padding="2dp"
+                android:layout_below="@+id/img_mine_bg"
+                android:scrollbars="none"
+                android:verticalSpacing="15dp" />
+        </RelativeLayout>
+
+    </com.qingfengmy.ui.view.DampView>
+</LinearLayout>

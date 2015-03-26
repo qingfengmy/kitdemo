@@ -3,6 +3,7 @@ package com.qingfengmy.ui;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -27,8 +28,8 @@ public class SwipeRefreshActivity extends BaseActivity {
 
     @InjectView(R.id.swipe_container)
     SwipeRefreshLayout mSwipeLayout;
-    @InjectView(R.id.list_view_with_empty_view_fragment_list_view)
-    LoadMoreListView actualListView;
+    @InjectView(R.id.recyclerView)
+    RecyclerView recyclerView;
     @InjectView(R.id.empty_view)
     EmptyView emptyView;
 
@@ -66,20 +67,11 @@ public class SwipeRefreshActivity extends BaseActivity {
         });
 
 
-        actualListView.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                if (total < 10)
-                    new LoadMoreTask().execute();
-            }
-        });
-        actualListView.setEmptyView(emptyView);
         // init date
         titles = new LinkedList<>();
 
         mAdapter = new MyAdapter(SwipeRefreshActivity.this, titles);
 
-        actualListView.setAdapter(mAdapter);
     }
 
     private class InitTask extends AsyncTask<Void, Void, Void> {
@@ -136,8 +128,6 @@ public class SwipeRefreshActivity extends BaseActivity {
                 showToast("mei you geng duo shu ju");
             }
             mAdapter.notifyDataSetChanged();
-            actualListView.onLoadMoreComplete();
-            actualListView.setCanLoadMore(total < 10);
             total++;
         }
     }

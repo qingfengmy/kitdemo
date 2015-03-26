@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
     tools:context="cn.mchina.wfenxiao.ui.SplashActivity">
 
     <ImageView
@@ -12,4 +11,4 @@
         android:layout_centerInParent="true"
         android:src="@drawable/ic_launcher" />
 
-</RelativeLayout><!-- android:paddingLeft="73dp"-->
+</RelativeLayout>

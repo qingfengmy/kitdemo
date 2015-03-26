@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="BaseAppTheme"></style>
     <!-- Base application theme. -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -45,15 +46,20 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <style name="progressbar_style1">
+    <style name="progressBar_Anim">
         <item name="android:maxWidth">136.0dip</item>
         <item name="android:maxHeight">106.0dip</item>
-        <item name="android:indeterminateDrawable">@anim/loading</item>
+        <item name="android:indeterminateDrawable">@anim/loading_anim</item>
         <item name="android:minWidth">68.0dip</item>
         <item name="android:minHeight">53.0dip</item>
+    </style>
+
+    <style name="progressBar_Color" parent="@android:style/Widget.ProgressBar.Inverse">
+        <item name="android:indeterminateDrawable">@drawable/bg_progress_bar</item>
     </style>
 
     <style name="splash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/logo</item>
     </style>
+
 </resources>
