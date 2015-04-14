@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.app.Application;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -26,6 +27,8 @@ public class KitDemoApplication extends Application {
 
         //初始化 imageloader
         initImageLoader(getApplicationContext());
+
+        Fresco.initialize(this);
     }
 
     // 初始化ImageLoader

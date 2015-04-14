@@ -89,12 +89,6 @@ public class PhotoActivity extends BaseActivity{
                 .build();
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(dm.widthPixels, dm.widthPixels);
-        lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        bigviewpager.setLayoutParams(lp);
         TOTAL_COUNT = images.size();
 
         bigviewpager.setAdapter(new MyPagerAdapter(images));

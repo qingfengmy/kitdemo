@@ -149,6 +149,9 @@
         <activity
             android:name=".ui.DumpActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.FrescoActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="AA_DB_NAME"

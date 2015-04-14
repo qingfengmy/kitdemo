@@ -26,6 +26,7 @@
         <item>查看大图</item>
         <item>三种自定义progressbar</item>
         <item>阻尼效果的scrollview</item>
+        <item>facebook的Fresco</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -53,6 +54,7 @@
         <item>"com.qingfengmy.ui.PhotoActivity"</item>
         <item>"com.qingfengmy.ui.ProgressBarActivity"</item>
         <item>"com.qingfengmy.ui.DumpActivity"</item>
+        <item>"com.qingfengmy.ui.FrescoActivity"</item>
     </string-array>
     <string-array name="blend_modes">
         <item>Add</item>

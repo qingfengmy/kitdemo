@@ -41,7 +41,6 @@ public class LollipopFragment extends Fragment {
             "定义阴影:Z = elevation + translationZ",
             "裁剪：ViewOutlineProvider",
             "Drawable Tinting（着色）",
-            "Ripple(波纹)",
             "矢量图动画",
             "View state changes （视图状态改变）"};
 
@@ -90,12 +89,10 @@ public class LollipopFragment extends Fragment {
                         startActivity(new Intent(getActivity(), TintingsActivity.class));
                         break;
                     case 7:
-                        // 波纹
-                    case 8:
                         // svg
                         startActivity(new Intent(getActivity(), SvgActivity.class));
                         break;
-                    case 9:
+                    case 8:
                         // View state changes （视图状态改变）
                         startActivity(new Intent(getActivity(), StateListAnimatorActivity.class));
                         break;
