@@ -152,6 +152,27 @@
         <activity
             android:name=".ui.FrescoActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.NotifycationActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.DateTimePickerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.LaunchModeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SingleTopActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SingleTasksActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.SingleInstanceActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="AA_DB_NAME"

@@ -5,7 +5,8 @@
         <item>流式布局（热门标签）</item>
         <item>属性动画</item>
         <item>刮刮卡</item>
-        <item>截取头像</item>
+        <!--<item>截取头像</item>-->
+        <item>NOTIFYCATION</item>
         <item>listview单选</item>
         <item>listview多选</item>
         <item>viewpager实现画廊效果</item>
@@ -13,7 +14,7 @@
         <item>生成条形码+生成二维码+扫码</item>
         <item>选取和截取相册图片</item>
         <item>上拉加载更多和下拉刷新</item>
-        <item>SwipeRefresh下拉和上拉</item>
+        <!--<item>SwipeRefresh下拉和上拉</item>-->
         <item>Viewpager切换动画</item>
         <item>ViewPagerIndicator</item>
         <item>BackgroundPagerActivity</item>
@@ -27,13 +28,16 @@
         <item>三种自定义progressbar</item>
         <item>阻尼效果的scrollview</item>
         <item>facebook的Fresco</item>
+        <item>日期时间选择器</item>
+        <item>Activity启动模式详解</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
         <item>com.qingfengmy.ui.FlowLayoutActivity</item>
         <item>com.qingfengmy.ui.AnimatorActivity</item>
         <item>com.qingfengmy.ui.GuaGuakaActivity</item>
-        <item>com.qingfengmy.ui.CutPicActivity</item>
+        <item>com.qingfengmy.ui.NotifycationActivity</item>
+        <!--<item>com.qingfengmy.ui.CutPicActivity</item>-->
         <item>com.qingfengmy.ui.SingleSelecterActivity</item>
         <item>com.qingfengmy.ui.MultipeSelectActivity</item>
         <item>com.qingfengmy.ui.ViewPagerMultiActivity</item>
@@ -41,7 +45,7 @@
         <item>com.qingfengmy.ui.CreateCodeActivity</item>
         <item>"com.qingfengmy.ui.PictureActivity"</item>
         <item>"com.qingfengmy.ui.RefreshListViewActivity"</item>
-        <item>"com.qingfengmy.ui.SwipeRefreshActivity"</item>
+        <!--<item>"com.qingfengmy.ui.SwipeRefreshActivity"</item>-->
         <item>"com.qingfengmy.ui.PageTransformerActivity"</item>
         <item>"com.qingfengmy.ui.ViewPagerIndicatorActivity"</item>
         <item>"com.qingfengmy.ui.BackgroundPagerActivity"</item>
@@ -55,6 +59,8 @@
         <item>"com.qingfengmy.ui.ProgressBarActivity"</item>
         <item>"com.qingfengmy.ui.DumpActivity"</item>
         <item>"com.qingfengmy.ui.FrescoActivity"</item>
+        <item>"com.qingfengmy.ui.DateTimePickerActivity"</item>
+        <item>"com.qingfengmy.ui.LaunchModeActivity"</item>
     </string-array>
     <string-array name="blend_modes">
         <item>Add</item>

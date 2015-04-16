@@ -37,8 +37,6 @@ import butterknife.InjectView;
 public class FrescoActivity extends BaseActivity {
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-    @InjectView(R.id.my_image_view)
-    SimpleDraweeView draweeView;
     @InjectView(R.id.listView)
     ListView listView;
 
@@ -63,15 +61,6 @@ public class FrescoActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-
-        Uri uri = Uri.parse("http://ww4.sinaimg.cn/bmiddle/406ef017jw1eqjdup8baqg209y05b1ky.gif");
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
-                .build();
-
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .build();
-        draweeView.setController(controller);
 
         for(int i=0; i<100; i++){
             Bean bean = new Bean("name"+i, 7200+i*10);

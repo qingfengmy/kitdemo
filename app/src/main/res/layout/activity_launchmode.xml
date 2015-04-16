@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/title_bar" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/primary"
+        card_view:contentPadding="15dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="dfdfd" />
+
+            <TextView
+                android:id="@+id/contnet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="dfdfd" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <com.qingfengmy.ui.view.AutoButton
+        android:id="@+id/standard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="standard"
+        android:background="@color/primary"
+        android:textColor="@color/white" />
+
+    <com.qingfengmy.ui.view.AutoButton
+        android:id="@+id/singleTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="singleTop"
+        android:background="@color/primary"
+        android:textColor="@color/white" />
+
+    <com.qingfengmy.ui.view.AutoButton
+        android:id="@+id/singleTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="singleTask"
+        android:background="@color/primary"
+        android:textColor="@color/white" />
+
+    <com.qingfengmy.ui.view.AutoButton
+        android:id="@+id/singleInstance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="singleInstance"
+        android:background="@color/primary"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

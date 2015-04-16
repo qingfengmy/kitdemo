@@ -1,7 +1,6 @@
 package com.qingfengmy.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -75,7 +74,7 @@ public class VolleyActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        FragmentTransaction ft = fm.beginTransaction().setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+        FragmentTransaction ft = fm.beginTransaction().setCustomAnimations(R.anim.push_in, R.anim.push_out);
         switch (item.getItemId()) {
             case R.id.action_first:
                 if (firstFragment.isAdded()) {
