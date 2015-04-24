@@ -14,6 +14,9 @@ import android.widget.FrameLayout;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.DatePickerFragment;
 import com.qingfengmy.ui.fragment.TimePickerFragment;
+import com.qingfengmy.ui.utils.tools.ToastUtil;
+import com.qingfengmy.ui.view.FeedContextMenu;
+import com.qingfengmy.ui.view.FeedContextMenuManager;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -21,7 +24,7 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2015/4/15.
  */
-public class DateTimePickerActivity extends BaseActivity {
+public class DateTimePickerActivity extends BaseActivity implements FeedContextMenu.OnFeedContextMenuItemClickListener {
     @InjectView(R.id.container)
     FrameLayout layout;
     @InjectView(R.id.toolbar)
@@ -61,10 +64,7 @@ public class DateTimePickerActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_date:
-                switchContent(dateFragment);
-                return true;
-            case R.id.action_time:
-                switchContent(timeFragment);
+                FeedContextMenuManager.getInstance(this).toggleContextMenuFromView(titleBar, this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -86,4 +86,15 @@ public class DateTimePickerActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onReportClick() {
+        FeedContextMenuManager.getInstance(this).hideContextMenu();
+        ToastUtil.showToast(this, "first");
+    }
+
+    @Override
+    public void onSharePhotoClick() {
+        FeedContextMenuManager.getInstance(this).hideContextMenu();
+        ToastUtil.showToast(this, "second");
+    }
 }

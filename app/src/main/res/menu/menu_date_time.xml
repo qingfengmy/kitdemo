@@ -4,10 +4,7 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/action_date"
-        app:showAsAction="never"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_launcher"
         android:title="日期选择控件"/>
-    <item
-        android:id="@+id/action_time"
-        app:showAsAction="never"
-        android:title="时间选择控件"/>
 </menu>
