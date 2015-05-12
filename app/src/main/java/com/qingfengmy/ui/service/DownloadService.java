@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by aspsine on 15-4-19.
@@ -26,11 +29,14 @@ public class DownloadService extends Service {
     private static final String TAG = DownloadService.class.getSimpleName();
     public static final String EXTRA_FILE_INFO = "file_info";
     public static final String EXTRA_FINISHED = "finished";
+    public static final String EXTRA_ID = "fid";
 
     private static final int MSG_INIT = 0;
 
     private DownloadTask mDownloadTask;
     LocalBroadcastManager mLocalBroadcastManager;
+
+    private Map<Integer, DownloadTask> mTask = new LinkedHashMap<>();
 
     Handler handler = new Handler() {
         @Override
@@ -38,8 +44,9 @@ public class DownloadService extends Service {
             super.handleMessage(msg);
             if (msg.what == MSG_INIT) {
                 FileInfo fileInfo = (FileInfo) msg.obj;
-                mDownloadTask = new DownloadTask(DownloadService.this, fileInfo);
+                DownloadTask mDownloadTask = new DownloadTask(DownloadService.this, fileInfo,3);
                 mDownloadTask.download();
+                mTask.put(fileInfo.getfId(), mDownloadTask);
             }
         }
     };
@@ -70,26 +77,25 @@ public class DownloadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null){
-            Log.i(TAG, "intent = null");
             return super.onStartCommand(intent, flags, startId);
         }
         String action = intent.getAction();
         if (Constants.Action.ACTION_START.toString().equals(action)) {
-            Log.i(TAG, "start " + this.hashCode());
+            // 開始
             FileInfo fileInfo = (FileInfo) intent.getSerializableExtra(EXTRA_FILE_INFO);
             download(fileInfo);
         } else if (Constants.Action.ACTION_PAUSE.toString().equals(action)) {
-            Log.i(TAG, "pause " + this.hashCode());
+            // 暫停
             FileInfo fileInfo = (FileInfo) intent.getSerializableExtra(EXTRA_FILE_INFO);
-            if(mDownloadTask != null){
-                mDownloadTask.pause();
-            }
+            DownloadTask task = mTask.get(fileInfo.getfId());
+            if (task != null)
+                task.pause();
         }
         return super.onStartCommand(intent, flags, startId);
     }
 
     public void download(FileInfo fileInfo) {
-        new InitThread(this, fileInfo).start();
+        DownloadTask.executorService.execute(new InitThread(this, fileInfo));
     }
 
     /**
@@ -140,11 +146,21 @@ public class DownloadService extends Service {
                 raf = new RandomAccessFile(file, "rwd");
                 raf.setLength(length);
                 mFileInfo.setLength(length);
+
+               FileInfo tempInfo = mFileInfo.existFileInfo(mFileInfo.getUrl());
+                if(tempInfo == null){
+                    mFileInfo.save();
+                    Log.e("aaa", "大家伙入库,"+mFileInfo.toString());
+                }else{
+                    mFileInfo.setFinshed(tempInfo.getFinshed());
+                }
+
                 handler.obtainMessage(MSG_INIT, mFileInfo).sendToTarget();
             } catch (IOException e) {
                 e.printStackTrace();
                 mIntent.putExtra(DownloadService.EXTRA_FINISHED, -1);
                 mLocalBroadcastManager.sendBroadcast(mIntent);
+                Log.e("aaa", "e="+e.toString());
             } finally {
                 httpConn.disconnect();
                 try {

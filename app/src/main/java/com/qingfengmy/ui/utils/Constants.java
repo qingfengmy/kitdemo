@@ -11,6 +11,7 @@ public class Constants {
     public static enum Action {
         ACTION_START,
         ACTION_PAUSE,
-        ACTION_UPDATE
+        ACTION_UPDATE,
+        ACTION_FINISHED;
     }
 }

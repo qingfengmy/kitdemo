@@ -1,5 +1,7 @@
 package com.qingfengmy.ui.entity;
 
+import android.provider.BaseColumns;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -25,9 +27,11 @@ public class ThreadInfo extends Model implements Serializable {
 
 
     public ThreadInfo() {
+        super();
     }
 
     public ThreadInfo(String url, int start, int end, int finshed) {
+        super();
         this.url = url;
         this.start = start;
         this.end = end;
@@ -80,17 +84,18 @@ public class ThreadInfo extends Model implements Serializable {
         return new Select().from(ThreadInfo.class).where("url=?", url).execute();
     }
 
-    public boolean exists(String url) {
+    public synchronized boolean exists(String url) {
         return new Select().from(ThreadInfo.class).where("url=?", url).executeSingle() == null ? false : true;
     }
 
-    public void delete(String url) {
+    public synchronized void delete(String url) {
         new Delete().from(ThreadInfo.class).where("url=?", url).execute();
     }
 
-    public void update(String url, int finished) {
+    public synchronized void update(String url, int finished) {
         this.url = url;
         this.finshed = finished;
         this.save();
     }
+
 }
