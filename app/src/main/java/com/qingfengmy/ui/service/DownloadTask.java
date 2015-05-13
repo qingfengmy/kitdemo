@@ -53,11 +53,11 @@ public class DownloadTask {
         List<ThreadInfo> threadInfos = new ThreadInfo().getThreadInfos(mFileInfo.getUrl());
         if (threadInfos.size() == 0) {
             // 获得每个线程下载长度
-            int length = mFileInfo.getLength()/threadCount;
-            for (int i=0; i<threadCount; i++){
+            int length = mFileInfo.getLength() / threadCount;
+            for (int i = 0; i < threadCount; i++) {
                 // 创建线程信息
-                ThreadInfo threadInfo = new ThreadInfo(mFileInfo.getUrl(), length*i, (i+1)*length-1, 0);
-                if (i == threadCount-1){
+                ThreadInfo threadInfo = new ThreadInfo(mFileInfo.getUrl(), length * i, (i + 1) * length - 1, 0);
+                if (i == threadCount - 1) {
                     threadInfo.setEnd(mFileInfo.getLength());
                 }
                 // 添加到线程列表
@@ -67,8 +67,13 @@ public class DownloadTask {
         }
         threadList = new ArrayList<>();
 
+        Intent mIntent = new Intent(Constants.Action.ACTION_START.toString());
+        mFileInfo.setStatue(FileInfo.start);
+        mIntent.putExtra(DownloadService.EXTRA_FILE_INFO, mFileInfo);
+        mLocalBroadcastManager.sendBroadcast(mIntent);
+
         // 启动多个线程进行下载
-        for (ThreadInfo info : threadInfos){
+        for (ThreadInfo info : threadInfos) {
             DownloadThread thread = new DownloadThread(info);
             DownloadTask.executorService.execute(thread);
             threadList.add(thread);
@@ -137,7 +142,11 @@ public class DownloadTask {
                         // 暂停保存进度
                         if (mIsPause) {
                             mThreadInfo.update(mThreadInfo.getUrl(), mThreadInfo.getFinshed());
-                            mFileInfo.update(mFileInfo.getUrl(), mFinished);
+                            mFileInfo.update(mFileInfo.getUrl(), mFinished, FileInfo.pause);
+                            Intent mIntent = new Intent(Constants.Action.ACTION_PAUSE.toString());
+                            mFileInfo.setStatue(FileInfo.pause);
+                            mIntent.putExtra(DownloadService.EXTRA_FILE_INFO, mFileInfo);
+                            mLocalBroadcastManager.sendBroadcast(mIntent);
                             return;
                         }
                     }
@@ -154,6 +163,9 @@ public class DownloadTask {
                 mLocalBroadcastManager.sendBroadcast(mIntent);
                 mThreadInfo.delete(mFileInfo.getUrl());
                 mFileInfo.delete();
+                Intent mIntent = new Intent(Constants.Action.ACTION_FAILED.toString());
+                mFileInfo.setStatue(FileInfo.start);
+                mIntent.putExtra(DownloadService.EXTRA_FILE_INFO, mFileInfo);
             } finally {
                 httpConn.disconnect();
                 try {
@@ -170,25 +182,23 @@ public class DownloadTask {
         }
     }
 
-    private synchronized void checkAllThreadFinished(){
+    private synchronized void checkAllThreadFinished() {
         boolean allFinished = true;
-        for (DownloadThread thread : threadList){
-            if (!thread.isFinished){
-                allFinished =  false;
+        for (DownloadThread thread : threadList) {
+            if (!thread.isFinished) {
+                allFinished = false;
                 break;
             }
         }
         // 發送廣播通知下載任務結束
-        if (allFinished){
+        if (allFinished) {
             // 下載完成根據url刪除數據庫中的threadInfo
             new ThreadInfo().delete(mFileInfo.getUrl());
             Intent mIntent = new Intent(Constants.Action.ACTION_FINISHED.toString());
-            mIntent.putExtra("fileInfo", mFileInfo);
+            mIntent.putExtra(DownloadService.EXTRA_FILE_INFO, mFileInfo);
             mLocalBroadcastManager.sendBroadcast(mIntent);
+            mFileInfo.update(mFileInfo.getUrl(), mFinished, FileInfo.finished);
         }
     }
 
-    public static interface ProgressCallBacks {
-        public void onProgress(int progress);
-    }
 }

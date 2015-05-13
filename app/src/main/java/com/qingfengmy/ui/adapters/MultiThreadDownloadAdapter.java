@@ -57,25 +57,31 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
         final ViewHolder holder;
         final FileInfo fileInfo = fileInfos.get(position);
 
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_multithread, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
 
             holder.progressBar.setMax(100);
 
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         holder.tvFileName.setText(fileInfo.getName());
         holder.progressBar.setProgress(fileInfo.getFinshed());
-        holder.tvProgress.setText(fileInfo.getFinshed()+"%");
-        if (fileInfo.getFinshed() == 100){
+        holder.tvProgress.setText(fileInfo.getFinshed() + "%");
+
+        if (fileInfo.getStatue() == FileInfo.finished) {
+            // 下载完成
             holder.btnPause.setEnabled(false);
+            holder.btnStart.setEnabled(true);
+        } else if (fileInfo.getStatue() == FileInfo.start) {
+            // 正在下载
+            holder.btnPause.setEnabled(true);
             holder.btnStart.setEnabled(false);
-        }else if (fileInfo.getFinshed() == -1){
-            ToastUtil.showToast(context, fileInfo.getName()+"下载失败");
+        } else if (fileInfo.getStatue() == FileInfo.pause) {
+            // 暂停下载或暂未开始
             holder.btnPause.setEnabled(false);
             holder.btnStart.setEnabled(true);
         }
@@ -85,12 +91,18 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, DownloadService.class);
                 intent.setAction(Constants.Action.ACTION_START.toString());
+                if (fileInfo.getStatue() == FileInfo.finished) {
+                    fileInfo.setStatue(FileInfo.start);
+                    fileInfo.setFinshed(0);
+                    fileInfo.update(fileInfo.getUrl(), fileInfo.getFinshed(), fileInfo.getStatue());
+                }
                 intent.putExtra(DownloadService.EXTRA_FILE_INFO, fileInfo);
                 context.startService(intent);
-                holder.btnStart.setEnabled(false);
                 holder.btnPause.setEnabled(true);
+                holder.btnStart.setEnabled(false);
             }
         });
+
         holder.btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,19 +110,39 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
                 intent.setAction(Constants.Action.ACTION_PAUSE.toString());
                 intent.putExtra(DownloadService.EXTRA_FILE_INFO, fileInfo);
                 context.startService(intent);
-                holder.btnStart.setEnabled(true);
                 holder.btnPause.setEnabled(false);
+                holder.btnStart.setEnabled(true);
             }
         });
         return convertView;
     }
 
     // 更新列表項中的進度條
-    public void updateProgress(long fid, int progress){
-        for (int i=0; i<fileInfos.size(); i++){
+    public void updateProgress(long fid, int progress) {
+        for (int i = 0; i < fileInfos.size(); i++) {
             FileInfo fileInfo = fileInfos.get(i);
-            if (fileInfo.getfId() == fid){
+            if (fileInfo.getfId() == fid) {
                 fileInfo.setFinshed(progress);
+                if (progress == 100) {
+                    // 下载完成
+                    fileInfo.setStatue(FileInfo.finished);
+                } else if (progress == -1) {
+                    // 下载失败
+                    fileInfo.setStatue(FileInfo.pause);
+                    fileInfo.setFinshed(0);
+                }
+                break;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    // 下载状态改变
+    public void changeStatue(long fid, int statue) {
+        for (int i = 0; i < fileInfos.size(); i++) {
+            FileInfo fileInfo = fileInfos.get(i);
+            if (fileInfo.getfId() == fid) {
+                fileInfo.setStatue(statue);
                 break;
             }
         }
@@ -134,7 +166,7 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
         @InjectView(R.id.btnStart)
         Button btnStart;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }
 

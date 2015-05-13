@@ -150,7 +150,6 @@ public class DownloadService extends Service {
                FileInfo tempInfo = mFileInfo.existFileInfo(mFileInfo.getUrl());
                 if(tempInfo == null){
                     mFileInfo.save();
-                    Log.e("aaa", "大家伙入库,"+mFileInfo.toString());
                 }else{
                     mFileInfo.setFinshed(tempInfo.getFinshed());
                 }

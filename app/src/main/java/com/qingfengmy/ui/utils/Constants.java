@@ -12,6 +12,7 @@ public class Constants {
         ACTION_START,
         ACTION_PAUSE,
         ACTION_UPDATE,
-        ACTION_FINISHED;
+        ACTION_FINISHED,
+        ACTION_FAILED
     }
 }

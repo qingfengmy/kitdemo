@@ -16,6 +16,9 @@ import java.util.List;
 @Table(name = "fileInfo")
 public class FileInfo  extends Model implements Serializable {
 
+    public static final int pause = 0;
+    public static final int start = 1;
+    public static final int finished = 2;
     @Column(name = "fid")
     private int fId;
 
@@ -28,6 +31,9 @@ public class FileInfo  extends Model implements Serializable {
     @Column(name = "finshed")
     private int finshed;
 
+    @Column(name = "statue")
+    private int statue;
+
     public FileInfo() {
         super();
     }
@@ -39,6 +45,14 @@ public class FileInfo  extends Model implements Serializable {
         this.name = name;
         this.length = length;
         this.finshed = finshed;
+    }
+
+    public int getStatue() {
+        return statue;
+    }
+
+    public void setStatue(int statue) {
+        this.statue = statue;
     }
 
     public int getfId() {
@@ -108,10 +122,20 @@ public class FileInfo  extends Model implements Serializable {
         }
     }
 
+    public int getDownloadStatue(String url){
+        FileInfo info = new Select().from(FileInfo.class).where("url=?", url).executeSingle();
+        if (info != null){
+            return info.getStatue();
+        }else {
+            return 0;
+        }
+    }
 
-    public synchronized void update(String url, int finished) {
+
+    public synchronized void update(String url, int finished, int statue) {
         FileInfo fileInfo = existFileInfo(url);
         fileInfo.setFinshed(finished);
+        fileInfo.setStatue(statue);
         fileInfo.save();
     }
 }
