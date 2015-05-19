@@ -187,6 +187,36 @@
         <activity
             android:name=".ui.ZoomImageActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImageColorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ColorMatrixActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.PixelsEffectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.PrimaryColorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImageMatirxActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MeshViewTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ReflectViewTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.BitmapShaderTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.RoundRectXfermodTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImageMatrixTestActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".ui.service.DownloadService" />
 
