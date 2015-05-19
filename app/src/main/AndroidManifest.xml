@@ -217,6 +217,9 @@
         <activity
             android:name=".ui.ImageMatrixTestActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MoreTextViewActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".ui.service.DownloadService" />
 

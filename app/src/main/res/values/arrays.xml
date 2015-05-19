@@ -35,6 +35,7 @@
         <item>自定义大图</item>
         <item>图片颜色操作</item>
         <item>图片矩阵操作</item>
+        <item>多行文本折叠展开效果</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -71,6 +72,7 @@
         <item>"com.qingfengmy.ui.ZoomImageActivity"</item>
         <item>"com.qingfengmy.ui.ImageColorActivity"</item>
         <item>"com.qingfengmy.ui.ImageMatirxActivity"</item>
+        <item>"com.qingfengmy.ui.MoreTextViewActivity"</item>
     </string-array>
     <string-array name="blend_modes">
         <item>Add</item>

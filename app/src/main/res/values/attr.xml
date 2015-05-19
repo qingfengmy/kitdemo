@@ -45,4 +45,11 @@
         <attr name="weixin_text" format="string" />
         <attr name="weixin_text_size" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="MoreTextStyle">
+        <attr name="moreTextSize" format="dimension"/>
+        <attr name="moreTextColor" format="color"/>
+        <attr name="moreMaxLine" format="integer" />
+        <attr name="moreText" format="string" />
+    </declare-styleable>
 </resources>
