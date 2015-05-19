@@ -12,14 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.qingfengmy.R;
-import com.qingfengmy.ui.CardViewActivity;
 import com.qingfengmy.ui.ClippingActivity;
 import com.qingfengmy.ui.ElevationDragActivity;
+import com.qingfengmy.ui.game.HowOldActivity;
 import com.qingfengmy.ui.PaletteActivity;
-import com.qingfengmy.ui.RecyclerActivity;
 import com.qingfengmy.ui.StateListAnimatorActivity;
 import com.qingfengmy.ui.SvgActivity;
-import com.qingfengmy.ui.TintingsActivity;
 import com.qingfengmy.ui.TintingsActivity;
 import com.qingfengmy.ui.TransitionActivity;
 import com.qingfengmy.ui.game.NewPuzzleActivity;
@@ -37,7 +35,7 @@ public class GameFragment extends Fragment {
 
     private String[] titles = {
             "新拼图",
-            "2048"};
+            "how old do i look"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +58,8 @@ public class GameFragment extends Fragment {
                         startActivity(new Intent(getActivity(), NewPuzzleActivity.class));
                         break;
                     case 1:
-
+                        // how old do i look
+                        startActivity(new Intent(getActivity(), HowOldActivity.class));
                         break;
                     case 2:
                         // palette

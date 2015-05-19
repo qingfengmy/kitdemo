@@ -73,15 +73,12 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
         holder.tvProgress.setText(fileInfo.getFinshed() + "%");
 
         if (fileInfo.getStatue() == FileInfo.finished) {
-            // 下载完成
             holder.btnPause.setEnabled(false);
             holder.btnStart.setEnabled(true);
         } else if (fileInfo.getStatue() == FileInfo.start) {
-            // 正在下载
             holder.btnPause.setEnabled(true);
             holder.btnStart.setEnabled(false);
         } else if (fileInfo.getStatue() == FileInfo.pause) {
-            // 暂停下载或暂未开始
             holder.btnPause.setEnabled(false);
             holder.btnStart.setEnabled(true);
         }
@@ -117,17 +114,14 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // 更新列表項中的進度條
     public void updateProgress(long fid, int progress) {
         for (int i = 0; i < fileInfos.size(); i++) {
             FileInfo fileInfo = fileInfos.get(i);
             if (fileInfo.getfId() == fid) {
                 fileInfo.setFinshed(progress);
                 if (progress == 100) {
-                    // 下载完成
                     fileInfo.setStatue(FileInfo.finished);
                 } else if (progress == -1) {
-                    // 下载失败
                     fileInfo.setStatue(FileInfo.pause);
                     fileInfo.setFinshed(0);
                 }
@@ -137,7 +131,6 @@ public class MultiThreadDownloadAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    // 下载状态改变
     public void changeStatue(long fid, int statue) {
         for (int i = 0; i < fileInfos.size(); i++) {
             FileInfo fileInfo = fileInfos.get(i);

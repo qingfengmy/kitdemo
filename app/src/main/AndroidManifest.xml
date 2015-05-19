@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".ui.app.KitDemoApplication"
         android:allowBackup="true"
@@ -15,8 +16,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -176,8 +177,19 @@
         <activity
             android:name=".ui.MultiThreadDownloadActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.CommonAdapterActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <service android:name=".ui.service.DownloadService"/>
+        <activity
+            android:name=".ui.game.HowOldActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ZoomImageActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".ui.service.DownloadService" />
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="kits.db" />

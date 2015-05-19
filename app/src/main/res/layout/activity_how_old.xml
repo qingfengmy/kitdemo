@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/title_bar"></include>
+    <Button
+        android:id="@+id/bt_getImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:text="getImage" />
+
+    <Button
+        android:id="@+id/bt_detect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_toLeftOf="@+id/bt_getImage"
+        android:text="detect" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bt_detect"
+        android:layout_margin="10dp"
+        android:layout_toLeftOf="@+id/bt_detect"
+        android:textSize="18sp" />
+
+    <com.qingfengmy.ui.view.SquareImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bt_detect"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/t4" />
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/hint"
+            android:drawableLeft="@drawable/male"
+            android:textColor="#ff00ff"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="32"
+            android:visibility="invisible" />
+    </FrameLayout>
+</RelativeLayout>
