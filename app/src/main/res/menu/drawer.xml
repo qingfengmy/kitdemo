@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="主程序" />
+        <item
+            android:id="@+id/nav_joke"
+            android:icon="@android:drawable/ic_dialog_alert"
+            android:title="笑话" />
+        <item
+            android:id="@+id/nav_joke_img"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="趣图" />
+        <item
+            android:id="@+id/nav_android_l"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="android l" />
+        <item
+            android:id="@+id/nav_android_m"
+            android:icon="@android:drawable/ic_popup_sync"
+            android:title="android m" />
+    </group>
+    <item android:title="更多">
+        <menu>
+            <item
+                android:id="@+id/nav_game"
+                android:icon="@android:drawable/ic_dialog_map"
+                android:title="小游戏" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@android:drawable/ic_popup_reminder"
+                android:title="关于" />
+        </menu>
+    </item>
+</menu>

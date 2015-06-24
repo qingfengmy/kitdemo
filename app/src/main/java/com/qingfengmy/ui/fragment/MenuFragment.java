@@ -58,22 +58,22 @@ public class MenuFragment extends Fragment {
         int position = 0;
         switch (v.getId()) {
             case R.id.id_layout1:
-                position = 0;
+                position = R.id.nav_home;
                 break;
             case R.id.id_layout2:
-                position = 1;
+                position = R.id.nav_about;
                 break;
             case R.id.id_layout3:
-                position = 2;
+                position = R.id.nav_joke;
                 break;
             case R.id.id_layout4:
-                position = 3;
+                position = R.id.nav_joke_img;
                 break;
             case R.id.id_layout5:
-                position = 4;
+                position = R.id.nav_android_l;
                 break;
             case R.id.id_layout6:
-                position = 5;
+                position = R.id.nav_game;
                 break;
         }
         if (mCallback != null) {

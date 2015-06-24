@@ -19,6 +19,9 @@
         <!--背景透明 -->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/translation</item>
+        <!--navigaview在stateBar上面-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/translation</item>
     </style>
 
     <style name="myToolbar" parent="ThemeOverlay.AppCompat.ActionBar">

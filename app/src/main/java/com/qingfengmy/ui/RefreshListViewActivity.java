@@ -51,7 +51,6 @@ public class RefreshListViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refreshlistview);
         ButterKnife.inject(this);
-        Slidr.attach(this);
         // 先设置title，再设置action，否则无效
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -80,7 +79,7 @@ public class RefreshListViewActivity extends BaseActivity {
 
         // the following are default_image settings
         mPtrFrame.setResistance(1.7f);
-        mPtrFrame.setRatioOfHeaderHeightToRefresh(1.2f);
+        mPtrFrame.setRatioOfHeaderHeightToRefresh(1.0f);
         mPtrFrame.setDurationToClose(200);
         mPtrFrame.setDurationToCloseHeader(1000);
         // default_image is false
@@ -125,7 +124,7 @@ public class RefreshListViewActivity extends BaseActivity {
             }
 
             titles.clear();
-            int count = new Random().nextInt(20);
+            int count = 20;
             for (int i = 0; i < count; i++)
                 titles.add("recyclerview's adapter-" + new Random().nextInt(100));
             return null;

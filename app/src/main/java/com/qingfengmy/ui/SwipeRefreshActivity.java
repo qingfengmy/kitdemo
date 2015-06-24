@@ -1,22 +1,24 @@
 package com.qingfengmy.ui;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.qingfengmy.R;
-import com.qingfengmy.ui.adapters.MyAdapter;
+import com.qingfengmy.ui.adapters.SampleAdapter;
 import com.qingfengmy.ui.view.EmptyView;
-import com.qingfengmy.ui.view.LoadMoreListView;
-import com.r0adkll.slidr.Slidr;
+import com.qingfengmy.ui.view.SampleDivider;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,16 +31,40 @@ public class SwipeRefreshActivity extends BaseActivity {
     @InjectView(R.id.swipe_container)
     SwipeRefreshLayout mSwipeLayout;
     @InjectView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @InjectView(R.id.empty_view)
-    EmptyView emptyView;
+    RecyclerView mRecyclerView;
+
+    private LinearLayoutManager mLayoutManager;
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
     LinkedList<String> titles;
-    private MyAdapter mAdapter;
-    int total;
+    private SampleAdapter mAdapter;
 
+    private int lastVisibleItem;
+
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(SwipeRefreshActivity.this, "DOWN", Toast.LENGTH_LONG).show();
+                    mSwipeLayout.setRefreshing(false);
+
+                    mAdapter.getList().clear();
+                    addList();
+                    break;
+                case 1:
+                    Toast.makeText(SwipeRefreshActivity.this, "UP", Toast.LENGTH_LONG).show();
+                    addList();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,73 +88,56 @@ public class SwipeRefreshActivity extends BaseActivity {
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new InitTask().execute();
+                handler.sendEmptyMessageDelayed(0, 3000);
             }
         });
 
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        // init date
-        titles = new LinkedList<>();
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView,
+                                             int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                    handler.sendEmptyMessageDelayed(1, 3000);
+                }
+            }
 
-        mAdapter = new MyAdapter(SwipeRefreshActivity.this, titles);
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+
+        });
+
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new SampleDivider(this));
+
+        mAdapter = new SampleAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+
+        addList();
 
     }
 
-    private class InitTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-            }
-
-            titles.clear();
-            int count = new Random().nextInt(20);
-            for (int i = 0; i < count; i++)
-                titles.add("recyclerview's adapter-" + new Random().nextInt(100));
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            mAdapter.notifyDataSetChanged();
-            mSwipeLayout.setRefreshing(false);
-            super.onPostExecute(result);
-        }
+    private void addList() {
+        List<Integer> list = getList();
+        mAdapter.getList().addAll(list);
+        mAdapter.notifyDataSetChanged();
     }
 
-    private class LoadMoreTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    private List<Integer> getList() {
+        List<Integer> list = new ArrayList<Integer>();
+        int size = mAdapter.getList().size();
+        int lastPosition = size > 0 ? mAdapter.getList().get(size - 1) : 0;
+        for (int i = 1; i < 20; i++) {
+            list.add(lastPosition + i);
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            if (total < 10) {
-                titles.addLast("recyclerview's footview--");
-            } else {
-                showToast("mei you geng duo shu ju");
-            }
-            mAdapter.notifyDataSetChanged();
-            total++;
-        }
+        return list;
     }
 }

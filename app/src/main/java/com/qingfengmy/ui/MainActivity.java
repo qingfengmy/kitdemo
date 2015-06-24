@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,22 +33,25 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MainActivity extends BaseActivity implements MenuFragment.NavigationDrawerCallbacks {
+public class MainActivity extends BaseActivity implements MenuFragment.NavigationDrawerCallbacks, NavigationView.OnNavigationItemSelectedListener {
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @InjectView(R.id.navigation_view)
+    NavigationView mNavigationView;
 
     private ActionBarDrawerToggle mDrawerToggle;
     FragmentManager fragmentManager;
 
-    MainFragment mainFragment;
-    AboutFragment aboutFragment;
-    JokeFragment jokeFragment;
-    JokeFragment jokeImgFragment;
-    LollipopFragment lollipopFragment;
-    GameFragment gameFragment;
+    Fragment mainFragment;
+    Fragment aboutFragment;
+    Fragment jokeFragment;
+    Fragment jokeImgFragment;
+    Fragment lollipopFragment;
+    Fragment gameFragment;
+    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         // 设置drawer触发器为DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+        mNavigationView.setNavigationItemSelectedListener(this);
+
         mainFragment = new MainFragment();
         aboutFragment = new AboutFragment();
 
@@ -85,21 +91,8 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         gameFragment = new GameFragment();
 
-        selectItem(0);
+        selectItem(R.id.nav_home);
 
-        Log.e("aa", "onCreate");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e("aa", "onResume");
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        Log.e("aa", "onWindowFocusChanged");
     }
 
     @Override
@@ -108,7 +101,6 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         // 将drawerToggle和drawerlayout同步
         // 将actionbarDrawerToogle中的图标设置为ActionBar中的home-button
         mDrawerToggle.syncState();
-        Log.e("aa", "onPostCreate");
     }
 
     @Override
@@ -118,62 +110,65 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private void selectItem(int position) {
+    private void selectItem(int itemId) {
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        switch (position) {
-            case 0:
+        switch (itemId) {
+            case R.id.nav_home:
                 // 首页主程序
-                if (mainFragment.isAdded()) {
-                    ft.show(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(gameFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, mainFragment).show(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                }
+                if (switchFragment(ft, mainFragment))
+                setTitle("KitDemo");
                 break;
-            case 1:
+            case R.id.nav_about:
                 // 关于
-                if (aboutFragment.isAdded()) {
-                    ft.show(aboutFragment).hide(mainFragment).hide(jokeFragment).hide(gameFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, aboutFragment).show(aboutFragment).hide(gameFragment).hide(mainFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                }
+                if (switchFragment(ft, aboutFragment))
+                setTitle("关于");
                 break;
-            case 2:
+            case R.id.nav_joke:
                 //笑话
-                if (jokeFragment.isAdded()) {
-                    ft.show(jokeFragment).hide(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, jokeFragment).show(jokeFragment).hide(gameFragment).hide(aboutFragment).hide(mainFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                }
+                if (switchFragment(ft, jokeFragment))
+                setTitle("笑话");
                 break;
-            case 3:
+            case R.id.nav_joke_img:
                 // 趣图
-                if (jokeImgFragment.isAdded()) {
-                    ft.show(jokeImgFragment).hide(mainFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(lollipopFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, jokeImgFragment).show(jokeImgFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(mainFragment).hide(lollipopFragment).commit();
-                }
+                if (switchFragment(ft, jokeImgFragment))
+                setTitle("趣图");
                 break;
-            case 4:
+            case R.id.nav_android_l:
                 // android 5.0
-                if (lollipopFragment.isAdded()) {
-                    ft.show(lollipopFragment).hide(gameFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, lollipopFragment).show(lollipopFragment).hide(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).commit();
-                }
+                if (switchFragment(ft, lollipopFragment))
+                    setTitle("android L");
                 break;
-            case 5:
+            case R.id.nav_game:
                 // 小游戏
-                if (gameFragment.isAdded()) {
-                    ft.show(gameFragment).hide(mainFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(lollipopFragment).commit();
-                } else {
-                    ft.add(R.id.content_frame, gameFragment).show(gameFragment).hide(aboutFragment).hide(jokeFragment).hide(jokeImgFragment).hide(mainFragment).hide(lollipopFragment).commit();
-                }
+                if (switchFragment(ft, gameFragment))
+                setTitle("小游戏");
                 break;
         }
 
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawers();
         }
+    }
+
+    private boolean switchFragment(FragmentTransaction ft, Fragment to) {
+        if (currentFragment == to)
+            return false;
+        if (to.isAdded()) {
+            if (currentFragment == null) {
+                ft.show(to);
+            } else {
+                ft.show(to).hide(currentFragment);
+            }
+        } else {
+            if (currentFragment == null) {
+                ft.add(R.id.content_frame, to).show(to);
+            } else {
+                ft.hide(currentFragment).add(R.id.content_frame, to).show(to);
+            }
+        }
+        ft.commit();
+        currentFragment = to;
+        return true;
     }
 
     public void setTitle(CharSequence title) {
@@ -209,13 +204,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        selectItem(position);
-    }
-
     // 右边菜单开关事件
-
     public void openRightLayout() {
 
         if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
@@ -228,5 +217,16 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         }
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        selectItem(menuItem.getItemId());
+        return true;
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        selectItem(position);
     }
 }
