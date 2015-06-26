@@ -1,5 +1,4 @@
 include ':app'
 include ':extras:ptr-lib'
-include ':extras:endless'
 include ':extras:StikkyHeader'
 include ':extras:photo-library'

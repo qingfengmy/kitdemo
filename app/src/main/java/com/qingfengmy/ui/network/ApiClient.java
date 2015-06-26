@@ -29,9 +29,9 @@ public class ApiClient {
 
             // 测试连测试服务器，正式连正式服务器
             if (Constants.DEBUG) {
-                builder.setEndpoint("http://japi.juhe.cn");
+                builder.setEndpoint(" http://m2.qiushibaike.com");
             } else {
-                builder.setEndpoint("http://japi.juhe.cn");
+                builder.setEndpoint(" http://m2.qiushibaike.com");
             }
             // 默认就是gson
 //            builder.setConverter(new GsonConverter(ApiHelper.getGsonBuilder().create()));
@@ -39,7 +39,7 @@ public class ApiClient {
             builder.setRequestInterceptor(new RequestInterceptor() {
                 @Override
                 public void intercept(RequestFacade requestFacade) {
-                    requestFacade.addHeader("info", "android");
+//                    requestFacade.addHeader("info", "android");
                 }
             });
 

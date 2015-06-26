@@ -1,40 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#dedede">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        android:id="@+id/list_view_with_empty_view_fragment_ptr_frame"
-        xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        cube_ptr:ptr_duration_to_close="200"
-        cube_ptr:ptr_duration_to_close_header="1000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#dedede">
-
-            <ListView
-                android:id="@+id/listView"
-                android:scrollbars="none"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.qingfengmy.ui.view.EmptyView
-                android:id="@+id/empty_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
-
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
-</LinearLayout>
+        android:scrollbars="none" />
+</android.support.v4.widget.SwipeRefreshLayout>

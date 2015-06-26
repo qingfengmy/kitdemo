@@ -5,22 +5,36 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/1/21.
  */
 @Table(name = "joke")
-public class Joke extends Model {
+public class Joke extends Model implements Serializable {
     @Column(name = "content")
+    @SerializedName("content")
     private String content;
-    @Column(name = "hashId")
-    private String hashId;
-    @Column(name = "unixtime")
-    private long unixtime;
-    @Column(name = "updatetime")
-    @SerializedName("updatetime")
-    private String aaa;
-    @Column(name = "url")
-    private String url;
+
+    @Column(name = "image")
+    @SerializedName("image")
+    private String image;
+
+    @Column(name = "jokeId")
+    @SerializedName("id")
+    private String jokeId;
+
+    @Column(name = "time")
+    @SerializedName("created_at")
+    private long time;
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
 
     public String getContent() {
         return content;
@@ -30,35 +44,19 @@ public class Joke extends Model {
         this.content = content;
     }
 
-    public String getHashId() {
-        return hashId;
+    public String getImage() {
+        return image;
     }
 
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public long getUnixtime() {
-        return unixtime;
+    public String getJokeId() {
+        return jokeId;
     }
 
-    public void setUnixtime(long unixtime) {
-        this.unixtime = unixtime;
-    }
-
-    public String getUpdatetime() {
-        return aaa;
-    }
-
-    public void setUpdatetime(String updatetime) {
-        this.aaa = updatetime;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setJokeId(String jokeId) {
+        this.jokeId = jokeId;
     }
 }

@@ -4,6 +4,7 @@
     <string name="app_name">KitDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="image_url">http://pic.qiushibaike.com/system/pictures/%1$s/%2$s/medium/%3$s</string>
     <string name="aboutme">https://github.com/qingfengmy/kitdemo</string>
     <string name="daimajia">https://github.com/daimajia/AndroidImageSlider</string>
     <string name="PagerSlidingTabStrip">https://github.com/jpardogo/PagerSlidingTabStrip</string>
@@ -44,7 +45,6 @@
     a 48,48 0 1,0 96,0
     a 48,48 0 1,0 -96,0
   </string>
-
     <string name="base">m177.29501,118.05611c-5.53197,-7.63683 -12.30086,-13.81962 -19.08931,-18.14458c-7.92207,4.43319 -17.57091,7.13271 -28.0896,7.13271c-10.53928,0 -20.20216,-2.70483 -28.11019,-7.13271c-6.7885,4.32497 -13.56386,10.50776 -19.10989,18.14458c-12.87412,17.73026 -14.29019,35.9169 -3.17091,40.63242c4.98017,2.12433 10.20152,0.54102 15.59553,-3.4305c-0.94592,4.02686 -1.49865,8.39143 -1.49865,12.95667c0,20.28198 10.31131,36.7113 23.01929,36.7113c7.65943,0 11.4515,-5.98225 13.27482,-15.14168c1.81677,9.15942 5.608,15.14168 13.24011,15.14168c12.72867,0 23.04097,-16.42932 23.04097,-36.7113c0,-4.56523 -0.55283,-8.92981 -1.52023,-12.95667c5.40796,3.97151 10.62286,5.55482 15.61615,3.4305c11.11273,-4.71552 9.67606,-22.90233 -3.19809,-40.63242l0,0zm-47.19295,-17.9308c21.38272,0 38.72562,-13.25212 38.72562,-29.59966s-17.3429,-29.59966 -38.72562,-29.59966c-21.3893,0 -38.74623,13.25481 -38.74623,29.59966s17.35693,29.59966 38.74623,29.59966z</string>
     <string name="svg_desc">svg,矢量动画。xml文件中vector标签，其中的子标签有path和group等。path主要属性name和pathdate，前者作为唯一标识，动画会用，后者为svg的形状描述，当然还有颜色等。group作为vector的子标签和path父标签，可以设置锚点和旋转，缩放等其他属性，动画主要就是改变这些属性。</string>
     <string name="statelist_desc">给视图附加自定义的视图状态动画，使用selector元素在xml文件中定义一个动画祥例子中这样，给视图分配动画使用android:stateListAnimator属性。在代码中使用，使用AnimationInflater.loadStateListAnimator()方法，并且使用View.setStateListAnimator()方法。</string>

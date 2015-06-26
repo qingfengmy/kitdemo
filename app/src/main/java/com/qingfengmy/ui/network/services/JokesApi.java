@@ -1,10 +1,9 @@
 package com.qingfengmy.ui.network.services;
 
-import com.qingfengmy.ui.network.entities.JokeList;
+import com.qingfengmy.ui.network.entities.JokeResult;
 
 import retrofit.Callback;
 import retrofit.http.GET;
-import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -15,24 +14,20 @@ public interface JokesApi {
     /**
      * page	int	否	当前页数,默认1
      * pagesize	int	否	每次返回条数,默认1,最大20
-     * key	string	是	您申请的key
      */
-    @GET("/joke/content/text.from")
+    @GET("/article/list/text")
     void getJokeListByNew(
             @Query("page") int page,
-            @Query("pagesize") int pagesize,
-            @Query("key") String key,
-            Callback<JokeList> callback);
+            @Query("count") int count,
+            Callback<JokeResult> callback);
 
     /**
      * page	int	否	当前页数,默认1
      * pagesize	int	否	每次返回条数,默认1,最大20
-     * key	string	是	您申请的key
      */
-    @GET("/joke/img/text.from")
+    @GET("/article/list/imgrank")
     void getJokeImgListByNew(
             @Query("page") int page,
-            @Query("pagesize") int pagesize,
-            @Query("key") String key,
-            Callback<JokeList> callback);
+            @Query("count") int count,
+            Callback<JokeResult> callback);
 }

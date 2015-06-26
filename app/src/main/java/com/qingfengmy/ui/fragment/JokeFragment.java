@@ -1,37 +1,31 @@
 package com.qingfengmy.ui.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
-import com.commonsware.cwac.endless.EndlessAdapter;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.JokeAdapter;
-import com.qingfengmy.ui.adapters.pager.JokeImgPager;
-import com.qingfengmy.ui.adapters.pager.JokePager;
 import com.qingfengmy.ui.network.ApiClient;
 import com.qingfengmy.ui.network.entities.Joke;
-import com.qingfengmy.ui.network.entities.JokeList;
-import com.qingfengmy.ui.utils.Constants;
-import com.qingfengmy.ui.view.EmptyView;
+import com.qingfengmy.ui.network.entities.JokeResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -41,172 +35,156 @@ import retrofit.client.Response;
  */
 public class JokeFragment extends Fragment {
 
-    public static final String TYPE = "type";
-    @InjectView(R.id.list_view_with_empty_view_fragment_ptr_frame)
-    PtrClassicFrameLayout mPtrFrame;
-    @InjectView(R.id.listView)
-    ListView listView;
-    List<Joke> jokeList;
-    JokeAdapter jokeAdapter;
-    @InjectView(R.id.empty_view)
-    EmptyView emptyView;
-    int page;
-    ApiClient apiClient;
-    EndlessAdapter jokePager;
+    public static final int COUNT = 20;
 
-    private boolean isjoke;
+    @InjectView(R.id.swipe_container)
+    SwipeRefreshLayout mSwipeLayout;
+    @InjectView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    private List<Joke> jokeList;
+    private JokeAdapter mAdapter;
+    private int page;
+    private ApiClient apiClient;
+    private LinearLayoutManager mLayoutManager;
+    private int lastVisibleItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_joke, null);
         ButterKnife.inject(this, view);
 
-        mPtrFrame.setLastUpdateTimeRelateObject(this);
-        mPtrFrame.setPtrHandler(new PtrHandler() {
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                page = 1;
-                if (isjoke)
-                    getJokes();
-                else
-                    getJokeImgs();
-            }
-
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                // 第二个参数必须是listview，否则滑动会出错
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, listView, header);
+            public void onRefresh() {
+                getJokes();
             }
         });
 
-        // the following are default_image settings
-        mPtrFrame.setResistance(1.7f);
-        mPtrFrame.setRatioOfHeaderHeightToRefresh(1.2f);
-        mPtrFrame.setDurationToClose(200);
-        mPtrFrame.setDurationToCloseHeader(1000);
-        // default_image is false
-        mPtrFrame.setPullToRefresh(false);
-        // default_image is true
-        mPtrFrame.setKeepHeaderWhenRefresh(true);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        listView.setEmptyView(emptyView);
-        jokeList = new ArrayList<Joke>();
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView,
+                                             int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                    loadMore();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+
+        });
+
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        jokeList = new ArrayList<>();
+        mAdapter = new JokeAdapter(getActivity(), jokeList);
+        mRecyclerView.setAdapter(mAdapter);
+
         apiClient = new ApiClient();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        new GetJokeTask().execute();
     }
 
     class GetJokeTask extends AsyncTask<Void, Void, List<Joke>> {
 
         @Override
         protected List<Joke> doInBackground(Void... params) {
-            if (isjoke)
-                return new Select()
-                        .from(Joke.class).where("url is null")
-                        .execute();
-            else
-                return new Select().from(Joke.class).where("url is not null").execute();
+            return new Select()
+                    .from(Joke.class).where("image is null")
+                    .execute();
         }
 
         @Override
         protected void onPostExecute(List<Joke> jokes) {
-            jokeList.addAll(jokes);
-            jokeAdapter = new JokeAdapter(getActivity(), jokeList);
-            listView.setAdapter(jokeAdapter);
-
-            mPtrFrame.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mPtrFrame.autoRefresh();
-                }
-            }, 100);
+            if (jokes != null) {
+                jokeList.addAll(jokes);
+                mAdapter.notifyDataSetChanged();
+            }
+            mSwipeLayout.setRefreshing(true);
+            getJokes();
         }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        isjoke = getArguments().getBoolean(TYPE);
         new GetJokeTask().execute();
     }
 
-    private void getJokeImgs() {
-        apiClient.getJokeApi().getJokeImgListByNew(page, 20, Constants.OpenID, new Callback<JokeList>() {
-            @Override
-            public void success(JokeList list, Response response) {
-                if (list != null) {
-                    if (list.getResult() != null) {
-                        if (list.getResult().getJokeList() != null) {
-                            jokeList = list.getResult().getJokeList();
-                            jokeAdapter = new JokeAdapter(getActivity(), jokeList);
-                            jokePager = new JokeImgPager(getActivity(), jokeAdapter, R.layout.pending);
-                            listView.setAdapter(jokePager);
 
-                            // 存到数据库
-                            for (int i = 0; i < jokeList.size(); i++) {
-                                Joke joke = jokeList.get(i);
-                                List<Joke> temJoke = new Select().from(Joke.class).where("hashId ='" + joke.getHashId()+"'").execute();
-                                if (temJoke == null || temJoke.size() == 0)
-                                    joke.save();
-                            }
-                        } else {
-                            Log.e("aaa", "jokelist is null");
+    private void getJokes() {
+        page = 1;
+        apiClient.getJokeApi().getJokeListByNew(page, COUNT, new Callback<JokeResult>() {
+            @Override
+            public void success(JokeResult result, Response response) {
+                mSwipeLayout.setRefreshing(false);
+                if (result != null) {
+                    if (result.getData() != null && result.getData().size() > 0) {
+                        jokeList.clear();
+                        jokeList.addAll(result.getData());
+                        mAdapter.notifyDataSetChanged();
+                        // 存到数据库
+                        for (int i = 0; i < jokeList.size(); i++) {
+                            Joke joke = jokeList.get(i);
+                            List<Joke> temJoke = new Select().from(Joke.class).where("jokeId ='" + joke.getJokeId() + "'").execute();
+                            if (temJoke == null || temJoke.size() == 0)
+                                joke.save();
                         }
-                    } else {
-                        Log.e("aaa", "result is null");
+                        Log.e("refresh aaa", "size = "+ jokeList.size());
                     }
-                } else {
-                    Log.e("aaa", "list is null");
                 }
-                mPtrFrame.refreshComplete();
             }
 
             @Override
             public void failure(RetrofitError error) {
 
+                mSwipeLayout.setRefreshing(false);
                 Log.e("aaa", error.toString());
-                mPtrFrame.refreshComplete();
             }
         });
     }
 
-    private void getJokes() {
-        apiClient.getJokeApi().getJokeListByNew(page, 20, Constants.OpenID, new Callback<JokeList>() {
+    private void loadMore() {
+        page++;
+        apiClient.getJokeApi().getJokeListByNew(page, COUNT, new Callback<JokeResult>() {
             @Override
-            public void success(JokeList list, Response response) {
-                if (list != null) {
-                    if (list.getResult() != null) {
-                        if (list.getResult().getJokeList() != null) {
-                            jokeList = list.getResult().getJokeList();
-                            jokeAdapter = new JokeAdapter(getActivity(), jokeList);
-                            jokePager = new JokePager(getActivity(), jokeAdapter, R.layout.pending);
-                            listView.setAdapter(jokePager);
-
-                            // 存到数据库
-                            for (int i = 0; i < jokeList.size(); i++) {
-                                Joke joke = jokeList.get(i);
-                                List<Joke> temJoke = new Select().from(Joke.class).where("hashId ='" + joke.getHashId()+"'").execute();
-                                if (temJoke == null || temJoke.size() == 0)
-                                    joke.save();
-                            }
-                        } else {
-                            Log.e("aaa", "jokelist is null");
-                        }
-                    } else {
-                        Log.e("aaa", "result is null");
+            public void success(JokeResult result, Response response) {
+                if (result != null) {
+                    jokeList.addAll(result.getData());
+                    mAdapter.notifyDataSetChanged();
+                    // 存到数据库
+                    for (int i = 0; i < jokeList.size(); i++) {
+                        Joke joke = jokeList.get(i);
+                        List<Joke> temJoke = new Select().from(Joke.class).where("jokeId ='" + joke.getJokeId() + "'").execute();
+                        if (temJoke == null || temJoke.size() == 0)
+                            joke.save();
                     }
-                } else {
-                    Log.e("aaa", "list is null");
+                    Log.e("aaa", "loadmore size = "+ jokeList.size());
                 }
-                mPtrFrame.refreshComplete();
+
             }
 
             @Override
             public void failure(RetrofitError error) {
-
                 Log.e("aaa", error.toString());
-                mPtrFrame.refreshComplete();
             }
         });
     }

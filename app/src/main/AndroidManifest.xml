@@ -182,9 +182,6 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".ui.game.HowOldActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.ZoomImageActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -220,7 +217,19 @@
         <activity
             android:name=".ui.MoreTextViewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.TextInputLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.TabLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AppBarLayoutActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.CollapsingToolbarLayoutActivity"
+            android:screenOrientation="portrait" />
         <service android:name=".ui.service.DownloadService" />
 
         <meta-data

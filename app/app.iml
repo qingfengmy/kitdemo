@@ -121,7 +121,6 @@
     <orderEntry type="library" exported="" name="design-22.2.0" level="project" />
     <orderEntry type="module" module-name="StikkyHeader" exported="" />
     <orderEntry type="module" module-name="photo-library" exported="" />
-    <orderEntry type="module" module-name="endless" exported="" />
     <orderEntry type="module" module-name="ptr-lib" exported="" />
   </component>
 </module>

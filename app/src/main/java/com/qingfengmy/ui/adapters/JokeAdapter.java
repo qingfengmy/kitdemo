@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.google.zxing.common.StringUtils;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.GifActivity;
 import com.qingfengmy.ui.network.entities.Joke;
+import com.qingfengmy.ui.utils.tools.TimeUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -43,13 +45,22 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2015/1/21.
  */
-public class JokeAdapter extends BaseAdapter {
+public class JokeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_ITEM = 0;
+    private static final int TYPE_FOOTER = 1;
 
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Joke> jokeList;
 
-    private Bitmap bmp;
+    public void setJokeList(List<Joke> jokeList) {
+        this.jokeList = jokeList;
+    }
+
+    public List<Joke> getJokeList() {
+        return jokeList;
+    }
 
     public JokeAdapter(Context context, List<Joke> jokeList) {
         this.mContext = context;
@@ -58,56 +69,56 @@ public class JokeAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return jokeList.size();
+    public int getItemCount() {
+        return jokeList.size() + 1;
     }
 
     @Override
-    public Object getItem(int position) {
+    public int getItemViewType(int position) {
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ItemViewHolder) {
+            ItemViewHolder itemViewHolder = ((ItemViewHolder) holder);
+
+            Joke joke = jokeList.get(position);
+            StringBuilder sb = new StringBuilder();
+            itemViewHolder.draweeView.setVisibility(View.GONE);
+            itemViewHolder.content.setText(sb.append(joke.getContent()).toString());
+            itemViewHolder.time.setText(TimeUtil.formatTime(joke.getTime()));
+        }
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jokelist, null);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            return new ItemViewHolder(view);
+        } else if (viewType == TYPE_FOOTER) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footerview, null);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            return new FooterViewHolder(view);
+        }
+
         return null;
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    class FooterViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-        if (convertView != null) {
-            holder = (ViewHolder) convertView.getTag();
-        } else {
-            convertView = mInflater.inflate(R.layout.item_jokelist,
-                    null);
-            holder = new ViewHolder(convertView);
-
-            convertView.setTag(holder);
+        public FooterViewHolder(View view) {
+            super(view);
         }
 
-        Joke joke = jokeList.get(position);
-        StringBuilder sb = new StringBuilder();
-        if (TextUtils.isEmpty(joke.getUrl())) {
-            holder.draweeView.setVisibility(View.GONE);
-        } else {
-            if(joke.getUrl().endsWith(".gif")){
-                sb.append("(gif)");
-            }
-            Uri uri = Uri.parse(joke.getUrl());
-            DraweeController controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(uri)
-                    .setAutoPlayAnimations(true)
-                    .build();
-            holder.draweeView.setAspectRatio(1.33f);
-            holder.draweeView.setController(controller);
-        }
-        holder.content.setText(sb.append(joke.getContent()).toString());
-        holder.time.setText(joke.getUpdatetime());
-        return convertView;
     }
 
-
-    public static class ViewHolder {
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.textView)
         TextView content;
@@ -116,13 +127,9 @@ public class JokeAdapter extends BaseAdapter {
         @InjectView(R.id.img)
         SimpleDraweeView draweeView;
 
-        public ViewHolder(View view) {
+        public ItemViewHolder(View view) {
+            super(view);
             ButterKnife.inject(this, view);
         }
-    }
-
-    public void addJokes(List<Joke> jokes) {
-        jokeList.addAll(jokes);
-        notifyDataSetChanged();
     }
 }

@@ -25,7 +25,9 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.fragment.GameFragment;
 import com.qingfengmy.ui.fragment.JokeFragment;
+import com.qingfengmy.ui.fragment.JokeImageFragment;
 import com.qingfengmy.ui.fragment.LollipopFragment;
+import com.qingfengmy.ui.fragment.MNCFragment;
 import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
 
@@ -50,6 +52,7 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     Fragment jokeFragment;
     Fragment jokeImgFragment;
     Fragment lollipopFragment;
+    Fragment mncFragment;
     Fragment gameFragment;
     Fragment currentFragment;
 
@@ -76,23 +79,12 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
 
         mainFragment = new MainFragment();
         aboutFragment = new AboutFragment();
-
         jokeFragment = new JokeFragment();
-        Bundle jokeargs = new Bundle();
-        jokeargs.putBoolean(JokeFragment.TYPE, true);
-        jokeFragment.setArguments(jokeargs);
-
-        jokeImgFragment = new JokeFragment();
-        Bundle args = new Bundle();
-        args.putBoolean(JokeFragment.TYPE, false);
-        jokeImgFragment.setArguments(args);
-
+        jokeImgFragment = new JokeImageFragment();
         lollipopFragment = new LollipopFragment();
-
+        mncFragment = new MNCFragment();
         gameFragment = new GameFragment();
-
         selectItem(R.id.nav_home);
-
     }
 
     @Override
@@ -111,36 +103,40 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
     }
 
     private void selectItem(int itemId) {
-        FragmentTransaction ft = fragmentManager.beginTransaction();
         switch (itemId) {
             case R.id.nav_home:
                 // 首页主程序
-                if (switchFragment(ft, mainFragment))
+                if (switchFragment(mainFragment))
                 setTitle("KitDemo");
                 break;
             case R.id.nav_about:
                 // 关于
-                if (switchFragment(ft, aboutFragment))
+                if (switchFragment(aboutFragment))
                 setTitle("关于");
                 break;
             case R.id.nav_joke:
                 //笑话
-                if (switchFragment(ft, jokeFragment))
+                if (switchFragment(jokeFragment))
                 setTitle("笑话");
                 break;
             case R.id.nav_joke_img:
                 // 趣图
-                if (switchFragment(ft, jokeImgFragment))
+                if (switchFragment(jokeImgFragment))
                 setTitle("趣图");
                 break;
             case R.id.nav_android_l:
                 // android 5.0
-                if (switchFragment(ft, lollipopFragment))
+                if (switchFragment(lollipopFragment))
                     setTitle("android L");
+                break;
+            case R.id.nav_android_m:
+                // android 5.0
+                if (switchFragment(mncFragment))
+                    setTitle("android M");
                 break;
             case R.id.nav_game:
                 // 小游戏
-                if (switchFragment(ft, gameFragment))
+                if (switchFragment( gameFragment))
                 setTitle("小游戏");
                 break;
         }
@@ -150,7 +146,8 @@ public class MainActivity extends BaseActivity implements MenuFragment.Navigatio
         }
     }
 
-    private boolean switchFragment(FragmentTransaction ft, Fragment to) {
+    private boolean switchFragment(Fragment to) {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
         if (currentFragment == to)
             return false;
         if (to.isAdded()) {

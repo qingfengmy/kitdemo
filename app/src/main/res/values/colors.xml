@@ -30,4 +30,5 @@
     <color name="gray">#ccc</color>
     <color name="pink">#e91e63</color>
     <color name="color_shadow">#44000000</color>
+    <color name="black">#010101</color>
 </resources>
