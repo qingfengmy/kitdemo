@@ -15,6 +15,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.network.entities.Joke;
+import com.qingfengmy.ui.utils.CommonUtils;
 import com.qingfengmy.ui.utils.tools.TimeUtil;
 
 import java.util.List;
@@ -74,16 +75,7 @@ public class JokeImgAdapter extends BaseAdapter {
                 sb.append("(gif)");
             }
 
-            String a = "";
-            String b = "";
-            String c = joke.getImage();
-            if (c.startsWith("app")) {
-                b = c.substring(3, c.indexOf("."));
-            } else {
-                b = c.substring(0, c.indexOf("."));
-            }
-            a = b.substring(0, 5);
-            String imageUrl = String.format(mContext.getString(R.string.image_url), a, b, c);
+            String imageUrl = CommonUtils.getImageString(mContext, joke.getImage());
             Uri uri = Uri.parse(imageUrl);
 
             DraweeController controller = Fresco.newDraweeControllerBuilder()
@@ -97,7 +89,6 @@ public class JokeImgAdapter extends BaseAdapter {
         holder.time.setText(TimeUtil.formatTime(joke.getTime()));
         return convertView;
     }
-
 
     public static class ViewHolder {
 

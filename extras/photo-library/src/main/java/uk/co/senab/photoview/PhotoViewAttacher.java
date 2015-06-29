@@ -69,6 +69,14 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     private boolean mAllowParentInterceptOnEdge = true;
 
+    private SingleTapUpListenner singleTapUpListenner;
+    public interface SingleTapUpListenner{
+        void singleTap();
+    }
+
+    public void setSingleTapUpListenner(SingleTapUpListenner singleTapUpListenner) {
+        this.singleTapUpListenner = singleTapUpListenner;
+    }
     private static void checkZoomLevels(float minZoom, float midZoom,
                                         float maxZoom) {
         if (minZoom >= midZoom) {
@@ -175,6 +183,16 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
                         if (null != mLongClickListener) {
                             mLongClickListener.onLongClick(getImageView());
                         }
+                    }
+
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent e) {
+                        boolean result = super.onSingleTapUp(e);
+                        if(singleTapUpListenner != null){
+                            singleTapUpListenner.singleTap();
+                        }
+                        return result;
+
                     }
                 });
 

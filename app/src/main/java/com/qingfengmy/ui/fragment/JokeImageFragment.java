@@ -1,5 +1,6 @@
 package com.qingfengmy.ui.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.activeandroid.query.Select;
 import com.qingfengmy.R;
+import com.qingfengmy.ui.PhotoActivity;
 import com.qingfengmy.ui.adapters.JokeImgAdapter;
 import com.qingfengmy.ui.network.ApiClient;
 import com.qingfengmy.ui.network.entities.Joke;
@@ -82,6 +85,15 @@ public class JokeImageFragment extends Fragment {
             public void onLoadMore() {
                 if (canLoadMore)
                     loadMore();
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String img = jokeList.get(position).getImage();
+                Intent intent = new Intent(getActivity(), PhotoActivity.class);
+                intent.putExtra("img", img);
+                startActivity(intent);
             }
         });
         listView.setEmptyView(emptyView);

@@ -10,6 +10,9 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -20,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.qingfengmy.R;
+import com.qingfengmy.ui.utils.CommonUtils;
 import com.qingfengmy.ui.utils.tools.ToastUtil;
 import com.qingfengmy.ui.view.ViewPagerFixed;
 
@@ -34,7 +38,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 /**
  * Created by Administrator on 2015/3/26.
  */
-public class PhotoActivity extends BaseActivity{
+public class PhotoActivity extends BaseActivity implements ViewTreeObserver.OnGlobalLayoutListener{
 
     private static int TOTAL_COUNT;
 
@@ -55,6 +59,11 @@ public class PhotoActivity extends BaseActivity{
 
     @InjectView(R.id.toolbar)
     Toolbar titleBar;
+    boolean showMenu;
+    String authImage;
+    boolean isFirst;;
+    boolean isShow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +79,6 @@ public class PhotoActivity extends BaseActivity{
                 onBackPressed();
             }
         });
-        Intent intent = getIntent();
-        images = new ArrayList<>();
-        images.add("http://ww1.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c569myj20go0b4dgx.jpg");
-        images.add("http://ww1.sinaimg.cn/bmiddle/9e5389bbjw1eqj2bwpvn2j20go09egmx.jpg");
-        images.add("http://ww3.sinaimg.cn/bmiddle/9e5389bbjw1eqj2byyy71j20go0b475c.jpg");
-        images.add("http://ww3.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c0rtllj20b40gojt6.jpg");
-        images.add("http://ww2.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c2qsvhj20go0b4q4o.jpg");
-        images.add("http://ww2.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c8y2plj20go0b4aaz.jpg");
-        currentPosition = intent.getIntExtra("position", -1);
 
         loader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
@@ -89,17 +89,62 @@ public class PhotoActivity extends BaseActivity{
                 .build();
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        TOTAL_COUNT = images.size();
+        Intent intent = getIntent();
 
-        bigviewpager.setAdapter(new MyPagerAdapter(images));
-        bigviewpager.setOffscreenPageLimit(TOTAL_COUNT);
+        authImage = intent.getStringExtra("img");
+        showMenu = authImage == null;
 
-        MyOnPageChangeListener myOnPageChangeListener = new MyOnPageChangeListener();
-        bigviewpager.setOnPageChangeListener(myOnPageChangeListener);
-        bigindexText.setText(new StringBuilder().append("1/").append(TOTAL_COUNT));
-        bigviewpager.setCurrentItem(currentPosition);
+        if (showMenu) {
+
+            images = new ArrayList<>();
+            images.add("http://ww1.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c569myj20go0b4dgx.jpg");
+            images.add("http://ww1.sinaimg.cn/bmiddle/9e5389bbjw1eqj2bwpvn2j20go09egmx.jpg");
+            images.add("http://ww3.sinaimg.cn/bmiddle/9e5389bbjw1eqj2byyy71j20go0b475c.jpg");
+            images.add("http://ww3.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c0rtllj20b40gojt6.jpg");
+            images.add("http://ww2.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c2qsvhj20go0b4q4o.jpg");
+            images.add("http://ww2.sinaimg.cn/bmiddle/9e5389bbjw1eqj2c8y2plj20go0b4aaz.jpg");
+            currentPosition = intent.getIntExtra("position", -1);
+
+            TOTAL_COUNT = images.size();
+            bigindexText.setText(new StringBuilder().append(currentPosition+1).append("/").append(TOTAL_COUNT));
+
+            bigviewpager.setAdapter(new MyPagerAdapter(images));
+
+            MyOnPageChangeListener myOnPageChangeListener = new MyOnPageChangeListener();
+            bigviewpager.setOnPageChangeListener(myOnPageChangeListener);
+            bigviewpager.setCurrentItem(currentPosition);
+        } else {
+            images = new ArrayList<>();
+
+            images.add(CommonUtils.getImageString(this, authImage));
+            bigindexText.setVisibility(View.GONE);
+
+            bigviewpager.setAdapter(new MyPagerAdapter(images));
+
+            MyOnPageChangeListener myOnPageChangeListener = new MyOnPageChangeListener();
+            bigviewpager.setOnPageChangeListener(myOnPageChangeListener);
+        }
+
+        ViewTreeObserver observer = titleBar.getViewTreeObserver();
+        if (null != observer)
+            observer.addOnGlobalLayoutListener(this);
     }
 
+    private void toggleToolBar() {
+        if (isShow) {
+            titleBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+        } else {
+            titleBar.animate().translationY(-titleBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+        }
+        isShow = !isShow;
+    }
+    @Override
+    public void onGlobalLayout() {
+        if (!isFirst) {
+            toggleToolBar();
+            isFirst = !isFirst;
+        }
+    }
 
     class MyPagerAdapter extends PagerAdapter {
 
@@ -142,7 +187,15 @@ public class PhotoActivity extends BaseActivity{
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                     progressBar.setVisibility(View.GONE);
-                    PhotoViewAttacher mAttacher = new PhotoViewAttacher((ImageView)view);
+                    PhotoViewAttacher mAttacher = new PhotoViewAttacher((ImageView) view);
+                    mAttacher.setSingleTapUpListenner(new PhotoViewAttacher.SingleTapUpListenner() {
+                        @Override
+                        public void singleTap() {
+
+                            toggleToolBar();
+                        }
+
+                    });
                     mAttacher.update();
                 }
 
