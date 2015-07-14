@@ -1,6 +1,7 @@
 package com.qingfengmy.ui.network;
 
 import com.qingfengmy.ui.network.services.JokesApi;
+import com.qingfengmy.ui.network.services.MovieApi;
 import com.qingfengmy.ui.utils.Constants;
 
 import retrofit.RequestInterceptor;
@@ -53,8 +54,32 @@ public class ApiClient {
 
         return restAdapter;
     }
+    protected RestAdapter getMovieRestAdapter() {
+        if (restAdapter == null) {
+            RestAdapter.Builder builder = newRestAdapterBuilder();
+
+            // 测试连测试服务器，正式连正式服务器
+            if (Constants.DEBUG) {
+                builder.setEndpoint("https://api.douban.com/v2/");
+            } else {
+                builder.setEndpoint("https://api.douban.com/v2/");
+            }
+
+            // 加log日志
+            if (Constants.DEBUG) {
+                builder.setLogLevel(RestAdapter.LogLevel.FULL);
+            }
+
+            restAdapter = builder.build();
+        }
+
+        return restAdapter;
+    }
 
     public JokesApi getJokeApi() {
         return getRestAdapter().create(JokesApi.class);
+    }
+    public MovieApi getMovieApi() {
+        return getMovieRestAdapter().create(MovieApi.class);
     }
 }

@@ -13,7 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
 
@@ -30,7 +29,6 @@ public class KitDemoApplication extends Application {
         initImageLoader(getApplicationContext());
 
         Fresco.initialize(this);
-        LeakCanary.install(this);
     }
 
     // 初始化ImageLoader

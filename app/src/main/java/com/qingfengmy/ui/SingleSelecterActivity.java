@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
-import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.view.SprinnerView;
 import com.r0adkll.slidr.Slidr;
 
@@ -59,7 +58,7 @@ public class SingleSelecterActivity extends BaseActivity {
 
 
         titles = new ArrayList<String>();
-        for(int i=0; i<15; i++){
+        for(int i=0; i<2; i++){
             titles.add("名称--"+i);
         }
         SprinnerView sView = new SprinnerView(this, titles);
@@ -71,6 +70,12 @@ public class SingleSelecterActivity extends BaseActivity {
             }
         });
         viewContent.addView(sView);
+        viewContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickTitle();
+            }
+        });
     }
 
     @OnClick(R.id.store_title)

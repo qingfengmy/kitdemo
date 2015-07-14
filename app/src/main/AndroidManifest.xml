@@ -230,6 +230,10 @@
         <activity
             android:name=".ui.CollapsingToolbarLayoutActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MovieActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name=".ui.service.DownloadService" />
 
         <meta-data

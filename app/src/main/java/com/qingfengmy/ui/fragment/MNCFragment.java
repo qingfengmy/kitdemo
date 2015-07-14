@@ -3,7 +3,6 @@ package com.qingfengmy.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +13,10 @@ import android.widget.ListView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.AppBarLayoutActivity;
-import com.qingfengmy.ui.CardViewActivity;
-import com.qingfengmy.ui.ClippingActivity;
 import com.qingfengmy.ui.CollapsingToolbarLayoutActivity;
-import com.qingfengmy.ui.ElevationDragActivity;
-import com.qingfengmy.ui.PaletteActivity;
-import com.qingfengmy.ui.RecyclerActivity;
-import com.qingfengmy.ui.StateListAnimatorActivity;
-import com.qingfengmy.ui.SvgActivity;
+import com.qingfengmy.ui.MovieActivity;
 import com.qingfengmy.ui.TabLayoutActivity;
 import com.qingfengmy.ui.TextInputLayoutActivity;
-import com.qingfengmy.ui.TintingsActivity;
-import com.qingfengmy.ui.TransitionActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,7 +35,7 @@ public class MNCFragment extends Fragment {
             "SnackBar",
             "tablayout",
             "AppBarLayout",
-            "CollapsingToolbarLayout"};
+            "CollapsingToolbarLayout", "Data Binding"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,6 +70,10 @@ public class MNCFragment extends Fragment {
                     case 5:
                         // CollapsingToolbarLayout
                         startActivity(new Intent(getActivity(), CollapsingToolbarLayoutActivity.class));
+                        break;
+                    case 6:
+                        // CollapsingToolbarLayout
+                        startActivity(new Intent(getActivity(), MovieActivity.class));
                         break;
                 }
             }

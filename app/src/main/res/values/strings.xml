@@ -51,4 +51,8 @@
     <string name="content">最近做应用的时候有用到TextView单行长文本，当文本内容过长时候又想实现触摸水平滑动效果。TextView本身是不支持滑动的。
             网上找了很多，都没有看到有效解决方案。其中，看到最常见的也是最笨拙滴采用重写TextView并继承实现touch 和 Gesture手势。个人觉得很麻烦。直接使用 EditText 就好了。 因为EditText需要编辑和移动光标的缘故，使得它是可以水平滑动的。因此我们只需要设置其为透明背景，并且不可以获得焦点。</string>
 
+    <string name="search">搜索</string>
+    <string name="input_hint">请输入tag</string>
+    <string name="input_prefill"></string>
+    <string name="default_search_tag">科幻</string>
 </resources>
