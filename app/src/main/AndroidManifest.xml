@@ -233,6 +233,12 @@
         <activity
             android:name=".ui.MovieActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ViewDragHelperActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.LuckPanActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".ui.service.DownloadService" />
 
