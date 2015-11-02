@@ -55,4 +55,5 @@
     <string name="input_hint">请输入tag</string>
     <string name="input_prefill"></string>
     <string name="default_search_tag">科幻</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 </resources>

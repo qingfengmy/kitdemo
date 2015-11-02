@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.AppBarLayoutActivity;
 import com.qingfengmy.ui.CollapsingToolbarLayoutActivity;
-import com.qingfengmy.ui.MovieActivity;
 import com.qingfengmy.ui.TabLayoutActivity;
 import com.qingfengmy.ui.TextInputLayoutActivity;
 
@@ -35,7 +34,7 @@ public class MNCFragment extends Fragment {
             "SnackBar",
             "tablayout",
             "AppBarLayout",
-            "CollapsingToolbarLayout", "Data Binding"};
+            "CollapsingToolbarLayout"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,10 +69,6 @@ public class MNCFragment extends Fragment {
                     case 5:
                         // CollapsingToolbarLayout
                         startActivity(new Intent(getActivity(), CollapsingToolbarLayoutActivity.class));
-                        break;
-                    case 6:
-                        // CollapsingToolbarLayout
-                        startActivity(new Intent(getActivity(), MovieActivity.class));
                         break;
                 }
             }

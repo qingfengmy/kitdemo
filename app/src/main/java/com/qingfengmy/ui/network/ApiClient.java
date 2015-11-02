@@ -1,7 +1,6 @@
 package com.qingfengmy.ui.network;
 
 import com.qingfengmy.ui.network.services.JokesApi;
-import com.qingfengmy.ui.network.services.MovieApi;
 import com.qingfengmy.ui.utils.Constants;
 
 import retrofit.RequestInterceptor;
@@ -78,8 +77,5 @@ public class ApiClient {
 
     public JokesApi getJokeApi() {
         return getRestAdapter().create(JokesApi.class);
-    }
-    public MovieApi getMovieApi() {
-        return getMovieRestAdapter().create(MovieApi.class);
     }
 }

@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
 
-    <data></data>
+<com.qingfengmy.ui.view.DragViewLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <com.qingfengmy.ui.view.DragViewLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#44ff0000"
+        android:gravity="center"
+        android:text="I can be dragged !" />
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="#44ff0000"
-            android:gravity="center"
-            android:text="I can be dragged !" />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#44ff0000"
+        android:gravity="center"
+        android:text="I can be dragged and release back! " />
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="#44ff0000"
-            android:gravity="center"
-            android:text="I can be dragged and release back! " />
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="#44ff0000"
-            android:gravity="center"
-            android:text="I can be dragged by edge!" />
-    </com.qingfengmy.ui.view.DragViewLayout>
-</layout>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#44ff0000"
+        android:gravity="center"
+        android:text="I can be dragged by edge!" />
+</com.qingfengmy.ui.view.DragViewLayout>

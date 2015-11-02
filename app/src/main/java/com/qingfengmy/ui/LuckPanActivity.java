@@ -1,37 +1,47 @@
 package com.qingfengmy.ui;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.qingfengmy.R;
-import com.qingfengmy.databinding.ActivityLuckpanBinding;
+import com.qingfengmy.ui.view.LuckPanSurface;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by Administrator on 2015/7/15.
  */
 public class LuckPanActivity extends BaseActivity {
-    ActivityLuckpanBinding binding;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+    @InjectView(R.id.luckPanView)
+    LuckPanSurface luckPanView;
+    @InjectView(R.id.bton)
+    ImageView bton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_luckpan);
-        binding.toolbar.setTitle("抽奖了");
-        setSupportActionBar(binding.toolbar);
+        setContentView(R.layout.activity_luckpan);
+        ButterKnife.inject(this);
+        toolbar.setTitle("抽奖了");
+        setSupportActionBar(toolbar);
 
-        binding.bton.setOnClickListener(new View.OnClickListener() {
+        bton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!binding.luckPanView.isStart()){
-                    binding.luckPanView.luckyStart(1);
-                    binding.bton.setImageResource(R.drawable.stop);
-                }else{
+                if (!luckPanView.isStart()) {
+                    luckPanView.luckyStart(1);
+                    bton.setImageResource(R.drawable.stop);
+                } else {
                     // 还在转
-                    if (!binding.luckPanView.isShouldEnd()){
+                    if (!luckPanView.isShouldEnd()) {
                         // 停止按钮还没按
-                        binding.luckPanView.luckyEnd();
-                        binding.bton.setImageResource(R.drawable.start);
+                        luckPanView.luckyEnd();
+                        bton.setImageResource(R.drawable.start);
                     }
                 }
             }

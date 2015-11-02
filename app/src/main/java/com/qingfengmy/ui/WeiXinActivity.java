@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.qingfengmy.R;
+import com.qingfengmy.ui.fragment.Tab1Fragment;
+import com.qingfengmy.ui.fragment.Tab2Fragment;
+import com.qingfengmy.ui.fragment.Tab3Fragment;
 import com.qingfengmy.ui.fragment.TabFragment;
 import com.qingfengmy.ui.view.ChangeColorIconWithTextView;
 
@@ -65,13 +68,20 @@ public class WeiXinActivity extends BaseActivity implements
 
     private void initDatas() {
 
-        for (String title : mTitles) {
-            TabFragment tabFragment = new TabFragment();
-            Bundle args = new Bundle();
-            args.putString("title", title);
-            tabFragment.setArguments(args);
-            mTabs.add(tabFragment);
-        }
+//        for (String title : mTitles) {
+//            TabFragment tabFragment = new TabFragment();
+//            Bundle args = new Bundle();
+//            args.putString("title", title);
+//            tabFragment.setArguments(args);
+//        }
+        TabFragment fragment = new TabFragment();
+        mTabs.add(fragment);
+        Tab1Fragment fragment1 = new Tab1Fragment();
+        mTabs.add(fragment1);
+        Tab2Fragment fragment2 = new Tab2Fragment();
+        mTabs.add(fragment2);
+        Tab3Fragment fragment3 = new Tab3Fragment();
+        mTabs.add(fragment3);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 

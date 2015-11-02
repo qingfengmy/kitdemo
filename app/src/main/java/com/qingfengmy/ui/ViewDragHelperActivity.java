@@ -1,10 +1,12 @@
 package com.qingfengmy.ui;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.qingfengmy.R;
-import com.qingfengmy.databinding.ActivityDraghelperBinding;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -13,13 +15,15 @@ import com.qingfengmy.databinding.ActivityDraghelperBinding;
  */
 public class ViewDragHelperActivity extends BaseActivity {
 
-    ActivityDraghelperBinding binding;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_draghelper);
-        binding.toolbar.setTitle(getName(this));
-        setSupportActionBar(binding.toolbar);
+        setContentView(R.layout.activity_draghelper);
+        ButterKnife.inject(this);
+        toolbar.setTitle(getName(this));
+        setSupportActionBar(toolbar);
     }
 }
