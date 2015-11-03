@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ import android.graphics.RectF;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
 /**
  * Tools for handler picture
@@ -261,7 +263,7 @@ public final class ImageTools {
 	 * @return
 	 */
 	public static Bitmap getPhotoFromSDCard(String path,String photoName){
-		Bitmap photoBitmap = BitmapFactory.decodeFile(path + "/" +photoName +".png");
+		Bitmap photoBitmap = BitmapFactory.decodeFile(path + "/" + photoName + ".png");
 		if (photoBitmap == null) {
 			return null;
 		}else {
@@ -378,4 +380,16 @@ public final class ImageTools {
 		}
 	}
 
+	public static Bitmap decodeUriAsBitmap(Context context, Uri uri) {
+		if (context == null || uri == null) return null;
+
+		Bitmap bitmap;
+		try {
+			bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return bitmap;
+	}
 }

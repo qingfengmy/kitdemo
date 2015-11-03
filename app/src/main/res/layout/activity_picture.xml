@@ -17,28 +17,29 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn"
+            android:id="@+id/camare"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="@color/primary"
             android:textColor="@color/white"
-            android:text="Choose picture" />
+            android:text="相机" />
 
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/galary"
             android:layout_width="fill_parent"
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/primary"
             android:textColor="@color/white"
-            android:text="Crop picture" />
+            android:text="相册" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/img"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_layout" />
