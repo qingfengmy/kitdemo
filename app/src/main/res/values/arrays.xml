@@ -38,6 +38,7 @@
         <item> Android ViewDragHelper</item>
         <item>抽奖盘</item>
         <item>属性动画改变x,y坐标，不断重绘的LoadingView</item>
+        <item>无障碍服务</item>
     </string-array>
     <string-array name="classes">
         <item>com.qingfengmy.ui.TabHostActivity</item>
@@ -77,6 +78,7 @@
         <item>"com.qingfengmy.ui.ViewDragHelperActivity"</item>
         <item>"com.qingfengmy.ui.LuckPanActivity"</item>
         <item>"com.qingfengmy.ui.LoadingActivity"</item>
+        <item>"com.qingfengmy.ui.AccessibilityActivity"</item>
     </string-array>
     <string-array name="blend_modes">
         <item>Add</item>

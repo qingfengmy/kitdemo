@@ -56,4 +56,9 @@
     <string name="input_prefill"></string>
     <string name="default_search_tag">科幻</string>
     <string name="title_activity_loading">LoadingActivity</string>
+    <string name="title_activity_auto_layout">AutoLayoutActivity</string>
+    <string name="title_activity_accessibility">AccessibilityActivity</string>
+    <string name="accessibility_service_description">打开后，在kitdemo界面可以监听view增删并随机显示选中button~~~</string>
+    <string name="add">添加</string>
+    <string name="remove">删除</string>
 </resources>

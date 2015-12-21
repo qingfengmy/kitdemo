@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qingfengmy" >
+    package="com.qingfengmy">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,11 +13,18 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="design_width"
+            android:value="750" />
+        <meta-data
+            android:name="design_height"
+            android:value="1334" />
+
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/splash" >
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -231,7 +238,18 @@
             android:screenOrientation="portrait" />
 
         <service android:name=".ui.service.DownloadService" />
+        <service
+            android:name=".ui.service.ZhangAccessibilityService"
+            android:label="~~~webkit~~~"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
         <meta-data
             android:name="AA_DB_NAME"
             android:value="kits.db" />
@@ -242,8 +260,11 @@
         <activity
             android:name=".ui.LoadingActivity"
             android:label="@string/title_activity_loading"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.AccessibilityActivity"
+            android:label="@string/title_activity_accessibility"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
