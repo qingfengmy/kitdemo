@@ -22,7 +22,12 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/translation</item>
     </style>
-
+    <style name="FullScreen" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
     <style name="myToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:background">@color/primary</item>
         <item name="titleTextAppearance">@style/myTitle</item>
