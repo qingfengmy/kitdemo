@@ -15,7 +15,6 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.BaseActivity;
 import com.qingfengmy.ui.PictureActivity;
 import com.qingfengmy.ui.game.views.NewPuzzleLayout;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -36,7 +35,6 @@ public class NewPuzzleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_puzzle);
         ButterKnife.inject(this);
-        Slidr.attach(this);
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_menu_back);

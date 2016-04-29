@@ -3,16 +3,13 @@ package com.qingfengmy.ui;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
-import com.r0adkll.slidr.SlidrInterface;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
@@ -57,7 +52,6 @@ public class PaletteActivity extends BaseActivity {
     TextView DarkMuted;
     @InjectView(R.id.LightMuted)
     TextView LightMuted;
-    SlidrInterface slidrInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +59,6 @@ public class PaletteActivity extends BaseActivity {
         setContentView(R.layout.activity_palette);
 
         ButterKnife.inject(this);
-        slidrInterface = Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
@@ -134,11 +127,6 @@ public class PaletteActivity extends BaseActivity {
 
         @Override
         public void onPageSelected(int position) {
-            if(position == 0){
-                slidrInterface.unlock();
-            }else{
-                slidrInterface.lock();
-            }
 
             indexText.setText(new StringBuilder().append(position + 1)
                     .append("/").append(TOTAL_COUNT));

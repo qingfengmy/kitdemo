@@ -9,7 +9,6 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.MyAdapter;
 import com.qingfengmy.ui.view.EmptyView;
 import com.qingfengmy.ui.view.LoadMoreListView;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.LinkedList;
 import java.util.Random;

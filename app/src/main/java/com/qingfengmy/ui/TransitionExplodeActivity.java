@@ -11,7 +11,6 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,7 +38,6 @@ public class TransitionExplodeActivity extends BaseActivity {
         setContentView(R.layout.activity_transition_explode);
 
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

@@ -6,22 +6,16 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.OvershootInterpolator;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.RecyclerAdapter;
-import com.qingfengmy.ui.view.AbsListViewScrollDetector;
 import com.qingfengmy.ui.view.SampleDivider;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +52,6 @@ public class RecyclerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

@@ -4,16 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
-import com.qingfengmy.ui.fragment.MainFragment;
 import com.qingfengmy.ui.fragment.MenuFragment;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

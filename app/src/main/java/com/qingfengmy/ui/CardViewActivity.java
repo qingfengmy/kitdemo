@@ -1,6 +1,5 @@
 package com.qingfengmy.ui;
 
-import android.app.Application;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -8,12 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ListView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.adapters.ApplicationAdapter;
 import com.qingfengmy.ui.entity.AppInfo;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +35,6 @@ public class CardViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardview);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

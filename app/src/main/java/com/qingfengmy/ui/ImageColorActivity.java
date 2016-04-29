@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

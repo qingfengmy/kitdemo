@@ -13,7 +13,6 @@ import android.widget.Button;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.view.DragFrameLayout;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

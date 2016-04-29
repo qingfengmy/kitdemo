@@ -51,8 +51,8 @@ public class TabLayoutActivity extends BaseActivity {
         tabLayout.addTab(tabLayout.newTab().setText("第二个"), false);//添加 Tab,默认不选中
         tabLayout.addTab(tabLayout.newTab().setText("第三个"), false);//添加 Tab,默认不选中
         tabLayout.addTab(tabLayout.newTab().setText("第4个"), false);//添加 Tab,默认不选中
-        tabLayout.addTab(tabLayout.newTab().setText("第5个"), false);//添加 Tab,默认不选中
-        tabLayout.addTab(tabLayout.newTab().setText("第6个"), false);//添加 Tab,默认不选中
+//        tabLayout.addTab(tabLayout.newTab().setText("第5个"), false);//添加 Tab,默认不选中
+//        tabLayout.addTab(tabLayout.newTab().setText("第6个"), false);//添加 Tab,默认不选中
 
 //        ArrayList<TextView> tvs = new ArrayList<TextView>();
 //        for (int i = 0; i < items.length; i++) {
@@ -72,8 +72,8 @@ public class TabLayoutActivity extends BaseActivity {
         adapter.addFragment(new AboutFragment(), "第二个");
         adapter.addFragment(new AboutFragment(), "第三个");
         adapter.addFragment(new AboutFragment(), "第四个");
-        adapter.addFragment(new AboutFragment(), "第五个");
-        adapter.addFragment(new AboutFragment(), "第六个");
+//        adapter.addFragment(new AboutFragment(), "第五个");
+//        adapter.addFragment(new AboutFragment(), "第六个");
         vp.setAdapter(adapter);
 
         //用来设置tab的，同时也要覆写  PagerAdapter 的 CharSequence getPageTitle(int position) 方法，要不然 Tab 没有 title

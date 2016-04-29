@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.RemoteViews;
 
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -59,7 +57,6 @@ public class NotifycationActivity extends BaseActivity {
             /*加载页面*/
         setContentView(R.layout.activity_notifycation);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

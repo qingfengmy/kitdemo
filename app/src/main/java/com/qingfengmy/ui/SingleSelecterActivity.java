@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.AboutFragment;
 import com.qingfengmy.ui.view.SprinnerView;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ public class SingleSelecterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigleselecter);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle("");
         setSupportActionBar(titleBar);

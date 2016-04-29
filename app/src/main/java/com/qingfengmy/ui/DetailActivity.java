@@ -17,8 +17,6 @@ import android.widget.TextView;
 import com.nispok.snackbar.Snackbar;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.entity.AppInfo;
-import com.qingfengmy.ui.utils.Utils;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.Date;
 
@@ -40,7 +38,6 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle("");
         setSupportActionBar(titleBar);

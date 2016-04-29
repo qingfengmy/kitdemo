@@ -4,7 +4,6 @@ package com.qingfengmy.ui;
  * author zhouxin@easier.cn
  */
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -70,7 +68,6 @@ public class CreateCodeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createcode);
         ButterKnife.inject(this);
-        Slidr.attach(this);
         // 先设置title，再设置action，否则无效
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

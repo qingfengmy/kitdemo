@@ -13,10 +13,6 @@ import android.view.MenuItem;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.CardFragment;
 import com.qingfengmy.ui.view.PagerSlidingTabStrip;
-import com.r0adkll.slidr.Slidr;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,7 +38,6 @@ public class ViewPagerIndicatorActivity extends BaseActivity {
         setContentView(R.layout.activity_viewpagerindicator);
 
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

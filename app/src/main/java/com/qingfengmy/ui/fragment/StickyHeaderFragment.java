@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,14 +22,9 @@ import com.qingfengmy.ui.view.LoadMoreListView;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 import it.carlom.stikkyheader.core.animator.AnimatorBuilder;
 import it.carlom.stikkyheader.core.animator.HeaderStikkyAnimator;
@@ -105,12 +99,6 @@ public class StickyHeaderFragment extends Fragment {
                     else
                         dots.get(i)
                                 .setBackgroundResource(R.drawable.dot_normal);
-                }
-
-                if(position == 0){
-                    activity.getSlidrInterface().unlock();
-                }else{
-                    activity.getSlidrInterface().lock();
                 }
 
             }

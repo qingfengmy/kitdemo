@@ -59,8 +59,9 @@
         <item name="android:indeterminateDrawable">@drawable/bg_progress_bar</item>
     </style>
 
-    <style name="splash" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/logo</item>
+    <style name="splash" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash_logo</item>
+
     </style>
 
     <style name="ContextMenuButton">

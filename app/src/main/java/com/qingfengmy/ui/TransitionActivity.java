@@ -1,8 +1,6 @@
 package com.qingfengmy.ui;
 
-import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +20,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qingfengmy.BuildConfig;
 import com.qingfengmy.R;
-import com.r0adkll.slidr.Slidr;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -57,7 +51,6 @@ public class TransitionActivity extends BaseActivity {
 
         setContentView(R.layout.activity_transition);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

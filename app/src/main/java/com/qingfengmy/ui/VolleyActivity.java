@@ -14,7 +14,6 @@ import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.VolleyFirstFragment;
 import com.qingfengmy.ui.fragment.VolleySecondFragment;
 import com.qingfengmy.ui.fragment.VolleyThirdFragment;
-import com.r0adkll.slidr.Slidr;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,7 +38,6 @@ public class VolleyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volley);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

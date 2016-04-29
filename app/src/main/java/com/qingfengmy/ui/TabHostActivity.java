@@ -28,7 +28,6 @@ import android.widget.TextView;
 import com.qingfengmy.R;
 import com.qingfengmy.ui.fragment.TabHostFragment;
 import com.qingfengmy.ui.view.BadgeView;
-import com.r0adkll.slidr.Slidr;
 
 import java.io.Serializable;
 
@@ -57,7 +56,6 @@ public class TabHostActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host);
         ButterKnife.inject(this);
-        Slidr.attach(this);
 
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);

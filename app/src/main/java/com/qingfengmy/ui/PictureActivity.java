@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.qingfengmy.R;
 import com.qingfengmy.ui.utils.ClipPicture;
-import com.r0adkll.slidr.Slidr;
 
 import java.io.File;
 
@@ -29,7 +28,6 @@ public class PictureActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
         ButterKnife.inject(this);
-        Slidr.attach(this);
         titleBar.setTitle(getName(this));
         setSupportActionBar(titleBar);
         titleBar.setNavigationIcon(R.drawable.ic_launcher);

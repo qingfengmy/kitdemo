@@ -1,9 +1,5 @@
 package com.qingfengmy.ui;
 
-import java.io.IOException;
-import java.util.Vector;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -18,8 +14,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -29,7 +23,9 @@ import com.qingfengmy.ui.zxing.camera.CameraManager;
 import com.qingfengmy.ui.zxing.decoding.CaptureActivityHandler;
 import com.qingfengmy.ui.zxing.decoding.InactivityTimer;
 import com.qingfengmy.ui.zxing.view.ViewfinderView;
-import com.r0adkll.slidr.Slidr;
+
+import java.io.IOException;
+import java.util.Vector;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -63,7 +59,6 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
         ButterKnife.inject(this);
-        Slidr.attach(this);
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
